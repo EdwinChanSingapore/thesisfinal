@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  24 MAR 2017 04:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  24 MAR 2017 06:38
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -56,12 +56,20 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks15
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count91
+\float@exts=\toks16
+\float@box=\box26
+\@float@everytoks=\toks17
+\@floatcapt=\box27
+)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.te
 x"
-\pgfutil@everybye=\toks16
+\pgfutil@everybye=\toks18
 \pgfutil@tempdima=\dimen111
 \pgfutil@tempdimb=\dimen112
 
@@ -69,7 +77,7 @@ x"
 sts.tex"))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def
 "
-\pgfutil@abb=\box26
+\pgfutil@abb=\box28
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ms\everyshi.sty"
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
@@ -101,7 +109,7 @@ Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count91
+\Gread@gobject=\count92
 ))
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
@@ -112,12 +120,12 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
 "
-\pgfkeys@pathtoks=\toks17
-\pgfkeys@temptoks=\toks18
+\pgfkeys@pathtoks=\toks19
+\pgfkeys@temptoks=\toks20
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.c
 ode.tex"
-\pgfkeys@tmptoks=\toks19
+\pgfkeys@tmptoks=\toks21
 ))
 \pgf@x=\dimen115
 \pgf@y=\dimen116
@@ -129,13 +137,13 @@ ode.tex"
 \pgf@yc=\dimen122
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count92
-\c@pgf@countb=\count93
-\c@pgf@countc=\count94
-\c@pgf@countd=\count95
-\t@pgf@toka=\toks20
-\t@pgf@tokb=\toks21
-\t@pgf@tokc=\toks22
+\c@pgf@counta=\count93
+\c@pgf@countb=\count94
+\c@pgf@countc=\count95
+\c@pgf@countd=\count96
+\t@pgf@toka=\toks22
+\t@pgf@tokb=\toks23
+\t@pgf@tokc=\toks24
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg"
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
@@ -153,8 +161,8 @@ File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.
 code.tex"
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count96
-\pgfsyssoftpath@bigbuffer@items=\count97
+\pgfsyssoftpath@smallbuffer@items=\count97
+\pgfsyssoftpath@bigbuffer@items=\count98
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.
 code.tex"
@@ -185,11 +193,11 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex
 "
 \pgfmath@dimen=\dimen123
-\pgfmath@count=\count98
-\pgfmath@box=\box27
-\pgfmath@toks=\toks23
-\pgfmath@stack@operand=\toks24
-\pgfmath@stack@operation=\toks25
+\pgfmath@count=\count99
+\pgfmath@box=\box29
+\pgfmath@toks=\toks25
+\pgfmath@stack@operand=\toks26
+\pgfmath@stack@operation=\toks27
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.
 tex"
@@ -210,7 +218,7 @@ code.tex")
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integ
 erarithmetics.code.tex")))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex"
-\c@pgfmathroundto@lastzeros=\count99
+\c@pgfmathroundto@lastzeros=\count100
 ))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.co
 de.tex"
@@ -245,10 +253,10 @@ File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.co
 de.tex"
 File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
-\pgfpic=\box28
-\pgf@hbox=\box29
-\pgf@layerbox@main=\box30
-\pgf@picture@serial@count=\count100
+\pgfpic=\box30
+\pgf@hbox=\box31
+\pgf@layerbox@main=\box32
+\pgf@picture@serial@count=\count101
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicst
 ate.code.tex"
@@ -283,7 +291,7 @@ File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 e.tex"
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen147
-\pgf@sys@shading@range@num=\count101
+\pgf@sys@shading@range@num=\count102
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.cod
 e.tex"
@@ -292,7 +300,7 @@ File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.
 code.tex"
 File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
-\pgfexternal@startupbox=\box31
+\pgfexternal@startupbox=\box33
 ))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.co
 de.tex"
@@ -309,7 +317,7 @@ File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleshapes.cod
 e.tex"
 File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
-\pgfnodeparttextbox=\box32
+\pgfnodeparttextbox=\box34
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleplot.code.
 tex"
@@ -336,8 +344,8 @@ Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex")
 \pgffor@iter=\dimen150
 \pgffor@skip=\dimen151
-\pgffor@stack=\toks26
-\pgffor@toks=\toks27
+\pgffor@stack=\toks28
+\pgffor@toks=\toks29
 ))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.cod
 e.tex"
@@ -346,7 +354,7 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothan
 dlers.code.tex"
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count102
+\pgf@plot@mark@count=\count103
 \pgfplotmarksize=\dimen152
 )
 \tikz@lastx=\dimen153
@@ -355,23 +363,23 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikz@lastysaved=\dimen156
 \tikzleveldistance=\dimen157
 \tikzsiblingdistance=\dimen158
-\tikz@figbox=\box33
-\tikz@figbox@bg=\box34
-\tikz@tempbox=\box35
-\tikz@tempbox@bg=\box36
-\tikztreelevel=\count103
-\tikznumberofchildren=\count104
-\tikznumberofcurrentchild=\count105
-\tikz@fig@count=\count106
+\tikz@figbox=\box35
+\tikz@figbox@bg=\box36
+\tikz@tempbox=\box37
+\tikz@tempbox@bg=\box38
+\tikztreelevel=\count104
+\tikznumberofchildren=\count105
+\tikznumberofcurrentchild=\count106
+\tikz@fig@count=\count107
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\modules\pgfmodulematrix.cod
 e.tex"
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count107
-\pgfmatrixcurrentcolumn=\count108
-\pgf@matrix@numberofcolumns=\count109
+\pgfmatrixcurrentrow=\count108
+\pgfmatrixcurrentcolumn=\count109
+\pgf@matrix@numberofcolumns=\count110
 )
-\tikz@expandcount=\count110
+\tikz@expandcount=\count111
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\librarie
 s\tikzlibrarytopaths.code.tex"
@@ -444,17 +452,17 @@ LaTeX Font Info:    ... okay on input line 18.
 ABD: EveryShipout initializing macros
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count111
+\scratchcounter=\count112
 \scratchdimen=\dimen159
-\scratchbox=\box37
-\nofMPsegments=\count112
-\nofMParguments=\count113
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count114
+\scratchbox=\box39
+\nofMPsegments=\count113
+\nofMParguments=\count114
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count115
 \MPscratchDim=\dimen160
-\MPnumerator=\count115
-\makeMPintoPDFobject=\count116
-\everyMPtoPDFconversion=\toks29
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
+\everyMPtoPDFconversion=\toks31
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -551,31 +559,81 @@ y/m/n/10 j\OML/cmm/m/it/10 MutationisclinVar\OT1/cmr/m/n/10 ) = []
  []
 
 [3 <c:/users/user/pictures/thesisimages/neuralnet.png>]
-<c:/users/user/pictures/thesisimages/analysisofvariantcallers.png, id=22, 758.8
-35pt x 345.08925pt>
+<c:/users/user/pictures/thesisimages/analysisofvariantcallers.png, id=22, 800.9
+925pt x 424.58624pt>
 File: c:/users/user/pictures/thesisimages/analysisofvariantcallers.png Graphic 
 file (type png)
 
 <use c:/users/user/pictures/thesisimages/analysisofvariantcallers.png>
 Package pdftex.def Info: c:/users/user/pictures/thesisimages/analysisofvariantc
 allers.png used on input line 117.
-(pdftex.def)             Requested size: 411.9399pt x 187.33536pt.
+(pdftex.def)             Requested size: 411.9399pt x 218.3631pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--125
+Underfull \hbox (badness 10000) in paragraph at lines 121--126
 
  []
 
 [4] [5 <c:/users/user/pictures/thesisimages/analysisofvariantcallers.png>]
-[6]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 141.
+
+
+<c:/users/user/pictures/thesisimages/featureengineering.png, id=33, 807.015pt x
+ 205.9695pt>
+File: c:/users/user/pictures/thesisimages/featureengineering.png Graphic file (
+type png)
+ <use c:/users/user/pictures/thesisimages/featureengineering.png>
+Package pdftex.def Info: c:/users/user/pictures/thesisimages/featureengineering
+.png used on input line 143.
+(pdftex.def)             Requested size: 411.9399pt x 105.13733pt.
+
+[6 <c:/users/user/pictures/thesisimages/featureengineering.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+
+<c:/users/user/pictures/thesisimages/neuralnetworkstructure.png, id=38, 515.526
+pt x 321.6015pt>
+File: c:/users/user/pictures/thesisimages/neuralnetworkstructure.png Graphic fi
+le (type png)
+
+<use c:/users/user/pictures/thesisimages/neuralnetworkstructure.png>
+Package pdftex.def Info: c:/users/user/pictures/thesisimages/neuralnetworkstruc
+ture.png used on input line 166.
+(pdftex.def)             Requested size: 411.9399pt x 256.99202pt.
+ [7]
+<c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png, id=42, 
+515.526pt x 247.52475pt>
+File: c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png Gra
+phic file (type png)
+
+<use c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png>
+Package pdftex.def Info: c:/users/user/pictures/thesisimages/neuralnetworkstruc
+tureresults.png used on input line 172.
+(pdftex.def)             Requested size: 411.9399pt x 197.79723pt.
+
+[8 <c:/users/user/pictures/thesisimages/neuralnetworkstructure.png> <c:/users/u
+ser/pictures/thesisimages/neuralnetworkstructureresults.png>]
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ³ in font cmr10!
+ [9]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
- [7] [8] (HT.txt.aux)
+ [10]
+(HT.txt.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -585,10 +643,10 @@ LaTeX Warning: There were multiply-defined labels.
 ### semi simple group (level 1) entered at line 65 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12127 strings out of 493334
- 244876 string characters out of 3136675
- 384736 words of memory out of 3000000
- 15443 multiletter control sequences out of 15000+200000
+ 12203 strings out of 493334
+ 246574 string characters out of 3136675
+ 386103 words of memory out of 3000000
+ 15512 multiletter control sequences out of 15000+200000
  4850 words of font info for 18 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,6n,54p,1892b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -599,9 +657,9 @@ mmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
 i7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b>
-Output written on HT.txt.pdf (9 pages, 210222 bytes).
+Output written on HT.txt.pdf (11 pages, 312808 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
+ 72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
