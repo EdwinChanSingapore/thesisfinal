@@ -12,7 +12,7 @@
 \usepackage{graphicx}
 \usepackage{setspace}
 
-\graphicspath{ {c:/users/user/pictures/thesisimages/} }
+\graphicspath{ {c:/Users/User/Documents/thesis/Thesis/thesisimages/} }
 
 
 \begin{document}
@@ -176,15 +176,20 @@ Initially, with the flat network, the precision rate was very low, indicating th
 
 
 \subsection{Network Tuning and Optimisation}
+
 A. Sample Balancing
-In tuning our network, we sought to study how the various hyperparameters as well as the datastructure affected our network's ability to learn from the data. In particular, we focused on four issues, sample balancing, optimiser choise, learning rate choice and number of layers. These four issues are known to be critical in deep learning networks (CITATION x4). Our first concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix INSERT for more details). Figure 1 shows a representation of the normal, datasets on two principal components
+
+In tuning our network, we sought to study how the various hyperparameters as well as the datastructure affected our network's ability to learn from the data. In particular, we focused on four issues, sample balancing, optimiser choise, learning rate choice and number of layers. These four issues are known to be critical in deep learning networks (CITATION x4). Our first concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix INSERT for more details). Figure 1 shows a representation of the normal, datasets on two principal components. Performance of all three methods 	
 
 
-
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{comparisonofbalancingmethods.png}
+\centering
+\end{figure}
 
 B. Optimiser Choice
-
-
+Optimisers have also been 
 
 C. Learning Rate Choice
 

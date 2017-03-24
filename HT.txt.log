@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  24 MAR 2017 06:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  24 MAR 2017 16:10
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -535,13 +535,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 74--75
  []
 
 
-<c:/users/user/pictures/thesisimages/neuralnet.png, id=13, 562.1pt x 280.04625p
-t>
-File: c:/users/user/pictures/thesisimages/neuralnet.png Graphic file (type png)
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png, id=13, 562.1
+pt x 280.04625pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png Graphic 
+file (type png)
 
- <use c:/users/user/pictures/thesisimages/neuralnet.png>
-Package pdftex.def Info: c:/users/user/pictures/thesisimages/neuralnet.png used
- on input line 79.
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
+ralnet.png used on input line 79.
 (pdftex.def)             Requested size: 411.9399pt x 205.2354pt.
  [2]
 Underfull \hbox (badness 10000) in paragraph at lines 84--85
@@ -558,15 +559,16 @@ Overfull \hbox (128.9197pt too wide) detected at line 89
 y/m/n/10 j\OML/cmm/m/it/10 MutationisclinVar\OT1/cmr/m/n/10 ) = []
  []
 
-[3 <c:/users/user/pictures/thesisimages/neuralnet.png>]
-<c:/users/user/pictures/thesisimages/analysisofvariantcallers.png, id=22, 800.9
-925pt x 424.58624pt>
-File: c:/users/user/pictures/thesisimages/analysisofvariantcallers.png Graphic 
-file (type png)
+[3 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcallers.pn
+g, id=22, 800.9925pt x 424.58624pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcalle
+rs.png Graphic file (type png)
 
-<use c:/users/user/pictures/thesisimages/analysisofvariantcallers.png>
-Package pdftex.def Info: c:/users/user/pictures/thesisimages/analysisofvariantc
-allers.png used on input line 117.
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcaller
+s.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/ana
+lysisofvariantcallers.png used on input line 117.
 (pdftex.def)             Requested size: 411.9399pt x 218.3631pt.
 
 
@@ -577,63 +579,78 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--126
 
  []
 
-[4] [5 <c:/users/user/pictures/thesisimages/analysisofvariantcallers.png>]
+[4] [5 <c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcal
+lers.png>]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 141.
 
 
-<c:/users/user/pictures/thesisimages/featureengineering.png, id=33, 807.015pt x
- 205.9695pt>
-File: c:/users/user/pictures/thesisimages/featureengineering.png Graphic file (
-type png)
- <use c:/users/user/pictures/thesisimages/featureengineering.png>
-Package pdftex.def Info: c:/users/user/pictures/thesisimages/featureengineering
-.png used on input line 143.
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png, id=
+33, 807.015pt x 205.9695pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png
+ Graphic file (type png)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/fea
+tureengineering.png used on input line 143.
 (pdftex.def)             Requested size: 411.9399pt x 105.13733pt.
-
-[6 <c:/users/user/pictures/thesisimages/featureengineering.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
-
- []
-
+[6 <c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png>]
 
 Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
 
-<c:/users/user/pictures/thesisimages/neuralnetworkstructure.png, id=38, 515.526
-pt x 321.6015pt>
-File: c:/users/user/pictures/thesisimages/neuralnetworkstructure.png Graphic fi
-le (type png)
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
-<use c:/users/user/pictures/thesisimages/neuralnetworkstructure.png>
-Package pdftex.def Info: c:/users/user/pictures/thesisimages/neuralnetworkstruc
-ture.png used on input line 166.
+ []
+
+
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure.png,
+ id=38, 515.526pt x 321.6015pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
+.png Graphic file (type png)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure.
+png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
+ralnetworkstructure.png used on input line 166.
 (pdftex.def)             Requested size: 411.9399pt x 256.99202pt.
  [7]
-<c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png, id=42, 
-515.526pt x 247.52475pt>
-File: c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png Gra
-phic file (type png)
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructureresul
+ts.png, id=42, 515.526pt x 247.52475pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
+results.png Graphic file (type png)
 
-<use c:/users/user/pictures/thesisimages/neuralnetworkstructureresults.png>
-Package pdftex.def Info: c:/users/user/pictures/thesisimages/neuralnetworkstruc
-tureresults.png used on input line 172.
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructurer
+esults.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
+ralnetworkstructureresults.png used on input line 172.
 (pdftex.def)             Requested size: 411.9399pt x 197.79723pt.
-
-[8 <c:/users/user/pictures/thesisimages/neuralnetworkstructure.png> <c:/users/u
-ser/pictures/thesisimages/neuralnetworkstructureresults.png>]
+ [8 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure.
+png> <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
+results.png>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ³ in font cmr10!
- [9]
+
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingmethod
+s.png, id=46, 659.3433pt x 337.9827pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingm
+ethods.png Graphic file (type png)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingme
+thods.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/com
+parisonofbalancingmethods.png used on input line 187.
+(pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
+ [9] [10 <c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalanc
+ingmethods.png>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
- [10]
-(HT.txt.aux)
+ [11] (HT.txt.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -643,10 +660,10 @@ LaTeX Warning: There were multiply-defined labels.
 ### semi simple group (level 1) entered at line 65 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12203 strings out of 493334
- 246574 string characters out of 3136675
- 386103 words of memory out of 3000000
- 15512 multiletter control sequences out of 15000+200000
+ 12208 strings out of 493334
+ 247272 string characters out of 3136675
+ 386119 words of memory out of 3000000
+ 15516 multiletter control sequences out of 15000+200000
  4850 words of font info for 18 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,6n,54p,1892b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -657,9 +674,9 @@ mmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
 i7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b>
-Output written on HT.txt.pdf (11 pages, 312808 bytes).
+Output written on HT.txt.pdf (12 pages, 500994 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 76 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
