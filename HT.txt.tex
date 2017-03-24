@@ -156,7 +156,17 @@ In order to train the neural network, features were extracted from the variant c
 \subsection{Generation of Artificial Genome}
 In order to begin training 
 
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{MutationInSimulatedGenome.jpg}
+\centering
+\end{figure}
 
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{MutationRateInSimulatedGenome.jpg}
+\centering
+\end{figure}
 
 \subsection{Network Architecture}
 We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network. Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. \\\\
@@ -200,13 +210,52 @@ D. Number of Layers
 
 
 \subsection{Benchmarking of Network with Mason Datasets}
-t
+From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be 0.00003, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. Concordance calling using an ensemble of callers has been shown to be an improvement over using single variant callers (CITATION). 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{final_f1scores_results_all.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+In terms of overall F1 score, we see that the neural network was able to outperform single and concordance-based callers. This provides strong evidence that the neural network is able to learn from the input features whether the variant call is real or not, validating its usage in variant calling. Looking at the exact precision, recall and F1 scores of the top 2 variant callers as well as the best single variant caller versus the neural network, we find that the neural network is more precise than both, but the recall is rather similar. This indicates the neural network is able to sieve out the false positives inside best calling methods. 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{masonheadsupcomparison.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+Further evidence of the ability of the neural networks to learn comes from basic principal components analysis of the datasets. 
 
 \subsection{Benchmarking of Network with NA Datasets}
+After verification of the neural network architecture, optimised parameters and ability to learn with a simulated dataset, we sought to analyse a real dataset to set the validity of the neural network in validating variants. We studied the NA12878 Genome In a Bottle dataset (CITATION), which has been used in other variant calling validation pipelines(CITATION) and contains a set of high confidence variant calls which we can use as ground truth for training and validation. This set of high confidence variant calls are obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants. As can be seen from the figure, the neural network was able to predict with higher precision the best single caller, haplotype caller and the 2 best concordance callers, 3-concordance and 4-concordance. In terms of recall, the recall rates were the same between Haplotype Caller, 3 concordance and the neural network. This was an interesting observation as it shows that the neural network is more aggressive in making calls than the 4 concordance neural network, and it is more likely that the calls it makes are correct. Ultimately when we looked at the f1 score, the neural network was able to outperform these variant callers. This validates our neural network pipeline and indicates that we are able to learn from the input features. 
 
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{naheadsupcomparison.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
 
 \subsection{Analysis of PDX dataset using Bayesian Ranking systems}
+After validation, we sought to enable a clear and understandable ranking of genes. We first build a Bayesian network analysis using known functional annotations from AnnoVar. The features inside AnnoVar and their clinical validation can be found below. 
 
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{annovarfeatures.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+These were subsequently used to compute the Bayesian probability ranking, which is shown in Figure N below.
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{bayesiannetwork.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+This network structure was chosen as we wanted to use three different sets of information to update the probability of the gene being important. Firstly, the confidence of the call should matter in how important it is - the more likely a gene is real, the more important it should be. Secondly, the rank should also be determined by how common the variation is, based on studying known SNP polymorphism rates. If it is a common SNP, then the ranking should be downgraded as 
 \section{Future Directions}
 
 
