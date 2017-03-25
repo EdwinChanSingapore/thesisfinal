@@ -3,7 +3,7 @@
 \usepackage{lipsum}
 \usepackage[letterpaper, margin=1.4in]{geometry}
 \usepackage{float}
-
+\usepackage{amsmath}
 %
 \usepackage{tikz}
 %
@@ -11,7 +11,7 @@
 %
 \usepackage{graphicx}
 \usepackage{setspace}
-
+\usepackage{subcaption}
 \graphicspath{ {c:/Users/User/Documents/thesis/Thesis/thesisimages/} }
 
 
@@ -83,30 +83,39 @@ Deep learning is a method of machine learning that involves deep stacks of artif
 
 Figure 1 depicts a sample neural network with 5 layers, with 8 data points as input, and 3 data points as output. In such a network, we would train it by providing the input data and output data, and letting the network learn how to integrate the inputs to create a network of activations that can be used to produce the corresponding output. This in part mimics the way we learn - experience teaches us that certain stimuli will result in specific effects (when we see a lightning bolt, we can expect the sound of thunder), and thus when new input comes in (a lightning bolt is seen), we can predict that the output that would arise (thunder is heard). In variant calling, deep learning will allow us to predict based on variant calling patterns and data whether a variant is valid and exists, or is erroneous. This will allow us to draw of the diversity of data with different variant callers, through letting the network learn which patterns will result in a valid call and which patterns are actually false positives. It will also allow us to tap on the differential sensitivity of different callers, as the neural network is able to learn which callers work best for which types of mutations. Thus, such a combinatorial approach will allow us to improve the accuracy and precision of variant calling.\\
 
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{neuralnet.png}
+\centering
+\caption{A Neural Network with 1 input layer, 3 hidden layers and 1 output layer. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers. At each node, linking functions can be had }
+\end{figure}
 
-\begin{equation}
-P(Mutation is Important | Mutation is clinVar) = \frac{P(Mutation is clinVar | mutation is important)* P(Mutation is important)}{P(Mutation is ClinVar)}
-\end{equation}
-
-
-\begin{equation}
-\prod P(token_i | spam) = P("free" | spam)* P("viagra"|spam)*P(next token|spam)....
-\end{equation}
-
-\begin{equation}
-P(clinVar | important) 
-\end{equation}
-\begin{equation}
-P(mutationTaster | important)
-\end{equation}
-\begin{equation}
-P(SIFT | important)
-\end{equation}
 
 \section{Materials and Methods}
 
+\subsection{Overall Analysis Structure}
+Simulate sequence reads with error rates and ground truth variants
+Train deep learning neural network using simulated reads to optimize the network
+Use optimized network to train on reference genome (NA12878) using high confidence calls as ground truth
+
+Build a Bayesian network based on high confidence calls and functional annotations to rank mutations
+
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{trainingpathway.png}
+\centering
+\caption{A Neural Network with 1 input layer, 3 hidden layers and 1 output layer. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers. At each node, linking functions can be had }
+\end{figure}
+
+
 \subsection{Artificial Datasets}
-To generate datasets to train variant calling networks, VarSim was used with ART in order to generate artificial datasets. Datasets generated has 
+To generate datasets to train variant calling networks, mason was used in order to generate an artificial genome for analysis. Artificial genomes are the best methods to analyse our neural networks on as the ground truth which are the truth variants inside the genome can be known (CITATION). This allows accurate verification of prediction schemes. It is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called. Thus, artificial genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform.
+To accurately simulate variants, error profiles were obtained from published data (CITATIONS).
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{neuralnet.png}
+\centering
+\caption{A Neural Network with 1 input layer, 3 hidden layers and 1 output layer. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers. At each node, linking functions can be had }
+\end{figure}
 
 
 \subsection{Variant Callers}
@@ -149,7 +158,7 @@ In order to train the neural network, features were extracted from the variant c
 
 \subsection{Processing tools}
 
-\subsection{PDX datasets}
+\subsection{PDX mouse model development and sequencing}
 
 
 \section{Results and Discussion}
@@ -199,7 +208,18 @@ In tuning our network, we sought to study how the various hyperparameters as wel
 \end{figure}
 
 B. Optimiser Choice
-Optimisers have also been 
+Optimisers have also been well studied and known to be important in neural network training (CITATION). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent. ADAM is an adaptive learning rate optimiser that stores . is known to be validated for dataset, and is an improvement. RMS-prop is another adaptive learning rate optimiser that stores is an unpublished dataset, but has been known to work well for experimental learning datasets. Stocastic gradient descent is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically. For more information on the mathematical foundations of each optimiser, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
+
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{optimiserlearning.jpg}
+\centering
+\end{figure}
+
+ADAM was noted to plateau at an accuracy at X epochs. This was higher than RMSprop at N after 100 epochs and SGD at Y after 100 epochs. This indicates that ADAM seems to be the most suitable learning rate method. Furthermore, we note a stable learning curve for ADAM, indicating it is able to learn and update the gradients in the neural network to learn from input data. Interestingly, we note some chaotic behaviour for ADAM after it has hit plateau, bouncing up and down in terms. This could be due to a minimum finding problem where it has already found the minimum and so every gradient moves it away from the minimum causing it to decrease, and then it goes back to the minimum again. Such behaviour has been noted in X. This is known to be not an issue with the algorithm but more of due to the fact that it has already found the minimum. Thus, we decided to use ADAM as our optimiser. 
+
+
+
 
 C. Learning Rate Choice
 
@@ -237,16 +257,8 @@ After verification of the neural network architecture, optimised parameters and 
 \centering
 \end{figure}
 
-\subsection{Analysis of PDX dataset using Bayesian Ranking systems}
-After validation, we sought to enable a clear and understandable ranking of genes. We first build a Bayesian network analysis using known functional annotations from AnnoVar. The features inside AnnoVar and their clinical validation can be found below. 
-
-\begin{figure}[H]
-\includegraphics[width=\textwidth]{annovarfeatures.png}
-\caption{Comparison of Variant Callers}
-\centering
-\end{figure}
-
-These were subsequently used to compute the Bayesian probability ranking, which is shown in Figure N below.
+\subsection{Analysis of gene importance using Bayesian Ranking systems}
+After validation of high confidence calls, we sought to enable a clear and understandable ranking of genes. We first build a Bayesian network analysis using known functional annotations from AnnoVar. These were subsequently used to compute the Bayesian probability ranking, which is shown in Figure N below.
 
 
 \begin{figure}[H]
@@ -255,8 +267,67 @@ These were subsequently used to compute the Bayesian probability ranking, which 
 \centering
 \end{figure}
 
-This network structure was chosen as we wanted to use three different sets of information to update the probability of the gene being important. Firstly, the confidence of the call should matter in how important it is - the more likely a gene is real, the more important it should be. Secondly, the rank should also be determined by how common the variation is, based on studying known SNP polymorphism rates. If it is a common SNP, then the ranking should be downgraded as 
-\section{Future Directions}
+This network structure was chosen as we wanted to use three different sets of information to update the probability of the gene being important. Firstly, the confidence of the call should matter in how important it is - the more likely a gene is real, the more important it should be. Secondly, the rank should also be determined by how common the variation is, based on studying known SNP polymorphism rates. If it is a common SNP, then the ranking should be downgraded as it is less likely to be a driver mutation. Finally, we sought to predict the overall effect of mutations via an ensemble of mutation effect predictors. These predictors use different methods to predict the average effect of that mutation - based on statistical methods like position specific substitution matrixes and Hidden Markov Models to study the effect of a mutation on protein structure and function. We also used the ClinVar database, a curated repository of known Human variants and their resulting phenotypes. These scores were then aggregated to update the probability of the mutation effect.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{annovarfeatures.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+
+Based on scores provided, we report the update the conditional probabilities using the probabilities chain rule - for the first level, this is given as \\
+\begin{equation}
+\begin{split}
+P(Impt | (Del  \ \cap \ Uncom  \cap High\ Conc)) =  \ \ P(&Impt \cap Del  \ \cap \ Uncom \cap High \ Conc ) \\ \ * \ & P(Del  \cap Uncom  \cap High \ Conc )
+\end{split}
+\end{equation}
+\tiny
+\indent
+P(Impt) refers to the probability of the gene being important,\\
+\indent P(Del) refers to the probability of the gene being deleterious,\\ 
+\indent P(Uncom) refers to the probability of the gene being uncommon and\\  \indent P(High Conc) refers to the probability of the gene being a high confidence call.\\ \indent Further calculations can be found and derivations can be found in Appendix A\\
+
+\normalsize
+\noindent
+To compute the final probabilites, the software pomegranate was used. This simplifies the node drawing and probabilistic updates of the final ranking scores. \\\\
+
+
+\subsection{Validation of Bayesian Network Ranking on PDX dataset}
+To study the effectiveness of our bayesian network ranking system, we sequenced and analysed a patient derived xenograft (PDX) tumour genome. This tumour genome was grafted onto the immunocompromised mouse from a patient with a known cancer - Diffuse Large B Cell Lymphoma (DLBCL). We chose to analyse lymphoma as lymphoma is a well-known and studied disease model with a well-defined disease progression. The patient derived xenograph model also allows in vivo studies of the tumour in its environment, and serves as a good model for sequencing and analysis. After sequencing the PDX genome, we put it through our full analysis pipeline, which involves identifying high confidence mutations using the neural networks and then ranking these genes using the bayesian network ranking. Figure N shows the top 30 genes by probability. 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{bayesianranks.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+Studying the top 5 genes, we found that four of these five genes have been implicated on lymphomas or other cancers. AHNAK is a known tumour suppressor and has been known to be downregulated inlines of Burkitt Lymphoma. BCL11A is a known proto-oncogene in DLBCL, and has been found to be overexpressed in 75\% of primary mediastinal B-cell Lymphomas, a subset of DLBCL. SPRR1A, the fourth gene ranked in terms of importance, has been shown to be expressed in DLBCL and its expression has been shown to strongly correlate with 5 year survival rate (Figure ). Finally development of B-cell lymphoma has been noted in Crb-2 related syndrome, which is a bi-allelic mutaiton of CRB2. Interestingly, the last highly ranked genes was noted to be a subunit of Hemoglobin. While there is no strong evidence for the role of Hemoglobin in lymphoma, it has been shown to be expressed in aggressive gliobastoma lines, indicating a possible previously unknown role in cancer. This gives us high confidence that the bayesian ranking network is able to pick up important and relevant mutations. Without such a ranking system, we would have to look through over 70 thousand genes, without a way to systematically study their call confidence, as well as their probability of having an effect. 
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{top5importantgenes.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics{sprr1adataset.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+
+To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system. A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. From the Ciros Plot (Figure N), we find several interesting gene familes that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), Tlr3 (chr4,rank 26) and Tlr1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway, and interleukins are also important in cancer due to their importance in mediating inflammation and immune response. Thus, we show that our bayesian network can be used by Clinicians to quickly interrogate the information from functional annotations and database lookups to understand the disease specifics. 
+
+\begin{figure}[H]
+\includegraphics{circosplot.png}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+
+\section{Summary and Future Directions}
 
 
 \section{Appendixes}
