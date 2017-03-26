@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  26 MAR 2017 06:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  27 MAR 2017 04:05
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -789,137 +789,206 @@ Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/opt
 imiserlearning.jpg used on input line 215.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
 
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg, id=61, 6
+59.3433pt x 337.9827pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg Grap
+hic file (type jpg)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/lea
+rningrates.jpg used on input line 224.
+(pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
+
 [13 <c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg>]
 
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructure.jpg, id=65
+, 659.3433pt x 337.9827pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructure.jpg G
+raphic file (type jpg)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructure.jpg>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/net
+workstructure.jpg used on input line 234.
+(pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
+
+[14 <c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg> <c:/
+Users/User/Documents/thesis/Thesis/thesisimages/networkstructure.jpg>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitecturefi
+nal.png, id=69, 489.027pt x 331.2375pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitect
+urefinal.png Graphic file (type png)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitectu
+refinal.png>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
+ralnetworkarchitecturefinal.png used on input line 242.
+(pdftex.def)             Requested size: 411.9399pt x 279.03616pt.
+
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results_all.
-jpg, id=64, 659.3433pt x 337.9827pt>
+jpg, id=70, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
 _all.jpg Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results_
 all.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/fin
-al_f1scores_results_all.jpg used on input line 236.
+al_f1scores_results_all.jpg used on input line 252.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
-
+ [15 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitect
+urefinal.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison.jpg,
- id=65, 659.3433pt x 337.9827pt>
+ id=74, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison
 .jpg Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison.
 jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/mas
-onheadsupcomparison.jpg used on input line 244.
+onheadsupcomparison.jpg used on input line 260.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
- [14 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
-_all.jpg>] [15 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsup
+ [16 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
+_all.jpg>] [17 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsup
 comparison.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jpg, id
-=72, 659.3433pt x 337.9827pt>
+=81, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jp
 g Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jpg
 >
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/nah
-eadsupcomparison.jpg used on input line 255.
+eadsupcomparison.jpg used on input line 271.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
 
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png, id=73,
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png, id=82,
  449.2785pt x 225.84375pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png Gr
 aphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bay
-esiannetwork.png used on input line 265.
+esiannetwork.png used on input line 281.
 (pdftex.def)             Requested size: 411.9399pt x 207.08609pt.
 
-[16 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jpg
+[18 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jpg
 >]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png, id=77,
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png, id=87,
  622.7265pt x 291.489pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png Gr
 aphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/ann
-ovarfeatures.png used on input line 273.
+ovarfeatures.png used on input line 289.
 (pdftex.def)             Requested size: 411.9399pt x 192.82365pt.
 
-[17 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
+[19 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 295--296
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--290
+Underfull \hbox (badness 10000) in paragraph at lines 300--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--294
+Underfull \hbox (badness 10000) in paragraph at lines 308--310
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--294
+Underfull \hbox (badness 10000) in paragraph at lines 308--310
 
  []
 
-[18 <c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png, id=89, 6
+[20 <c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png, id=98, 6
 59.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png Grap
 hic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bay
-esianranks.png used on input line 300.
+esianranks.png used on input line 316.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
 
-[19 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>]
+[21 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png, id=
-94, 604.659pt x 327.624pt>
+103, 604.659pt x 327.624pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png
  Graphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/top
-5importantgenes.png used on input line 309.
+5importantgenes.png used on input line 325.
 (pdftex.def)             Requested size: 411.9399pt x 223.20128pt.
 
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png, id=95, 3
-39.669pt x 353.52075pt>
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png, id=104, 
+339.669pt x 353.52075pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png Grap
 hic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/spr
-r1adataset.png used on input line 315.
+r1adataset.png used on input line 331.
 (pdftex.def)             Requested size: 339.66817pt x 353.51988pt.
 
-[20 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
+[22 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
 ]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png, id=99, 370.
-38374pt x 370.38374pt>
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png, id=108, 370
+.38374pt x 370.38374pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png Graphic
  file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/cir
-cosplot.png used on input line 324.
+cosplot.png used on input line 340.
 (pdftex.def)             Requested size: 370.38283pt x 370.38283pt.
 
-[21 <c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>]
-[22 <c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>]
+[23 <c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>]
+[24 <c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jpg, i
+d=116, 659.3433pt x 337.9827pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
+pg Graphic file (type jpg)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jp
+g>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/var
+iancecapturedbypc.jpg used on input line 360.
+(pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
+ [25]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg, id=1
+20, 351.714pt x 158.994pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg 
+Graphic file (type jpg)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/smo
+teoversampling.jpg used on input line 371.
+(pdftex.def)             Requested size: 411.9399pt x 186.23087pt.
+
+[26 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jp
+g>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteevidence.jpg, id=124, 
+320.99925pt x 257.16075pt>
+File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteevidence.jpg Grap
+hic file (type jpg)
+
+<use c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteevidence.jpg>
+Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/smo
+teevidence.jpg used on input line 379.
+(pdftex.def)             Requested size: 411.9399pt x 330.04358pt.
+
+[27 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
+[28 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteevidence.jpg>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 
-[23] (HT.txt.aux)
+[29] (HT.txt.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -929,10 +998,10 @@ LaTeX Warning: There were multiply-defined labels.
 ### semi simple group (level 1) entered at line 65 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13979 strings out of 493334
- 278487 string characters out of 3136675
+ 14009 strings out of 493334
+ 280490 string characters out of 3136675
  417655 words of memory out of 3000000
- 17247 multiletter control sequences out of 15000+200000
+ 17271 multiletter control sequences out of 15000+200000
  5304 words of font info for 20 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,15n,54p,1892b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -942,9 +1011,9 @@ cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 mr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5
 .pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb>
-Output written on HT.txt.pdf (24 pages, 2236546 bytes).
+Output written on HT.txt.pdf (30 pages, 2974809 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
+ 151 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 108 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 138 words of extra memory for PDF output out of 10000 (max. 10000000)
 

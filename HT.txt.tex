@@ -178,7 +178,7 @@ In order to begin training
 \end{figure}
 
 \subsection{Network Architecture}
-We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network. Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. \\\\
+We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network (please see Appendix A for more details of the PCA analysis). Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. \\\\
 
 \begin{figure}[H]
 \caption{Feature Engineering Table}
@@ -207,7 +207,7 @@ In tuning our network, we sought to study how the various hyperparameters as wel
 \centering
 \end{figure}
 
-B. Optimiser Choice
+B. Optimiser and Learning Rates
 Optimisers have also been well studied and known to be important in neural network training (CITATION). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent. ADAM is an adaptive learning rate optimiser that stores . is known to be validated for dataset, and is an improvement. RMS-prop is another adaptive learning rate optimiser that stores is an unpublished dataset, but has been known to work well for experimental learning datasets. Stocastic gradient descent is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically. For more information on the mathematical foundations of each optimiser, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
 
 \begin{figure}[H]
@@ -216,16 +216,32 @@ Optimisers have also been well studied and known to be important in neural netwo
 \centering
 \end{figure}
 
-ADAM was noted to plateau at an accuracy at X epochs. This was higher than RMSprop at N after 100 epochs and SGD at Y after 100 epochs. This indicates that ADAM seems to be the most suitable learning rate method. Furthermore, we note a stable learning curve for ADAM, indicating it is able to learn and update the gradients in the neural network to learn from input data. Interestingly, we note some chaotic behaviour for ADAM after it has hit plateau, bouncing up and down in terms. This could be due to a minimum finding problem where it has already found the minimum and so every gradient moves it away from the minimum causing it to decrease, and then it goes back to the minimum again. Such behaviour has been noted in X. This is known to be not an issue with the algorithm but more of due to the fact that it has already found the minimum. Thus, we decided to use ADAM as our optimiser. 
+ADAM was noted to plateau at an accuracy at X epochs. This was higher than RMSprop at N after 100 epochs and SGD at Y after 100 epochs. This indicates that ADAM seems to be the most suitable learning rate method. Furthermore, we note a stable learning curve for ADAM, indicating it is able to learn and update the gradients in the neural network to learn from input data. Interestingly, we note some chaotic behaviour for ADAM after it has hit plateau, bouncing up and down in terms. This could be due to a minimum finding problem where it has already found the minimum and so every gradient moves it away from the minimum causing it to decrease, and then it goes back to the minimum again. Such behaviour has been noted in X. This is known to be not an issue with the algorithm but more of due to the fact that it has already found the minimum. Thus, we decided to use ADAM as our optimiser. We also looked at various learning rate for Adam (Figure N), and found that the most stable learning could be found at LR = 0.00001. Thus, we chose this to be our learning rate.
 
 
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{learningrates.jpg}
+\centering
+\end{figure}
 
 
-C. Learning Rate Choice
+C. Number of Layers 
+Finally, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. We studied 4 different neural network structures (4 layers to 7 layers). 
 
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{networkstructure.jpg}
+\centering
+\end{figure}
 
+From analysing the accuracies of the different layers, we find that 4 layers and 7 layers networks seem the best at learning from the input data. We decided on the 7 layer network as it seemed best able to learn from the input dataset. The final network was decided in the structure below - 
 
-D. Number of Layers 
+\begin{figure}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{neuralnetworkarchitecturefinal.png}
+\centering
+\end{figure}
 
 
 
@@ -331,8 +347,39 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 
 
 \section{Appendixes}
-\subsection{Key Technologies}
+\subsection{Neural Network Algorithms}
 
+\subsection{Feature Engineering}
+
+
+\subsection{Mathematical and Statistical Tools}
+A. Principal Components Analysis (PCA)\\
+Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduce of high dimensional datasets. It was first proposed by Pearson in 1901 (CITATION) and has been commonplace in many data analytics and signal processing methodologies. PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs are able to capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector is able to represent. Ultimately, we select n eigenvectors that is able to represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they are able to capture the variance in the dataset. For our analysis, we decided to use 8 principal components - we took the limit as the last principal components that was able to represent at least 0.5\% of variance in the dataset.
+ 
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{variancecapturedbypc.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+To carry out PCA, we used the preprocessing step SciPy to normalise all the input vectors to mean 0 and standard deviation 1. Subsequently, we perform principal components decomposition to obtain the eigenvector transformed representation of the dataset, and their corresponding eigenvalues. We then fit 8 of the principal components that explained the largest amount of variance into the neural network to study if it is able to learn from the compressed representation of the input features. 
+
+B. Synthetic Minority Overrepresentation Technique (SMOTE)
+SMOTE is a statistical technique derived in (CITATION) to overcome problems with imbalanced datasets that are common in machine learning. SMOTE oversamples the training class with less variables in a way that tries not to replicate data points (that makes certain data points over-represented) without creating new invalid training training examples. It does this by taking the intersection of two nearest data points of the same training class. This can be seen in Figure N. 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{smoteoversampling.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
+
+In doing so, it creates a more generalised representation of the sample class with less training examples, without replicating certain datapoints and without creating invalid data. This enables intelligent oversampling of the dataset to balance out the positive and negative feature classes. SMOTE has been shown to be valid for other datasets, including biological data (Figure N). Here, SMOTE was used to accomplish BLANK.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{smoteevidence.jpg}
+\caption{Comparison of Variant Callers}
+\centering
+\end{figure}
 
 \section{Acknowledgements}
 
