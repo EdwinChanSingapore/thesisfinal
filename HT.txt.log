@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  28 MAR 2017 08:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  28 MAR 2017 19:18
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -948,274 +948,301 @@ cosplot.png used on input line 332.
 
 [26 <c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>]
 [27 <c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 347--350
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--356
+
+ []
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 358--379
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--379
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--379
+
+ []
+
+[29]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jpg, i
-d=130, 659.3433pt x 337.9827pt>
+d=139, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jp
 g>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/var
-iancecapturedbypc.jpg used on input line 357.
+iancecapturedbypc.jpg used on input line 387.
 (pdftex.def)             Requested size: 411.9399pt x 211.17162pt.
- [28]
+ [30 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
+pg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg, id=1
-34, 351.714pt x 158.994pt>
+44, 351.714pt x 158.994pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg 
 Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/smo
-teoversampling.jpg used on input line 368.
+teoversampling.jpg used on input line 398.
 (pdftex.def)             Requested size: 411.9399pt x 186.23087pt.
 
-[29 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jp
-g>]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+[31 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-[30 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-[31]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 [33]
-Overfull \hbox (43.66292pt too wide) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+
+ []
+
+
+Overfull \hbox (43.66292pt too wide) in paragraph at lines 416--416
 []\OT1/cmr/m/n/10 Ruder, S. $2016$. An overview of gra-di-ent de-scent op-ti-mi
 za-tion al-go-rithms.arXiv preprint arXiv:1609.04747. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
-
-Overfull \hbox (24.9646pt too wide) in paragraph at lines 386--386
+[35]
+Overfull \hbox (24.9646pt too wide) in paragraph at lines 416--416
 \OT1/cmr/m/n/10 2014$. SMaSH: a bench-mark-ing toolkit for hu-man genome vari-a
 nt calling.Bioinformatics,30$19$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
-
- []
-
-[34]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--387
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
 
  []
 
-[35] (HT.txt.aux) )
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
+
+ []
+
+[36] [37] (HT.txt.aux) )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 66 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 14083 strings out of 493334
- 281776 string characters out of 3136675
+ 14085 strings out of 493334
+ 281797 string characters out of 3136675
  419033 words of memory out of 3000000
- 17340 multiletter control sequences out of 15000+200000
- 5304 words of font info for 20 fonts, out of 3000000 for 9000
+ 17341 multiletter control sequences out of 15000+200000
+ 5612 words of font info for 21 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,15n,54p,8185b,378s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb
-><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on HT.txt.pdf (36 pages, 3077759 bytes).
+cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
+i10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on HT.txt.pdf (38 pages, 3114067 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
+ 201 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

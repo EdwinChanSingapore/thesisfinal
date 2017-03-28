@@ -341,11 +341,41 @@ INSERT
 \section{Appendixes}
 
 \subsection{Neural Network Algorithms}
-INSERT
+Deep Learning is underpinned by two key algorithms, the feed-forward algorithm and the backpropagation algorithm. 
 
 \subsection{Feature Engineering}
-INSERT
-
+We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Base information tells us base specific properties, including information contained in the base as well as the quality of sequenced bases in the samples. Sequencing error and bias features attempt to tease out potential biases in sequencing, including features such as GC content, longest homopolymer run and as well as allele balances and counts. Finally, calling and mapping quality scores provide information on the mapping and calling confidence of the variant callers, and includes features such as genotype confidence and mapping quality. In all, these sets of information provide information on the key aspects of variant calling - specifically the properties of the bases in the samples, the characteristics of the sequencing process and finally the variant calling and mapping algorithms.
+\textbf{Base Information} \\\\
+\underline{Shannon Entropy}\\
+Shannon Entropy captures the amount of information contained inside the allele sequences. It is calculated using the equation :
+\begin{equation}
+H(X) = -\sum_{i=1}^{n}P(x_i)\log_{2}P(x_i)
+\end{equation}
+where $P(x_i)$ is the probability of finding each base at each position. Thus, we calculate the entropy by summing up the probabilities/lg(probabilities) at each position. This prior probability is calculated in two ways and both are used as features - firstly, the overall genome base probabilities are calculated over the entire genome, and thus the entropy is related to the probability of finding a base at any position in the genome. The second way prior probability is calculated is to take a region of space around the allele (10 bases plus the length of the allele in our calculations) and use those probabilities to calculate the entropy of the allelic sequence. Intuitively, it attempts to find out the amount of information contained within the allelic sequence and hopefully the neural network is able to use the information to determine the validity of a mutation.\\\\
+\underline{Kullback Leibler Divergence}\\
+The Kullback-Leibler Divergence feature is similar to Shannon entropy, but instead we use this to measure the informational change converting from the reference to the allele sequence. The Kullback-Leibler Divergence is calculated as follows :
+\begin{equation}
+D_{KL}(P||Q) = -\sum_{i=1}^{n}P(x_i)\log_{2}{\frac{P(x_i)}{Q(x_i)}}
+\end{equation}
+where $Q(x_i)$ is the prior probability of finding each base at each position based on the genomic region around the allele, while $P(X_i)$ is the posterior probability of finding a specific base inside the allelic sequence. Thus, the KL divergence describes the informational gain when the probabilities from Q is used to describe P. Intuitively, since we know the base probabilities of the region, we can then study the probabilities observed in the reference allelic sequence and see how well $Q(X_i)$ probabilities is able to approximate $P(X_i)$ probabilities.
+\underline{Base Quality}
+Phred score probability that the called allele is wrong 
+\textbf{Sequencing Biases and Errors} \\\\
+\underline{GC content}
+Calculated GC content of reference genome, which may affect sequencing results and accuracy
+\underline{Longest homozygous run}
+Homopolymer runs (AAAAAAAA) are known to cause sequencer errors, and might be a factor in determining in whether a variant is true.
+\underline{Allele Count}
+Total number of alleles in called phenotypes
+\underline{Allele Balance}
+Ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls)
+\textbf{Calling and Mapping Qualities} \\\\
+\underline{Genotype Likelihood}\\
+phred-scaled likelihood scores of whether the call heterozygosity. 
+\underline{Read Depth}
+Mapped read depth refers to the total number of bases sequenced and aligned at a given reference base position
+\underline{Quality by Depth}
+Quality score divided by allele depth, to obtain an average score of allele quality
 \subsection{Mathematical and Statistical Tools}
 A. Derivation of F1 Score 
 INSERT
