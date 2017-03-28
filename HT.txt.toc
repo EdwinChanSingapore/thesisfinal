@@ -1,0 +1,24 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {subsection}{\numberline {1.1}Deep Learning in Variant Calling Methodology}{2}
+\contentsline {subsection}{\numberline {1.2}Bayesian Networks in Gene Prioritisation}{5}
+\contentsline {subsection}{\numberline {1.3}Aims and Research Structure}{6}
+\contentsline {section}{\numberline {2}Materials and Methods}{7}
+\contentsline {subsection}{\numberline {2.1}Artificial Datasets}{7}
+\contentsline {subsection}{\numberline {2.2}Feature Engineering}{8}
+\contentsline {subsection}{\numberline {2.3}Variant Callers}{9}
+\contentsline {subsection}{\numberline {2.4}Overall Analysis Structure}{9}
+\contentsline {subsection}{\numberline {2.5}Technologies}{10}
+\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{11}
+\contentsline {section}{\numberline {3}Results and Discussion}{12}
+\contentsline {subsection}{\numberline {3.1}Network Architecture}{12}
+\contentsline {subsection}{\numberline {3.2}Network Tuning and Optimisation}{13}
+\contentsline {subsection}{\numberline {3.3}Benchmarking of Network with Mason Datasets}{18}
+\contentsline {subsection}{\numberline {3.4}Benchmarking of Network with NA Datasets}{20}
+\contentsline {subsection}{\numberline {3.5}Analysis of gene importance using Bayesian Ranking systems}{22}
+\contentsline {subsection}{\numberline {3.6}Validation of Bayesian Network Ranking on PDX dataset}{23}
+\contentsline {section}{\numberline {4}General Conclusions}{28}
+\contentsline {section}{\numberline {5}Appendixes}{29}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{29}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{33}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{37}
+\contentsline {section}{\numberline {6}Bibilography}{41}

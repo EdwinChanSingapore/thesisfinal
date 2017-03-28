@@ -61,16 +61,37 @@ Life Sciences\\
         
     \end{center}
 \end{titlepage}
-
-
+\newpage
+\pagenumbering{Roman} 
+\doublespace
+\large
+\vspace*{50px}
+\begin{center}
+\textbf{DECLARATION}\\[\baselineskip]
+I hereby declare that this thesis is my original work and it has been written by me in its entirety. I have duly acknowledged all the sources of information which have been used in the thesis.\\[\baselineskip]
+This thesis has also not been submitted for any degree in any university previously.\\[3\baselineskip]
+\begin{center}
+\line(1,0){150}
+\end{center}
+Chan Khai Ern Edwin\\
+04 April 2017
+\end{center}
+\newpage
+\section*{Acknowledgements}
+\newpage
+\section*{Table of Contents}
+\tableofcontents
+\newpage
+\section*{Abstract}
 \doublespace
 \normalsize
+\pagenumbering{arabic} 
 \section{Introduction}
 
-Identification of functionally important mutations is a critical step in enabling personal genomic pipelines. Recently, there has been great interest in using a persons genome to help doctors treat and diagnose disease (Rehm, 2017;Angrist, 2016). The fundamental intuition is that sequencing the person's genome can help doctors and clinicians narrow down important disease subtypes and progression. This enables doctors to better diagnose the disease, as well as prepare targeted medication to treat the specific disease. However, there are still two critical steps in this pipeline that needs to be addressed. Firstly, we need to be able to obtain high confidence mutations, and secondly there needs to be a method to prioritise these mutations for clinicians and doctors. For the first problem we have to be able to find out mutations in the persons genome that is different from a reference genome. This step is termed in literature as variant calling as it involves the discovery (calling) of genes (variants) that differ from a reference genome. However, current variant callers still tend to have low concordances for variants called (O'Rawe et al., 2013; Cornish and Guda, 2015), primarily due to differences in variant calling algorithms and assumptions. The second problem, ranking of mutations is critical as these variant callers do not take into account the importance of each variants. Thus, an additional step must be taken to attempt to find out which might be the most important genes for clinicians. This is critical a clinician should be able to obtain variants that are of clinical significance without having to sieve through literature to manually pick out genes that important. This would allow them to narrow their search to the most likely candidate dates, and then be able to embark on the most ideal treatment pathway. In this paper, we describe a tool, INSERTNAMEHERE, to integrate data from multiple variant callers, filter true variants and prioritise their importance. This tool uses deep learning for filtering variants, and bayesian updating to determine variants that are the most important.\\
+Identification of functionally important mutations is a critical step in enabling personal genomic pipelines. Recently, there has been great interest in using a persons genome to help doctors treat and diagnose disease (Rehm, 2017;Angrist, 2016). The fundamental intuition is that sequencing the person's genome can help doctors and clinicians narrow down important disease subtypes and progression. This enables doctors to better diagnose the disease, as well as prepare targeted medication to treat the specific disease. \\\\However, there are still two critical steps in this pipeline that needs to be addressed. Firstly, we need to be able to obtain high confidence mutations, and secondly there needs to be a method to prioritise these mutations for clinicians and doctors. For the first problem we have to be able to find out mutations in the persons genome that is different from a reference genome. This step is termed in literature as variant calling as it involves the discovery (calling) of genes (variants) that differ from a reference genome. However, current variant callers still tend to have low concordances for variants called (O'Rawe et al., 2013; Cornish and Guda, 2015), primarily due to differences in variant calling algorithms and assumptions. The second problem, ranking of mutations is critical as these variant callers do not take into account the importance of each variants. Thus, an additional step must be taken to attempt to find out which might be the most important genes for clinicians. This is critical a clinician should be able to obtain variants that are of clinical significance without having to sieve through literature to manually pick out genes that important. This would allow them to narrow their search to the most likely candidate dates, and then be able to embark on the most ideal treatment pathway. \\\\In this paper, we describe a tool, INSERTNAMEHERE, to integrate data from multiple variant callers, filter true variants and prioritise their importance. This tool uses deep learning for filtering variants, and bayesian updating to determine variants that are the most important.\\
 
 \subsection{Deep Learning in Variant Calling Methodology}
-Variant calling primarily involves the use of various statistical and mathematical methods to discover variants, or mutations, in the genome. Calling variants allows the analysis of deviations and differences between the genome of interest and a standard human genome. However, there are still areas for improvement in current variant calling methods, including dealing with different classes of mutations, as well as reducing the number of false positives (Mohiyuddin, et al., 2015; Gézsi et al., 2015). Both these problems fundamentally result from assumptions and implementations of variant callers - certain algorithms are more sensitive and accurate in calling certain classes of mutations, but suffer from inaccuracies in calling other variant types and edge cases. Probabilistic haplotype generating callers (such as GATK's haplotype caller and FreeBayes) tend to be more accurate for SNPs and indels (McKenna et al. 2010; Garrison \& Marth, 2012). They perform de-novo local assembly, where they rebuild small portions of the genome, and subsequently use bayesian analysis to determine the existence of variants. Specifically, they generate short haplotypes of local regions from sampled sequences, and determine (based on the haplotypes and prior probabilities in the reference genome) whether a variant should be called. However, these methods can only handle limited window sizes, preventing the detection of larger structural variants. For these we have to rely on other tools that examine larger segments of the genome (Ning et al., 2009) or use libraries of known mutation regions, and study these breakpoints to check if any mutations have occurred (Gerstein et al., 2015). Due to the heterogenity in mutations, no single caller works best for all classes of mutations, pointing towards a variant calling framework that aggregates data from multiple callers.\\
+Variant calling primarily involves the use of various statistical and mathematical methods to discover variants, or mutations, in the genome. Calling variants allows the analysis of deviations and differences between the genome of interest and a standard human genome. However, there are still areas for improvement in current variant calling methods, including dealing with different classes of mutations, as well as reducing the number of false positives (Mohiyuddin, et al., 2015; Gézsi et al., 2015). \\\\Both these problems fundamentally result from assumptions and implementations of variant callers - certain algorithms are more sensitive and accurate in calling certain classes of mutations, but suffer from inaccuracies in calling other variant types and edge cases. Probabilistic haplotype generating callers (such as GATK's haplotype caller and FreeBayes) tend to be more accurate for SNPs and indels (McKenna et al. 2010; Garrison \& Marth, 2012). They perform de-novo local assembly, where they rebuild small portions of the genome, and subsequently use bayesian analysis to determine the existence of variants. Specifically, they generate short haplotypes of local regions from sampled sequences, and determine (based on the haplotypes and prior probabilities in the reference genome) whether a variant should be called. However, these methods can only handle limited window sizes, preventing the detection of larger structural variants. For these we have to rely on other tools that examine larger segments of the genome (Ning et al., 2009) or use libraries of known mutation regions, and study these breakpoints to check if any mutations have occurred (Gerstein et al., 2015). Due to the heterogenity in mutations, no single caller works best for all classes of mutations, pointing towards a variant calling framework that aggregates data from multiple callers.\\
 
 Indeed, studies have shown low concordances between variant callers themselves, due to their specific implementations and algorithms (Mohiyuddin, et al., 2015; Gézsi et al., 2015). If we consider that each variant caller samples from the same genome but with a different statistical technique, then we can see each variant caller as a mode of data that provides us with a unique piece of information on the genome. Thus, we can generate more accurate calls by aggregating the multi-modal data from various callers, allowing us to cross validate the variants called using multiple techniques.\\
 
@@ -100,6 +121,7 @@ The second problem of gene prioritisation arises because there are a multitude o
 \subsection{Aims and Research Structure}
 In this paper, we will describe the building of a tool, INSERTNAMEHERE to perform both variant calling and. First, we simulated sequence reads with error rates and ground truth variants. This is critical to obtain a dataset that we can use to train and optimise our deep learning neural network. Subsequently, we benchmark our neural network against the other variant callers and combinations of those callers. After we validate the usage of our network on simulated datasets, then we use optimized network to train on reference genome (NA12878) using high confidence calls as ground truth. We then validate Finally, we build a Bayesian network based on high confidence calls and functional annotations to rank mutations. We note its ability to be able to validate genes in both simulated and real datasets, and we are able to apply our bayesian gene ranking system on real patient dataset to find important genes. 
 
+\newpage
 \section{Materials and Methods}
 
 \subsection{Artificial Datasets}
@@ -108,15 +130,15 @@ In this paper, we will describe the building of a tool, INSERTNAMEHERE to perfor
  Artificial genomes are the best methods to analyse our neural networks on as the ground truth which are the truth variants inside the genome can be known (Escalona, Rocha \& Posada, 2016). This allows accurate verification of prediction schemes. It is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called. Thus, artificial genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform. From this, we created a genome with over 300,000 random mutations (ground truth variants) spread over the chromosomes as can be seen below in Figures N. 
 
 \begin{figure}[H]
-\includegraphics[width=0.8\textwidth]{MutationInSimulatedGenome.jpg}
-\caption{Number of ground truth mutations (variants) created in each chromosome }
 \centering
+\includegraphics[width=0.7\textwidth]{MutationInSimulatedGenome.jpg}
+\caption{Number of ground truth mutations (variants) created in each chromosome }
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[width=0.8\textwidth]{MutationRateInSimulatedGenome.jpg}
-\caption{Mutation rate per base in each chromosome}
 \centering
+\includegraphics[width=0.7\textwidth]{MutationRateInSimulatedGenome.jpg}
+\caption{Mutation rate per base in each chromosome}
 \end{figure}
 
 After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants(figure N). To accurately simulate variants, error profiles of Illumina sequencing data were obtained from published articles (Schirmer et al., 2016). Mason, an artificial genome simulator software was used in order to generate an artificial genome for analysis. This program takes in error rates and ground truth variants, and produces FastQ reads that can be used in later analysis as simulated sequencing data.
@@ -161,20 +183,19 @@ For our deep learning networks, we used the Keras library with a TensorFlow back
 
 The general programming platform used was Python. Python was chosen due to its access to various important libraries, including NumPy, SciPy, Pomegrenate and PyVCF. NumPy was used to prepare input vectors for deep learning training, SciPy was used to perform Principal Component Analysis and Synthetic Minority Oversampling Technique Methods (See Appedndix N) for more information. Pomegranate was used to generate and compute the probabilistic model and ranking system for our Bayesian Network. Finally, PyVCF was used to parse the VCF files into python objects for easy manipulation.
 
-\subsection{PDX mouse model development and sequencing}
-To-get - Data from Dr Ban
+\subsection{Patient Derived Xenograft Mouse Model Development and Sequencing}
+[TO CLARIFY] To test the Bayesian ranking system, we used a patient derived xenograft mouse model. Athymic mice with the FOX mutation were grown for X number of days, and subsequently a tumour is grafted onto the mouse's body. Subsequently, the tumour was sequeneced on an Illumina MiSeq platform and used for analysis. 
 
+\newpage
 \section{Results and Discussion}
 
 \subsection{Network Architecture}
-We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network (please see Appendix A for more details of the PCA analysis). Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. \\\\
-
+We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network (please see Appendix A for more details of the PCA analysis). Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{neuralnetworkstructure.png}
 \centering
 \caption{Different Designs for Neural Network Architecture}
 \end{figure}
-
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{neuralnetworkstructureresults.png}
 \centering
@@ -184,50 +205,42 @@ Initially, with the flat network, the precision rate was very low, indicating th
 
 
 \subsection{Network Tuning and Optimisation}
-
-
-In tuning our network, we sought to study how the various hyperparameters as well as the datastructure affected our network's ability to learn from the data. In particular, we focused on four issues, sample balancing, optimiser choice, learning rate choice and number of layers. These four issues are known to be critical in deep learning networks (Ruder et al., 2016; LeCun, Bengio \& Hinton, 2015; Yan et al., 2015;  Sutskever et al., 2013) and would be critical to the success of a neural network.
-
-A. Number of Layers 
-Finally, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. We started off with a neural network architecture as shown below, and began to vary the number of layers in at each point.
-
+In tuning our network, we sought to study how the various hyperparameters as well as the datastructure affected our network's ability to learn from the data. In particular, we focused on four issues, sample balancing, optimiser choice, learning rate choice and number of layers. These four issues are known to be critical in deep learning networks (Ruder et al., 2016; LeCun, Bengio \& Hinton, 2015; Yan et al., 2015;  Sutskever et al., 2013) and would likely be critical to the success of a neural network.\\\\
+\textbf{A. Number of Layers} \\
+Firstly, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. We started off with a neural network architecture as shown below, and began to vary the number of layers in at each point.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{neuralnetworkarchitecturefinal.png}
 \centering
 \caption{Basic Merge Network Structure}
 \end{figure}
-
-For all layers, the LeakyReLU activation function was used. The LeakyReLU is a refinement of the ReLU activation function, and both are well documented activation functions that have been shown to work well in deep neural networks(LeCun, Bengio \& Hinton, 2015; Maas, Hannun \& Ng, 2013). We noticed that changing the number of layers after the merge layer did not vary the output, and so we focused on changing the number of layers before the merge layer. We studied 6 different neural network structures (4 layers to 9 layers). 
-
+For all layers, the LeakyReLU activation function was used. The LeakyReLU is a refinement of the ReLU activation function, and both are well documented activation functions that have been shown to work well in deep neural networks(LeCun, Bengio \& Hinton, 2015; Maas, Hannun \& Ng, 2013). We noticed that changing the number of layers after the merge layer did not significantly vary the output, and so we focused on changing the number of layers before the merge layer. We studied 6 different neural network structures (4 layers to 9 layers). 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{networkstructuredataset.jpg}
 \centering
 \caption{Analysis of Different Number of Layers On Training Accuracy}
 \end{figure}
-
-From analysing the accuracies of the different layers, we find that 8 layers seem the best at learning from the input data. We note that all the layers follow the same rough trend and accuracy structure, indicating they are all able to learn from the dataset. We decided on the 8 layer network as it seemed best able to learn from the input dataset. A final design feature used was to add two dropout filters at the last two layers before merging in order to prevent overfitting in data. Dropout filters have been shown to be an effective in preventing overfitting of data (Srivastava et al., 2014). Another active step taken to prevent overfitting was to ensure random separation of test, validation and training datasets.
-
-
-B. Sample Balancing
-
-Our second concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix N for more details). Figure N shows the training effect for each sample.
+From analysing the accuracies of the different layers, we find that 8 layers seem the best at learning from the input data. We note that all the layers follow the same rough trend and accuracy structure, indicating they are all able to learn from the dataset. We decided on the 8 layer network as it seemed best able to learn from the input dataset, with a final accuracy of 0.964. A final design feature used was to add two dropout filters at the last two layers before merging in order to prevent overfitting in data. Dropout filters have been shown to be an effective in preventing overfitting of data (Srivastava et al., 2014). Another active step taken to prevent overfitting was to ensure random separation of test, validation and training datasets.\\\\
+\textbf{B. Sample Balancing}\\
+Our second concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. In total, there were 286569 positive training examples and 4547919 negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix N for more details). Figure N shows the training effect for each sample.
 
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{comparisonofbalancingmethods.png}
 \centering
-\caption{Effect of Sample Balancing on Prediction Ability}
+\includegraphics[width=\textwidth]{comparisonofbalancingmethods.png}
+\caption{Effect of Sample Balancing on Prediction Ability                 }
 \end{figure}
 
-C. Optimiser and Learning Rates
-Finally, we sought to choose the best optimiser and learning rate for our dataset. Both optimisers and learning rates have  been well studied and known to be important in neural network training (Ruder et al., 2016; Sutskever et al., 2013). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent (SGD). ADAM is an adaptive learning rate optimiser that is known to be well suited in large dataset and parameter problems(Kingma \& Ba, 2014). RMSprop is another adaptive learning rate optimiser that unpublished, but has been known to work well for experimental learning datasets (Tieleman \& Hinton, 2012). SGD is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically and has also been shown to solve deep learning problems (Kingma \& Ba, 2014). For more information on the mathematical foundations of each optimiser, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
+Interestingly, we note that overall, undersampling, oversampling and no sampling at all had very small effects on precision, recall and the final F1 score. This could be due to clear boundary separation within positive and negative class examples as well as good representative datapoints within the positive training example class. This prevents the imbalanced data from having too much of an effect on variant prediction and classification. Still, we note that oversampling techniques resulted in a marginally higher F1 score (0.001 higher than undersampling and no sampling), and since ensuring that datasets are balanced is a recommended protocol to prevent further bias downstream, we used SMOTE oversampling to produce extra positive training class examples for all analysis pipelines.
+
+\textbf{C. Optimiser and Learning Rates}\\
+Finally, we sought to choose the best optimiser and learning rate for our dataset. Both optimisers and learning rates have  been well studied and known to be important in neural network training (Ruder et al., 2016; Sutskever et al., 2013). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent (SGD). ADAM is an adaptive learning rate optimiser that is known to be well suited in large dataset and parameter problems(Kingma \& Ba, 2014). RMSprop is another adaptive learning rate optimiser that unpublished, but has been shown to work well for real experimental datasets (Tieleman \& Hinton, 2012). SGD is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically and has also been shown to solve deep learning problems (Kingma \& Ba, 2014). For more information on the mathematical foundations of backpropagation, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{optimiserlearning.jpg}
 \centering
-\caption{Optimiser accuracies for training at each epoch}
+\caption{Optimiser accuracies for training at each epoch. Due to the noise in accuracies, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.}
 \end{figure}
 
-ADAM was noted to overcome the accuracy of SGD at about 70 Epochs. This was an interesting effect that can be explained by the adaptive learning rate that Adam uses, compared to the static learning rate that SGD uses. Because of Adam's adaptive learning rate, the learning rate slowly decreases as the gradient decreases. This allows Adam to continue to learn at higher accuracies and in the later epochs. For SGD, it appears that because the learning rate is too high, the gradient descent algorithm cannot find the true minima as every descent attempt results in an even greater deviation from minima, which can be seen in the graph. The average accuracy of Adam and SGD was also noted to be always higher than RMSprop. Furthermore, we note a stable learning curve for Adam, indicating it is able to learn and update the gradients in the neural network to learn from input data. Thus, we chose the more sophisticated adaptive learning rate optimiser, Adam, as our optimiser. We also looked at various learning rate for Adam (Figure N), and found that the most stable learning could be found at a learning rate of $10^{-5}$. At any larger learning rates ($10^{-4}$ and below), a very high amount of noise was observed, indicating that the learning rate was too high resulting in minima finding errors. At smaller learning rates ($10^{-6}$ and above), the final accuracy after 100 epochs (0.9639) was lower than the learning rate at $10^{-5}$ (0.9672). Thus, we chose $10^{-5}$ to be our learning rate. 
+The adaptive rate optimisers, Adam and RMSprop obtained the highest accuracies of 0.9670 and 0.9660 while SGD reached a maximum accuracy of 0.9569, very close to that of RMSprop. Interestingly adaptive rate optimisers seemed to have complex learning trajectories, while SGD has a very stable learning rate. This makes sense as adaptive learning rates allow greater gradient descents when the error is high, and decreasing the learning rate at smaller errors. This allows Adam and RMSprop to learn at variable rates based on the current gradients. For SGD, it appears that while it takes a while to learn the true minima, it eventually still reaches about the same minima as RMSprop. In the end, we chose Adam as our optimiser as the final accuracy discovered by Adam was noted to be higher than RMSprop and SGD, and we note a stable learning curve for Adam, indicating it is able to learn and update the gradients in the neural network to learn from input data. Then, we also looked at various initial learning rate for Adam (Figure N), and found that the most stable learning could be found at a learning rate of $10^{-5}$. This initial learning rate is critical as it determines the first few gradient descents which enable stable adaptive learning throughout the epochs (Sutskever et al., 2013). At any larger learning rates ($10^{-4}$ and below), a very high amount of noise was observed, indicating that the learning rate was too high resulting in minima finding errors. At smaller learning rates ($10^{-6}$ and above), the final accuracy after 100 epochs (0.9639) was lower than the learning rate at $10^{-5}$ (0.9672). Thus, we chose $10^{-5}$ to be our learning rate.
 
 
 \begin{figure}[H]
@@ -238,7 +251,7 @@ ADAM was noted to overcome the accuracy of SGD at about 70 Epochs. This was an i
 
 
 \subsection{Benchmarking of Network with Mason Datasets}
-From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be $10^{-5}$, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. The metrics we use to determine how well the neural networks perform is via precision, recall and F1 score (their derivation can be found in appendix N). 
+From optimisation steps, we finalised the network architecture as seen in Figure N. We choose the learning rate to be $10^{-5}$, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. The metrics we use to determine how well the neural networks perform is via precision, recall and F1 score (their derivation can be found in appendix N). 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{final_f1scores_results_all.jpg}
@@ -246,7 +259,7 @@ From optimisation steps, we finalised the network architecture as seen in figure
 \centering
 \end{figure}
 
-In terms of overall F1 score, we see that the neural network was able to outperform single and concordance-based callers. This provides strong evidence that the neural network is able to learn from the input features whether the variant call is real or not, validating its usage in variant calling. Looking at the exact precision, recall and F1 scores of the top 2 variant callers as well as the best single variant caller versus the neural network, we find that the neural network is more precise than both, but the recall is rather similar. This indicates the neural network is able to sieve out the false positives inside best calling methods. 
+In terms of overall F1 score, we see that the neural network was able to outperform single and concordance-based callers. This provides strong evidence that the neural network is able to learn from the input features whether the variant call is real or not, validating its usage in variant calling. The final F1 score obtained by the best single variant caller was Haplotype caller at 0.742, the best concordance caller had an F1 score of 0.816 while the neural network achieved an F1 score of 0.980. To study whether the increase in F1 score is due to improvements in precision or recall, we studied the exact precision, recall and F1 scores of the top 2 variant callers as well as the best single variant caller versus the neural network. We find that the neural network is more precise than both, but the recall is rather similar. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{masonheadsupcomparison.jpg}
@@ -254,24 +267,24 @@ In terms of overall F1 score, we see that the neural network was able to outperf
 \centering
 \end{figure}
 
-Further evidence of the ability of the neural networks to learn comes from basic principal components analysis of the datasets. 
+We find that the neural network is more precise than both, but the recall is rather similar. Increasingly, the recall of all the callers was high, indicating that while all were able to pick out most of the truth class variables, the main errors came from a high number of false positives that were also called as true mutations. Thus, this provides strong evidence that the neural network is able to sieve out false positives within the dataset and stably predict whether a mutation is true or not.
 
 \subsection{Benchmarking of Network with NA Datasets}
-After verification of the neural network architecture, optimised parameters and ability to learn with a simulated dataset, we sought to analyse a real dataset to set the validity of the neural network in validating variants. We studied the NA12878 Genome In a Bottle dataset (Zook et al., 2014), which has been used in other variant calling validation pipelines(Talwalkar et al., 2014; Linderman et al., 2014) and contains a set of high confidence variant calls which we can use as ground truth for training and validation. This set of high confidence variant calls are obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants. As can be seen from the figure, the neural network was able to predict with higher precision the best single caller, haplotype caller and the 2 best concordance callers, 3-concordance and 4-concordance. In terms of recall, the recall rates were the same between Haplotype Caller, 3 concordance and the neural network. This was an interesting observation as it shows that the neural network is more aggressive in making calls than the 4 concordance neural network, and it is more likely that the calls it makes are correct. Ultimately when we looked at the f1 score, the neural network was able to outperform these variant callers. This validates our neural network pipeline and indicates that we are able to learn from the input features. 
-
+After verification of the neural network architecture, optimised parameters and ability to learn with a simulated dataset, we sought to analyse a real dataset to set the validity of the neural network in validating variants. We studied the NA12878 Genome In a Bottle dataset (Zook et al., 2014), which has been used in other variant calling validation pipelines(Talwalkar et al., 2014; Linderman et al., 2014) and contains a set of high confidence variant calls which we can use as ground truth for training and validation. This set of high confidence variant calls are obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. \\\\We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{naheadsupcomparison.jpg}
 \caption{Comparison of Variant Callers}
 \centering
 \end{figure}
-
+As can be seen from the figure, the neural network was able to predict with higher precision the best single caller, haplotype caller and the 2 best concordance callers, 3-concordance and 4-concordance. In terms of recall, the recall rates were the same between Haplotype Caller, 3 concordance and the neural network. This was an interesting observation as it shows that the neural network is more aggressive in making calls than the 4 concordance neural network, and it is more likely that the calls it makes are correct. Ultimately when we looked at the f1 score, the neural network was able to outperform these variant callers. This validates our neural network pipeline and indicates that we are able to learn from the input features. 
+\newpage
 \subsection{Analysis of gene importance using Bayesian Ranking systems}
-After validation of high confidence calls, we sought to enable a clear and understandable ranking of genes. We first build a Bayesian network analysis using known functional annotations from AnnoVar. These were subsequently used to compute the Bayesian probability ranking, which is shown in Figure N below.
+After validation of high confidence calls, we sought to enable a clear and understandable ranking of genes. We first build a Bayesian network analysis using known functional annotations from ANNOVAR. These were subsequently used to compute the Bayesian probability ranking, which is shown in Figure N below.
 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{bayesiannetwork.png}
-\caption{Comparison of Variant Callers}
+\caption{Final Bayesian Network used in Analysis}
 \centering
 \end{figure}
 
@@ -298,9 +311,7 @@ P(Impt) refers to the probability of the gene being important,\\
 
 \normalsize
 \noindent
-To compute the final probabilites, the software pomegranate was used. This simplifies the node drawing and probabilistic updates of the final ranking scores. \\\\
-
-
+To compute the final probabilites, the software pomegranate was used. This simplifies the node drawing and probabilistic updates of the final ranking scores.
 \subsection{Validation of Bayesian Network Ranking on PDX dataset}
 To study the effectiveness of our bayesian network ranking system, we sequenced and analysed a patient derived xenograft (PDX) tumour genome. This tumour genome was grafted onto the immunocompromised mouse from a patient with a known cancer - Diffuse Large B Cell Lymphoma (DLBCL). We chose to analyse lymphoma as lymphoma is a well-known and studied disease model with a well-defined disease progression. The patient derived xenograph model also allows in vivo studies of the tumour in its environment, and serves as a good model for sequencing and analysis. After sequencing the PDX genome, we put it through our full analysis pipeline, which involves identifying high confidence mutations using the neural networks and then ranking these genes using the bayesian network ranking. Figure N shows the top 30 genes by probability. 
 
@@ -310,23 +321,22 @@ To study the effectiveness of our bayesian network ranking system, we sequenced 
 \centering
 \end{figure}
 
-Studying the top 5 genes, we found that four of these five genes have been implicated on lymphomas or other cancers. AHNAK is a known tumour suppressor and has been known to be downregulated inlines of Burkitt Lymphoma. BCL11A is a known proto-oncogene in DLBCL, and has been found to be overexpressed in 75\% of primary mediastinal B-cell Lymphomas, a subset of DLBCL. SPRR1A, the fourth gene ranked in terms of importance, has been shown to be expressed in DLBCL and its expression has been shown to strongly correlate with 5 year survival rate (Figure ). Finally development of B-cell lymphoma has been noted in Crb-2 related syndrome, which is a bi-allelic mutaiton of CRB2. Interestingly, the last highly ranked genes was noted to be a subunit of Hemoglobin. While there is no strong evidence for the role of Hemoglobin in lymphoma, it has been shown to be expressed in aggressive gliobastoma lines, indicating a possible previously unknown role in cancer. This gives us high confidence that the bayesian ranking network is able to pick up important and relevant mutations. Without such a ranking system, we would have to look through over 70 thousand genes, without a way to systematically study their call confidence, as well as their probability of having an effect. 
-
-
 \begin{figure}[H]
 \caption{Table of Top 5 important genes from Bayesian Ranking}
 \includegraphics[width=\textwidth]{top5importantgenes.png}
 \centering
 \end{figure}
 
+Studying the top 5 genes, we found that four of these five genes have been implicated on lymphomas or other cancers. AHNAK is a known tumour suppressor and has been known to be downregulated inlines of Burkitt Lymphoma. BCL11A is a known proto-oncogene in DLBCL, and has been found to be overexpressed in 75\% of primary mediastinal B-cell Lymphomas, a subset of DLBCL. SPRR1A, the fourth gene ranked in terms of importance, has been shown to be expressed in DLBCL and its expression has been shown to strongly correlate with 5 year survival rate (Figure N). Finally development of B-cell lymphoma has been noted in Crb-2 related syndrome, which is a bi-allelic mutaiton of CRB2. Interestingly, the last of the high ranked genes was noted to be a subunit of Hemoglobin. While there is no strong evidence for the role of Hemoglobin in DLBCL, it has been shown to be expressed in aggressive gliobastoma lines, indicating a possible previously unknown role in cancer. This gives us high confidence that the bayesian ranking network is able to pick up important and relevant mutations. Without such a ranking system, we would have to look through over 70 thousand genes, without a way to systematically study their call confidence, as well as their probability of having an effect. 
+
 \begin{figure}[H]
-\includegraphics{sprr1adataset.png}
-\caption{Dataset from sprr1}
 \centering
+\includegraphics[width=0.5\textwidth]{sprr1adataset.png}
+\caption{5 year survival curve of patients with SPRR1A+ and SPRR1A- patients with DLBCL. Source : Zhang et al. (2014), Figure 2.}
 \end{figure}
 
 
-To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system. A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. From the Ciros Plot (Figure N), we find several interesting gene families that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), Tlr3 (chr4,rank 26) and Tlr1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway, and interleukins are also important in cancer due to their importance in mediating inflammation and immune response. Thus, we show that our Bayesian network can be used by Clinicians to quickly interrogate the information from functional annotations and database lookups to understand the disease specifics. 
+To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system. A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. From the Ciros Plot (Figure N), we find several interesting gene families that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), TLR3 (chr4,rank 26) and Tlr1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway, and interleukins are also important in cancer due to their importance in mediating inflammation and immune response. Thus, we show that our Bayesian network can be used by Clinicians to quickly interrogate the information from functional annotations and database lookups to understand the disease specifics. 
 
 \begin{figure}[H]
 \includegraphics{circosplot.png}
@@ -334,10 +344,10 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 \centering
 \end{figure}
 
-
-\section{Summary and Future Directions}
-INSERT
-
+\newpage
+\section{General Conclusions}
+We have demonstrate the validation of high confidence variant calls using a deep learning neural network on both real and simulated datasets, and we also show that a Bayesian network is able to rank and prioritise genes in a systematic way so as to obtain important genes. Moving forward, we hope to be able to integrate extra sources of information into both networks. For the neural network, being able to include extra variant callers will provide it with even more feature data, enabling it to make better predictions. For the Bayesian network, one interesting direction we can take is to be able to integrate a druggable genome into the network, enabling the prioritisation of genes who have possible candidate drug targets, enabling 
+\newpage
 \section{Appendixes}
 
 \subsection{Neural Network Learning}
@@ -377,6 +387,7 @@ where $y_{ij}$ indicates the empirical observed probabilities of each class labe
 \caption{Gradient Descent}
 \centering
 \end{figure}
+\newpage
 \subsection{Feature Engineering}
 We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Base information tells us base specific properties, including information contained in the base as well as the quality of sequenced bases in the samples. Sequencing error and bias features attempt to tease out potential biases in sequencing, including features such as GC content, longest homopolymer run and as well as allele balances and counts. Finally, calling and mapping quality scores provide information on the mapping and calling confidence of the variant callers, and includes features such as genotype confidence and mapping quality. In all, these sets of information provide information on the key aspects of variant calling - specifically the properties of the bases in the samples, the characteristics of the sequencing process and finally the variant calling and mapping algorithms.\\\\
 \textbf{Base Information} \\\\
@@ -408,10 +419,11 @@ Allele count gives the total number of alleles in called phenotypes, while allel
 The genotype likelihood provides the phred-scaled likelihood scores of how confident the caller is in determining that it is a homozygous or heterozygous call, and for the homozygous calls whether it is a more likely to be a bi-allelic mutation or no mutation at all. This feature thus gives us the confidence of the caller in determining if one or two alleles have mutated. \\\\ 
 \underline{Read Depth}\\
 Mapped read depth refers to the total number of bases sequenced and aligned at a given reference base position. The read depth tells us how many reads contributed to a specific call, and thus provides information on how much evidence there is for the variant call\\\\
-\underline{Quality by Depth}\\
+\underline{Quality by Depth}\\*
 Quality by Depth is computed by dividing the quality score against allele depth, to obtain an average score of allele quality. This composite feature provides information on the information provided by each read supporting the call\\\\
 \underline{Mapping Quality}\\
 Mapping quality is originally a score provided by the alignment method and gives the probability that a read is placed accurately. The variant callers compute a overall mapping quality of the reads that provide evidence for a variant call which is given in this feature. A low mapping quality means that there are multiple positions where the reads contributing to this variant call could have gone, and thus providing evidence that this might not be an accurate call due to poor mapping.\\\\
+\newpage
 \subsection{Mathematical and Statistical Tools}
 \textbf{A. Derivation of F1 Score}\\
 The F1 score is a useful measure as it can measure both the precision as well as the recall of a predictor. For a binary predictor with a binary truth class(Figure N), we can obtain 4 types of results - true positives, true negatives, false positives and false negatives. 
@@ -453,9 +465,7 @@ SMOTE is a statistical technique described in by Chawla et al. (2002) to overcom
 \end{figure}
 
 In doing so, it creates a more generalised representation of the sample class with less training examples, without replicating certain datapoints and without creating invalid data. This enables intelligent oversampling of the dataset to balance out the positive and negative feature classes. SMOTE has been shown to be valid for other datasets including sentence boundary detection (Liu et al., 2006) and data mining (Chawla, 2005).
-
-\section{Acknowledgements}
-
+\newpage
 \section{Bibilography}
 
 \begin{list}{}{%
