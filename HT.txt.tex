@@ -128,7 +128,7 @@ After generating a ground truth model, we simulated sequence reads with error ra
 \end{figure}
 
 \subsection{Feature Engineering}
-In order to train the neural network, features were extracted from the variant callers, as well as engineered from the original dataset. All the features used in the training can be found in table N. More information and descriptions of the mathematics behind the engineered features can be found in appendix N. Features were engineered based on obtaining information for various aspects of variant calling, including how good quality of each base is (Base Quality, Read Depth), the confidence we have in the alignment (Mapping Quality), possible biases in the sequencing machine (Allele Balance, Allele Count) and finally the amount information contain in each variant call (Entropy, Kullback–Leibler divergence). More information on the features used can be found in Appendix N.
+In order to train the neural network, features were extracted from the variant callers, as well as engineered from the original dataset. All the features used in the training can be found in table N. Features were engineered based on obtaining information for various aspects of variant calling, including the information contained in the sample bases (Base Quality, Entropy, Kullback–Leibler divergence), the confidence we have in the calling and alignment (Read Depth, Mapping Quality) and finally possible biases in the sequencing machine(Allele Balance, Allele Count, GC content). More information on the features used can be found in Appendix N.
 
 \begin{table}[H]
 \caption{Feature Engineering Table}
@@ -238,7 +238,7 @@ ADAM was noted to overcome the accuracy of SGD at about 70 Epochs. This was an i
 
 
 \subsection{Benchmarking of Network with Mason Datasets}
-From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be $10^{-5}$, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. 
+From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be $10^{-5}$, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. The metrics we use to determine how well the neural networks perform is via precision, recall and F1 score (their derivation can be found in appendix N). 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{final_f1scores_results_all.jpg}
@@ -326,11 +326,11 @@ Studying the top 5 genes, we found that four of these five genes have been impli
 \end{figure}
 
 
-To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system. A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. From the Ciros Plot (Figure N), we find several interesting gene familes that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), Tlr3 (chr4,rank 26) and Tlr1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway, and interleukins are also important in cancer due to their importance in mediating inflammation and immune response. Thus, we show that our bayesian network can be used by Clinicians to quickly interrogate the information from functional annotations and database lookups to understand the disease specifics. 
+To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system. A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. From the Ciros Plot (Figure N), we find several interesting gene families that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), Tlr3 (chr4,rank 26) and Tlr1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway, and interleukins are also important in cancer due to their importance in mediating inflammation and immune response. Thus, we show that our Bayesian network can be used by Clinicians to quickly interrogate the information from functional annotations and database lookups to understand the disease specifics. 
 
 \begin{figure}[H]
 \includegraphics{circosplot.png}
-\caption{Circos plot of top 300 ranked genes from bayesian network ranking}
+\caption{Circos plot of top 300 ranked genes from Bayesian network ranking}
 \centering
 \end{figure}
 
@@ -340,11 +340,45 @@ INSERT
 
 \section{Appendixes}
 
-\subsection{Neural Network Algorithms}
-Deep Learning is underpinned by two key algorithms, the feed-forward algorithm and the backpropagation algorithm. 
+\subsection{Neural Network Learning}
+Machine learning is underpinned by two key phases, the feed-forward phase and the backpropagation phase. The feedforward phase describes the computation of a prediction, and during this phase the input features are used to compute the final output prediction. For a simple network below :
 
+\begin{figure}[H]
+\includegraphics{neuralnetworksample.png}
+\caption{Example neural networks with nodes and weights}
+\centering
+\end{figure}
+
+The final prediction, z is computed with the equation :
+\begin{equation}
+z = \beta_{y1} * y_1 + \beta_{y2} * y_2 + \beta_{y3} * y_3 + \beta_{y_4} * y_4 + \beta_{y_5} * y_5
+\end{equation}
+Where $\beta$ indicates the weights linking each output to the input of z and each of the $y_i$ terms are also computed in the same manner from the $x_i$ layer. At each node (x,y,z), there is also the existence of an activation function that modifies the input of the node to compute an output. Commonly used activation functions include the rectified linear unit (ReLU), sigmoid functions like hyperbolic tangent and logistic function, 
+\begin{equation}
+S(T)=\frac{1}{1+e^{-t}}
+\end{equation}
+Thus, the final prediction can be seen as a summation of all weights multiplied by the activation output of each node. In theory, we can expand each of the $y_i$ terms in equation N to include the $y_i$ layer activation function as well as rewrite the $y_i$ layer inputs in terms of the sum of outputs and weights from the $x_i$ layers. This complex integration of terms allows for the neural network to form complex continuous decision boundaries as the neural networks can compute sophisticated non-linear prediction functions despite being a fundamentally linear model.\\\\ After a prediction is made, we then have to check whether it is correct, and change our weights if an erroneous prediction was made (Figure N).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{backpropagation.png}
+\caption{Backpropagation of Error Terms}
+\end{figure}
+This is the backpropagation step, which involves backpropagating the error terms from the output layers to the input layer and updating the weights at each node based on the differential relationship between the error and each specific gradient. Specifically, this is governed by the optimiser functions which have been mentioned earlier - one example of such an function is the Stochastic Gradient Descent function, which is 
+\begin{equation}
+\beta^n_{yi} = \beta^{n-1}_{yi} - \alpha \frac{\partial{E_n}(\beta)}{\partial{\beta_i}}
+\end{equation}
+Here, each $\beta$ term indicates a gradient, $\alpha$ is a constant for the learning rate and $\frac{\partial{E_n}(\beta)}{\partial{\beta_i}}$ is the term used to modify the weight of the gradient based on the cost function ${E_n}(\beta)$. The idea used in all backpropagation functions is gradient descent, where the contribution of the gradient term to the error is computed and the gradient is changed by an amount in order to reduce the future contribution of the gradient to that error. Here it is useful to consider what the cost function ${E_n}(\beta)$ is. It is essentially the error rate when a set of gradients is used to perform predictions, as it measures how many accurate predictions were made and how many wrong predictions were made. For a binary class predictor (which is what we are using, only true and false), this is given by the equation
+\begin{equation}
+E(\beta) = - \frac{1}{n}\sum_{i=1}^{n}{\sum_{j=1}^{2}y_{ij}log(p_{ij})}
+\end{equation} 
+where $y_{ij}$ indicates the empirical observed probabilities of each class label while $log(p_{ij}$ is the theoretical probabilities of each class label. From this term, we see that if the neural network predicts something with a high probability ($y_{ij}$ is high) and it is false ($p_{ij}$ is low) so then $log(p_{ij}$ is a big negative number, and so the cost function will very high. On the other hand, if $y_{ij}$ and $p_{ij}$ is high then the entropy will be close to zero, indicating a correct prediction. Since each of the prediction terms can be rewritten in terms of the gradient(rewrite z in terms $\beta y_i $ and so on, we can theoretically compute the contribution of each gradient to the cost function to see how the cost function changes as the gradient changes. Thus, this is what gradient descent does - it tries to see how the cost function changes as each gradient changes, then attempts to move the gradient in the direction that minimises the error term. This is best seen in the graph below  where the gradient, or specifically the partial differentiation of the cost function with regards to each gradient is used to move the gradient to a new position so as to minimise the error term. Thus, machine learning is in essence a minimisation problem - we want to find a set of weights that minimises the cost function, and because the cost function describes how many predictions we made correctly, this is also training our network to accurately predict outputs from inputs.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{gradientdescent.png}
+\caption{Gradient Descent}
+\centering
+\end{figure}
 \subsection{Feature Engineering}
-We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Base information tells us base specific properties, including information contained in the base as well as the quality of sequenced bases in the samples. Sequencing error and bias features attempt to tease out potential biases in sequencing, including features such as GC content, longest homopolymer run and as well as allele balances and counts. Finally, calling and mapping quality scores provide information on the mapping and calling confidence of the variant callers, and includes features such as genotype confidence and mapping quality. In all, these sets of information provide information on the key aspects of variant calling - specifically the properties of the bases in the samples, the characteristics of the sequencing process and finally the variant calling and mapping algorithms.
+We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Base information tells us base specific properties, including information contained in the base as well as the quality of sequenced bases in the samples. Sequencing error and bias features attempt to tease out potential biases in sequencing, including features such as GC content, longest homopolymer run and as well as allele balances and counts. Finally, calling and mapping quality scores provide information on the mapping and calling confidence of the variant callers, and includes features such as genotype confidence and mapping quality. In all, these sets of information provide information on the key aspects of variant calling - specifically the properties of the bases in the samples, the characteristics of the sequencing process and finally the variant calling and mapping algorithms.\\\\
 \textbf{Base Information} \\\\
 \underline{Shannon Entropy}\\
 Shannon Entropy captures the amount of information contained inside the allele sequences. It is calculated using the equation :
@@ -357,30 +391,48 @@ The Kullback-Leibler Divergence feature is similar to Shannon entropy, but inste
 \begin{equation}
 D_{KL}(P||Q) = -\sum_{i=1}^{n}P(x_i)\log_{2}{\frac{P(x_i)}{Q(x_i)}}
 \end{equation}
-where $Q(x_i)$ is the prior probability of finding each base at each position based on the genomic region around the allele, while $P(X_i)$ is the posterior probability of finding a specific base inside the allelic sequence. Thus, the KL divergence describes the informational gain when the probabilities from Q is used to describe P. Intuitively, since we know the base probabilities of the region, we can then study the probabilities observed in the reference allelic sequence and see how well $Q(X_i)$ probabilities is able to approximate $P(X_i)$ probabilities.
-\underline{Base Quality}
-Phred score probability that the called allele is wrong 
+where $Q(x_i)$ is the prior probability of finding each base at each position based on the genomic region around the allele, while $P(X_i)$ is the posterior probability of finding a specific base inside the allelic sequence. Thus, the KL divergence describes the informational gain when the probabilities from Q is used to describe P. Intuitively, since we know the base probabilities of the region, we can then study the probabilities observed in the reference allelic sequence and see how well $Q(X_i)$ probabilities is able to approximate $P(X_i)$ probabilities.\\\\
+\underline{Base Quality}\\
+Base quality refers to the Phred score probability that the called allele is wrong. It is given by the equation :
+\[ \scalebox{1.2}{$P=10^{\frac{-Q}{10}}$} \]
+Where P is the Base Quality and Q is the probability that the allele called is wrong. This is a number computed by the sequencing machine based on the quality of the base samples provided, and tells us how much confidence the sequencing machine has in calling that base.\\\\
 \textbf{Sequencing Biases and Errors} \\\\
-\underline{GC content}
-Calculated GC content of reference genome, which may affect sequencing results and accuracy
-\underline{Longest homozygous run}
-Homopolymer runs (AAAAAAAA) are known to cause sequencer errors, and might be a factor in determining in whether a variant is true.
-\underline{Allele Count}
-Total number of alleles in called phenotypes
-\underline{Allele Balance}
-Ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls)
+\underline{GC content}\\
+This feature computes the calculated GC content of reference genome, which may affect sequencing results and accuracy as regions with a GC content are known to be more difficult to sequence. This is because of the greater strength of GC bonds, resulting in errors and biases in sequencing (Benjamini \& Speed, 2012).\\\\ 
+\underline{Longest homozygous run}\\
+Homopolymer runs (AAAAAAAA) are known to cause sequencer errors (Quail et al.,2012), and might be a factor in determining in whether a variant is true. This because long homopolymers provide the same type of signal to the sequencing machine, resulting in a difficult in estimating the magnitude of the signal or rather how many bases are in that homopolymer, resulting in errors and wrongly called variants. The reference sequence region including the allele was checked for homopolymer runs. \\\\
+\underline{Allele Count and Allele Balance}\\
+Allele count gives the total number of alleles in called phenotypes, while allele balance gives the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). Both these features give us information of possible biases in the sequencing machine.\\\\
 \textbf{Calling and Mapping Qualities} \\\\
 \underline{Genotype Likelihood}\\
-phred-scaled likelihood scores of whether the call heterozygosity. 
-\underline{Read Depth}
-Mapped read depth refers to the total number of bases sequenced and aligned at a given reference base position
-\underline{Quality by Depth}
-Quality score divided by allele depth, to obtain an average score of allele quality
+The genotype likelihood provides the phred-scaled likelihood scores of how confident the caller is in determining that it is a homozygous or heterozygous call, and for the homozygous calls whether it is a more likely to be a bi-allelic mutation or no mutation at all. This feature thus gives us the confidence of the caller in determining if one or two alleles have mutated. \\\\ 
+\underline{Read Depth}\\
+Mapped read depth refers to the total number of bases sequenced and aligned at a given reference base position. The read depth tells us how many reads contributed to a specific call, and thus provides information on how much evidence there is for the variant call\\\\
+\underline{Quality by Depth}\\
+Quality by Depth is computed by dividing the quality score against allele depth, to obtain an average score of allele quality. This composite feature provides information on the information provided by each read supporting the call\\\\
+\underline{Mapping Quality}\\
+Mapping quality is originally a score provided by the alignment method and gives the probability that a read is placed accurately. The variant callers compute a overall mapping quality of the reads that provide evidence for a variant call which is given in this feature. A low mapping quality means that there are multiple positions where the reads contributing to this variant call could have gone, and thus providing evidence that this might not be an accurate call due to poor mapping.\\\\
 \subsection{Mathematical and Statistical Tools}
-A. Derivation of F1 Score 
-INSERT
-
-B. Principal Components Analysis (PCA)\\
+\textbf{A. Derivation of F1 Score}\\
+The F1 score is a useful measure as it can measure both the precision as well as the recall of a predictor. For a binary predictor with a binary truth class(Figure N), we can obtain 4 types of results - true positives, true negatives, false positives and false negatives. 
+\begin{figure}[H]
+\includegraphics[width=0.8\textwidth]{confusionmatrix.png}
+\caption{Confusion Matrix}
+\centering
+\end{figure}
+True positives are positive predictions that are made that are actually positive class labels, while false positives are positive predictions that are made that have negative class labels. Similarly, true negatives are negative predictions that have negative class labels, while false negatives are negative predictions that are actually positive class labels. From this, we can define two equations, precision and recall. Precision is defined as (N) while recall is defined as (N). 
+\begin{equation}
+Precision = \frac{True \ Positive}{True\  Positive + False \ Positive} 
+\end{equation}
+\begin{equation}
+Recall\ \ \ \ = \frac{True\ Positive}{True \ Positive + False \ Negative} 
+\end{equation}
+Precision tells us how likely a positive prediction made will be true, while recall tells us how much of the truth class positive predictions the predictor is able to encompass. Thus, a predictor can have a high precision but low recall (makes few predictions but are very accurate) or a high recall and low precision(makes a lot of predictions that capture all truth variables, but have a lot of false positives as well). In genomics, both types of errors are not desired - we would want all the predictions to be true (precision), while not losing out on any important mutations (recall). Thus, we use the composite metric, the F1 score, that looks at the overall precision and recall of a predictor. It is defined as follows :
+\begin{equation}
+{F1} \ Score \ \ \  \ \ = \frac{2*Precision*Recall}{Precision + Recall} 
+\end{equation}
+\\
+\textbf{B. Principal Components Analysis (PCA)}\\
 Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduction. It was first proposed by Pearson in 1901 (Pearson, 1901) and has been commonplace in many data analytics and signal processing methodologies (Jolliffe, 2002). PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs are able to capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector is able to represent. Ultimately, we select n eigenvectors that is able to represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they are able to capture the variance in the dataset. For our analysis, we decided to use 8 principal components - we took the limit as the last principal components that was able to represent at least 0.5\% of variance in the dataset.
  
 \begin{figure}[H]
