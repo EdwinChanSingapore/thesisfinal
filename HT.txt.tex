@@ -4,6 +4,7 @@
 \usepackage[letterpaper, margin=1.4in]{geometry}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{hanging}
 %
 \usepackage{tikz}
 %
@@ -73,7 +74,7 @@ Variant calling primarily involves the use of various statistical and mathematic
 
 Indeed, studies have shown low concordances between variant callers themselves, due to their specific implementations and algorithms (Mohiyuddin, et al., 2015; Gézsi et al., 2015). If we consider that each variant caller samples from the same genome but with a different statistical technique, then we can see each variant caller as a mode of data that provides us with a unique piece of information on the genome. Thus, we can generate more accurate calls by aggregating the multi-modal data from various callers, allowing us to cross validate the variants called using multiple techniques.\\
 
-The simplest approach to aggregate data is concordance - if multiple variant callers are able to call a variant, it is most likely to be accurate. However, the precision of such a tool would be poor due to the differential sensitivity of callers to edge cases. This would defeat the purpose of using multiple callers in the first place, as the strength of a combinatorial approach lies in tapping into the sensitivities of different callers. More sophisticated efforts have since been done to use machine learning methods such as Support Vector Machines as a way to integrate variant calling information (Gézsi et al., 2015), and the authors showed that SVMs presented an improvement over concordance based methods. However, with the advent of deep learning techniques and libraries, which have been shown be able to integrate complex multi-modal information to solve problems (Ng et al., 2015), we hypothesize that deep learning can also be used to integrate the information from variant callers.\\
+The simplest approach to aggregate data is concordance - if multiple variant callers are able to call a variant, it is most likely to be accurate. However, the recall of such a tool would be poor due to the differential sensitivity of callers to edge cases, resulting in a lot of false negatives as true variant calls might only be picked up by one or two calling methodologies. This would defeat the purpose of using multiple callers in the first place, as the strength of a combinatorial approach lies in tapping into the sensitivities of different callers. More sophisticated efforts have since been done to use machine learning methods such as Support Vector Machines as a way to integrate variant calling information (Gézsi et al., 2015), and the authors showed that SVMs presented an improvement over concordance based methods. However, with the advent of deep learning techniques and libraries, which have been shown be able to integrate complex multi-modal information to solve problems (Ng et al., 2015), we hypothesize that deep learning can also be used to integrate the information from variant callers.\\
 
 Deep learning is a method of machine learning that involves deep stacks of artificial neural networks. These neural networks were inspired by the way our synapses work in the brain, and are represented in silico by input/output nodes that fire when a certain threshold is reached. Thus, these neural networks are able to simulate learning - by learning from labelled data correlations between inputs and outputs, these networks are able to predict outputs if given a new input. 
 
@@ -91,7 +92,7 @@ The second problem of gene prioritisation arises because there are a multitude o
 \begin{figure}[H]
 \includegraphics{samplebayesiannetwork.png}
 \centering
-\caption{A Bayesian Network for Rain Prediction. }
+\caption{A Sample Bayesian Network for Rain Prediction.}
 \end{figure}
 
  Here, we would like to predict how likely it is to rain. Thus, we record observations (we hear thunder, check the weather forecast, notice it is a cloudy day) and updating the likelihood of rain happening based on the conditional probabilities of P(Rain | Hear Thunder)... and so on. This model of learning was chosen because a Bayesian Network closely mimics the way Humans think - we observe events and form co-relational and causative predictions based on those events. This is advantageous over deep learning as in deep learning we are unable to interrogate the system to intuitively understand what the network is learning form - it has high predictive power but is essentially a black-box. The Bayesian network allows clinicians and doctors to see what are the components that went into gene ranking and prioritisation, and even change the probabilities, weightage or add more observation nodes based on their own diagnosis and treatment models and ideas. Ultimately, this enables the doctors and clinicians to be able to have confidence in the software as they are able to analyse and understand how it works. This also allows them to be able to explain their methodology and treatment plans clearly to the patient, making the diagnosis and treatment process clear, understandable and transparent.
@@ -156,9 +157,9 @@ For our research, we describe two main pipelines - the first pipeline will be us
 
 
 \subsection{Technologies}
-For our deep learning networks, we used the Keras library with a TensorFlow backend. TensorFlow was chosen due to its superior performance on single machines with multiple cores. On our Ubuntu compute cluster, TensorFlow's distributed CPU computation and queue management system enabled better performance in network training compared to other backend machine learning technologies technologies. For more explanation on the algorithms underpinning deep learning, see Appendix (INSERT) for more information 
+For our deep learning networks, we used the Keras library with a TensorFlow backend. TensorFlow was chosen due to its superior performance on single machines with multiple cores. On our Ubuntu compute cluster, TensorFlow's distributed CPU computation and queue management system enabled better performance in network training compared to other backend machine learning technologies technologies. For more explanation on the algorithms underpinning deep learning, see Appendix N for more information 
 
-The general programming platform used was Python. Python was chosen due to its access to various important libraries, including NumPy, SciPy, Pomegrenate and PyVCF. NumPy was used to prepare input vectors for deep learning training, SciPy was used to perform Principal Component Analysis and Synthetic Minority Oversampling Technique Methods (See Appedndix INSERT) for more information. Pomegranate was used to generate and compute the probabilistic model and ranking system for our Bayesian Network (INSERT see MM methods section N for more information). Finally, PyVCF was used to parse the VCF files into python objects for easy manipulation.
+The general programming platform used was Python. Python was chosen due to its access to various important libraries, including NumPy, SciPy, Pomegrenate and PyVCF. NumPy was used to prepare input vectors for deep learning training, SciPy was used to perform Principal Component Analysis and Synthetic Minority Oversampling Technique Methods (See Appedndix N) for more information. Pomegranate was used to generate and compute the probabilistic model and ranking system for our Bayesian Network. Finally, PyVCF was used to parse the VCF files into python objects for easy manipulation.
 
 \subsection{PDX mouse model development and sequencing}
 To-get - Data from Dr Ban
@@ -169,15 +170,15 @@ To-get - Data from Dr Ban
 We systematically tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, but before the input data was fed into the network a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network (please see Appendix A for more details of the PCA analysis). Finally, the last architecture we tested was the merged network. The overall structure of the networks can be seen in Figure N. \\\\
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{neuralnetworkstructure.png}
 \centering
+\caption{Different Designs for Neural Network Architecture}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{neuralnetworkstructureresults.png}
 \centering
+\caption{Analysis of Different Neural Network Architecture}
 \end{figure}
 Initially, with the flat network, the precision rate was very low, indicating that the neural network was unable to learn from the input feature set. We suspected that this was due to high dimensionality in the dataset, which led to our second architecture design, the PCA with flat analysis. Principal components analysis has been shown to be able to successfully improve learning in high dimensionality datasets (Chen et al., 2014; Van Der Maaten, Postma \& Van den Herik, 2009). Ultimately both failed to learn, indicating to us that perhaps the features from each of the callers had to be analysed separately before being passed into a separate neural network that did the final score computations. With this merged network, we managed to obtain a decent precision and F1 score that was far better than the previous two architectures. 
 
@@ -191,17 +192,17 @@ A. Number of Layers
 Finally, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. We started off with a neural network architecture as shown below, and began to vary the number of layers in at each point.
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{neuralnetworkarchitecturefinal.png}
 \centering
+\caption{Basic Merge Network Structure}
 \end{figure}
 
 For all layers, the LeakyReLU activation function was used. The LeakyReLU is a refinement of the ReLU activation function, and both are well documented activation functions that have been shown to work well in deep neural networks(LeCun, Bengio \& Hinton, 2015; Maas, Hannun \& Ng, 2013). We noticed that changing the number of layers after the merge layer did not vary the output, and so we focused on changing the number of layers before the merge layer. We studied 6 different neural network structures (4 layers to 9 layers). 
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{networkstructuredataset.jpg}
 \centering
+\caption{Analysis of Different Number of Layers On Training Accuracy}
 \end{figure}
 
 From analysing the accuracies of the different layers, we find that 8 layers seem the best at learning from the input data. We note that all the layers follow the same rough trend and accuracy structure, indicating they are all able to learn from the dataset. We decided on the 8 layer network as it seemed best able to learn from the input dataset. A final design feature used was to add two dropout filters at the last two layers before merging in order to prevent overfitting in data. Dropout filters have been shown to be an effective in preventing overfitting of data (Srivastava et al., 2014). Another active step taken to prevent overfitting was to ensure random separation of test, validation and training datasets.
@@ -209,17 +210,16 @@ From analysing the accuracies of the different layers, we find that 8 layers see
 
 B. Sample Balancing
 
-Our second concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix N for more details). Figure 1 shows a representation of the normal, datasets on two principal components. Performance of all three methods 	
-
+Our second concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. Such an sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to study two methods of sample balancing, undersampling and oversampling. Our data was skewed with a high amount of negative training samples and  a low number of positive train samples. Thus, undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more datapoints for the positive training example (see Appendix N for more details). Figure N shows the training effect for each sample.
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{comparisonofbalancingmethods.png}
 \centering
+\caption{Effect of Sample Balancing on Prediction Ability}
 \end{figure}
 
 C. Optimiser and Learning Rates
-Finally, we sought to choose the best optimiser and learning rate for our dataset. Both optimisers and learning rates have  been well studied and known to be important in neural network training (Ruder et al., 2016; Sutskever et al., 2013). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent (SGD). ADAM is an adaptive learning rate optimiser that is known to be well suited in large dataset and parameter problems(Kingma \& Ba, 2014). RMSprop is another adaptive learning rate optimiser that unpublished, but has been known to work well for experimental learning datasets (Tieleman & Hinton, 2012). SGD is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically and has also been shown to solve deep learning problems (Kingma \& Ba, 2014). For more information on the mathematical foundations of each optimiser, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
+Finally, we sought to choose the best optimiser and learning rate for our dataset. Both optimisers and learning rates have  been well studied and known to be important in neural network training (Ruder et al., 2016; Sutskever et al., 2013). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stocastic Gradient Descent (SGD). ADAM is an adaptive learning rate optimiser that is known to be well suited in large dataset and parameter problems(Kingma \& Ba, 2014). RMSprop is another adaptive learning rate optimiser that unpublished, but has been known to work well for experimental learning datasets (Tieleman \& Hinton, 2012). SGD is the simplest learning model with no adaptive learning rate, but is a useful model because it is the easiest to understand mathematically and has also been shown to solve deep learning problems (Kingma \& Ba, 2014). For more information on the mathematical foundations of each optimiser, please see Appendix N. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimisers to predict true variants (Figure N).
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{optimiserlearning.jpg}
@@ -227,41 +227,22 @@ Finally, we sought to choose the best optimiser and learning rate for our datase
 \caption{Optimiser accuracies for training at each epoch}
 \end{figure}
 
-ADAM was noted to overcome the accuracy of SGD at about 70 Epochs. The average momentum of ADAM was also This was higher than RMSprop at N after 100 epochs and SGD at Y after 100 epochs. This indicates that ADAM seems to be the most suitable learning rate method. Furthermore, we note a stable learning curve for ADAM, indicating it is able to learn and update the gradients in the neural network to learn from input data. Interestingly, we note some chaotic behaviour for ADAM after it has hit plateau, bouncing up and down in terms. This could be due to a minimum finding problem where it has already found the minimum and so every gradient moves it away from the minimum causing it to decrease, and then it goes back to the minimum again. Such behaviour has been noted in X. This is known to be not an issue with the algorithm but more of due to the fact that it has already found the minimum. Thus, we decided to use ADAM as our optimiser. We also looked at various learning rate for Adam (Figure N), and found that the most stable learning could be found at LR = 0.00001. Thus, we chose this to be our learning rate.
+ADAM was noted to overcome the accuracy of SGD at about 70 Epochs. This was an interesting effect that can be explained by the adaptive learning rate that Adam uses, compared to the static learning rate that SGD uses. Because of Adam's adaptive learning rate, the learning rate slowly decreases as the gradient decreases. This allows Adam to continue to learn at higher accuracies and in the later epochs. For SGD, it appears that because the learning rate is too high, the gradient descent algorithm cannot find the true minima as every descent attempt results in an even greater deviation from minima, which can be seen in the graph. The average accuracy of Adam and SGD was also noted to be always higher than RMSprop. Furthermore, we note a stable learning curve for Adam, indicating it is able to learn and update the gradients in the neural network to learn from input data. Thus, we chose the more sophisticated adaptive learning rate optimiser, Adam, as our optimiser. We also looked at various learning rate for Adam (Figure N), and found that the most stable learning could be found at a learning rate of $10^{-5}$. At any larger learning rates ($10^{-4}$ and below), a very high amount of noise was observed, indicating that the learning rate was too high resulting in minima finding errors. At smaller learning rates ($10^{-6}$ and above), the final accuracy after 100 epochs (0.9639) was lower than the learning rate at $10^{-5}$ (0.9672). Thus, we chose $10^{-5}$ to be our learning rate. 
 
 
 \begin{figure}[H]
-\caption{Feature Engineering Table}
 \includegraphics[width=\textwidth]{learningrates.jpg}
 \centering
+\caption{Training Accuracies over Each Epoch for Different Learning Rates}
 \end{figure}
-
-
-C. Number of Layers 
-Finally, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. We studied 4 different neural network structures (4 layers to 7 layers). 
-
-\begin{figure}[H]
-\caption{Feature Engineering Table}
-\includegraphics[width=\textwidth]{networkstructuredataset.jpg}
-\centering
-\end{figure}
-
-From analysing the accuracies of the different layers, we find that 4 layers and 7 layers networks seem the best at learning from the input data. We decided on the 7 layer network as it seemed best able to learn from the input dataset. The final network was decided in the structure below - 
-
-\begin{figure}[H]
-\caption{Feature Engineering Table}
-\includegraphics[width=\textwidth]{neuralnetworkarchitecturefinal.png}
-\centering
-\end{figure}
-
 
 
 \subsection{Benchmarking of Network with Mason Datasets}
-From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be 0.00003, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. Concordance calling using an ensemble of callers has been shown to be an improvement over using single variant callers (CITATION). 
+From optimisation steps, we finalised the network architecture as seen in figure 1. We choose the learning rate to be $10^{-5}$, and the optimiser used was Adam. With this network, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant callers are defined as the set of calls that any n callers agree upon - so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{final_f1scores_results_all.jpg}
-\caption{Comparison of Variant Callers}
+\caption{Overall Comparison of Variant Callers}
 \centering
 \end{figure}
 
@@ -269,14 +250,14 @@ In terms of overall F1 score, we see that the neural network was able to outperf
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{masonheadsupcomparison.jpg}
-\caption{Comparison of Variant Callers}
+\caption{Comparison of Best Variant Callers in terms of Precision, Recall and F1 Score}
 \centering
 \end{figure}
 
 Further evidence of the ability of the neural networks to learn comes from basic principal components analysis of the datasets. 
 
 \subsection{Benchmarking of Network with NA Datasets}
-After verification of the neural network architecture, optimised parameters and ability to learn with a simulated dataset, we sought to analyse a real dataset to set the validity of the neural network in validating variants. We studied the NA12878 Genome In a Bottle dataset (CITATION), which has been used in other variant calling validation pipelines(CITATION) and contains a set of high confidence variant calls which we can use as ground truth for training and validation. This set of high confidence variant calls are obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants. As can be seen from the figure, the neural network was able to predict with higher precision the best single caller, haplotype caller and the 2 best concordance callers, 3-concordance and 4-concordance. In terms of recall, the recall rates were the same between Haplotype Caller, 3 concordance and the neural network. This was an interesting observation as it shows that the neural network is more aggressive in making calls than the 4 concordance neural network, and it is more likely that the calls it makes are correct. Ultimately when we looked at the f1 score, the neural network was able to outperform these variant callers. This validates our neural network pipeline and indicates that we are able to learn from the input features. 
+After verification of the neural network architecture, optimised parameters and ability to learn with a simulated dataset, we sought to analyse a real dataset to set the validity of the neural network in validating variants. We studied the NA12878 Genome In a Bottle dataset (Zook et al., 2014), which has been used in other variant calling validation pipelines(Talwalkar et al., 2014; Linderman et al., 2014) and contains a set of high confidence variant calls which we can use as ground truth for training and validation. This set of high confidence variant calls are obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants. As can be seen from the figure, the neural network was able to predict with higher precision the best single caller, haplotype caller and the 2 best concordance callers, 3-concordance and 4-concordance. In terms of recall, the recall rates were the same between Haplotype Caller, 3 concordance and the neural network. This was an interesting observation as it shows that the neural network is more aggressive in making calls than the 4 concordance neural network, and it is more likely that the calls it makes are correct. Ultimately when we looked at the f1 score, the neural network was able to outperform these variant callers. This validates our neural network pipeline and indicates that we are able to learn from the input features. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{naheadsupcomparison.jpg}
@@ -297,8 +278,8 @@ After validation of high confidence calls, we sought to enable a clear and under
 This network structure was chosen as we wanted to use three different sets of information to update the probability of the gene being important. Firstly, the confidence of the call should matter in how important it is - the more likely a gene is real, the more important it should be. Secondly, the rank should also be determined by how common the variation is, based on studying known SNP polymorphism rates. If it is a common SNP, then the ranking should be downgraded as it is less likely to be a driver mutation. Finally, we sought to predict the overall effect of mutations via an ensemble of mutation effect predictors. These predictors use different methods to predict the average effect of that mutation - based on statistical methods like position specific substitution matrixes and Hidden Markov Models to study the effect of a mutation on protein structure and function. We also used the ClinVar database, a curated repository of known Human variants and their resulting phenotypes. These scores were then aggregated to update the probability of the mutation effect.
 
 \begin{figure}[H]
+\caption{Table of Functional Annotations obtained from ANNOVAR}
 \includegraphics[width=\textwidth]{annovarfeatures.png}
-\caption{Comparison of Variant Callers}
 \centering
 \end{figure}
 
@@ -325,7 +306,7 @@ To study the effectiveness of our bayesian network ranking system, we sequenced 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{bayesianranks.png}
-\caption{Comparison of Variant Callers}
+\caption{Top 30 genes from Bayesian Ranking Algorithm}
 \centering
 \end{figure}
 
@@ -333,14 +314,14 @@ Studying the top 5 genes, we found that four of these five genes have been impli
 
 
 \begin{figure}[H]
+\caption{Table of Top 5 important genes from Bayesian Ranking}
 \includegraphics[width=\textwidth]{top5importantgenes.png}
-\caption{Comparison of Variant Callers}
 \centering
 \end{figure}
 
 \begin{figure}[H]
 \includegraphics{sprr1adataset.png}
-\caption{Comparison of Variant Callers}
+\caption{Dataset from sprr1}
 \centering
 \end{figure}
 
@@ -349,74 +330,68 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 
 \begin{figure}[H]
 \includegraphics{circosplot.png}
-\caption{Comparison of Variant Callers}
+\caption{Circos plot of top 300 ranked genes from bayesian network ranking}
 \centering
 \end{figure}
 
 
 \section{Summary and Future Directions}
-
+INSERT
 
 \section{Appendixes}
 
 \subsection{Neural Network Algorithms}
+INSERT
 
 \subsection{Feature Engineering}
-
+INSERT
 
 \subsection{Mathematical and Statistical Tools}
 A. Derivation of F1 Score 
-
+INSERT
 
 B. Principal Components Analysis (PCA)\\
-Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduce of high dimensional datasets. It was first proposed by Pearson in 1901 (CITATION) and has been commonplace in many data analytics and signal processing methodologies. PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs are able to capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector is able to represent. Ultimately, we select n eigenvectors that is able to represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they are able to capture the variance in the dataset. For our analysis, we decided to use 8 principal components - we took the limit as the last principal components that was able to represent at least 0.5\% of variance in the dataset.
+Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduction. It was first proposed by Pearson in 1901 (Pearson, 1901) and has been commonplace in many data analytics and signal processing methodologies (Jolliffe, 2002). PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs are able to capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector is able to represent. Ultimately, we select n eigenvectors that is able to represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they are able to capture the variance in the dataset. For our analysis, we decided to use 8 principal components - we took the limit as the last principal components that was able to represent at least 0.5\% of variance in the dataset.
  
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{variancecapturedbypc.jpg}
-\caption{Comparison of Variant Callers}
+\caption{Variance captured by first 12 principal components}
 \centering
 \end{figure}
 
 To carry out PCA, we used the preprocessing step SciPy to normalise all the input vectors to mean 0 and standard deviation 1. Subsequently, we perform principal components decomposition to obtain the eigenvector transformed representation of the dataset, and their corresponding eigenvalues. We then fit 8 of the principal components that explained the largest amount of variance into the neural network to study if it is able to learn from the compressed representation of the input features. 
 
 B. Synthetic Minority Overrepresentation Technique (SMOTE)
-SMOTE is a statistical technique derived in (CITATION) to overcome problems with imbalanced datasets that are common in machine learning. SMOTE oversamples the training class with less variables in a way that tries not to replicate data points (that makes certain data points over-represented) without creating new invalid training training examples. It does this by taking the intersection of two nearest data points of the same training class. This can be seen in Figure N. 
+SMOTE is a statistical technique described in by Chawla et al. (2002) to overcome problems with imbalanced datasets that are common in machine learning. SMOTE oversamples the training class with less variables in a way that tries not to replicate data points (that makes certain data points over-represented) without creating new invalid training training examples. It does this by taking the intersection of two nearest data points of the same training class. This can be seen in Figure N. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{smoteoversampling.jpg}
-\caption{Comparison of Variant Callers}
+\caption{SMOTE oversampling algorithm}
 \centering
 \end{figure}
 
-In doing so, it creates a more generalised representation of the sample class with less training examples, without replicating certain datapoints and without creating invalid data. This enables intelligent oversampling of the dataset to balance out the positive and negative feature classes. SMOTE has been shown to be valid for other datasets, including biological data (Figure N). Here, SMOTE was used to accomplish BLANK.
-
-\begin{figure}[H]
-\includegraphics[width=\textwidth]{smoteevidence.jpg}
-\caption{Comparison of Variant Callers}
-\centering
-\end{figure}
+In doing so, it creates a more generalised representation of the sample class with less training examples, without replicating certain datapoints and without creating invalid data. This enables intelligent oversampling of the dataset to balance out the positive and negative feature classes. SMOTE has been shown to be valid for other datasets including sentence boundary detection (Liu et al., 2006) and data mining (Chawla, 2005).
 
 \section{Acknowledgements}
 
 \section{Bibilography}
 
-\begin{thebibliography}{9}
-\bibitem{latexcompanion} 
-O'Rawe, J., Jiang, T., Sun, G., Wu, Y., Wang, W., Hu, J., ... \& Wei, Z. (2013). Low concordance of multiple variant-calling pipelines: practical implications for exome and genome sequencing. Genome medicine, 5(3), 1.
- 
-\bibitem{einstein} 
- Cornish, A., \& Guda, C. (2015). A comparison of variant calling pipelines using genome in a bottle as a reference. BioMed research international, 2015.
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0.5in}%
+\setlength{\listparindent}{-0.5in}%
+\setlength{\itemindent}{-0.5in}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]\item[] Abyzov, A., Li, S., Kim, D. R., Mohiyuddin, M., Sttz, A. M., Parrish, N. F., ... \& Korbel, J. O. \(2015\). Analysis of deletion breakpoints from 1,092 humans reveals details of mutation mechanisms.Nature communications,6.\\\item[] Angrist, M. \(2016\). Personal genomics: Where are we now?.Applied \& translational genomics,8, 1.\\\item[] Chawla, N. V. \(2005\). Data mining for imbalanced datasets: An overview. InData mining and knowledge discovery handbook\(pp. 853-867\). Springer US.\\\item[] Chawla, N. V., Bowyer, K. W., Hall, L. O., \& Kegelmeyer, W. P. \(2002\). SMOTE: synthetic minority over-sampling technique.Journal of artificial intelligence research,16, 321-357.\\\item[] Chen, Y., Lin, Z., Zhao, X., Wang, G., \& Gu, Y. \(2014\). Deep learning-based classification of hyperspectral data. IEEE Journal of Selected topics in applied earth observations and remote sensing, 7\(6\), 2094-2107. Chicago \\\item[] Cornish, A., \& Guda, C. \(2015\). A comparison of variant calling pipelines using genome in a bottle as a reference.BioMed research international,2015.\\\item[] Danecek, P., Auton, A., Abecasis, G., Albers, C. A., Banks, E., DePristo, M. A., ... \& McVean, G. \(2011\). The variant call format and VCFtools.Bioinformatics,27\(15\), 2156-2158.\\\item[] DePristo, M. A., Banks, E., Poplin, R., Garimella, K. V., Maguire, J. R., Hartl, C., ... \& McKenna, A. \(2011\). A framework for variation discovery and genotyping using next-generation DNA sequencing data. Nature genetics, 43\(5\), 491-498.\\\item[] Escalona, M., Rocha, S., \& Posada, D. \(2016\). A comparison of tools for the simulation of genomic next-generation sequencing data.Nature Reviews Genetics,17\(8\), 459-469.\\\item[] Garrison, E., \& Marth, G. \(2012\). Haplotype-based variant detection from short-read sequencing.arXiv preprint arXiv:1207.3907.\\\item[] Garrison, E., \& Marth, G. \(2012\). Haplotype-based variant detection from short-read sequencing.arXiv preprint arXiv:1207.3907.\\\item[] Gzsi, A., Bolgr, B., Marx, P., Sarkozy, P., Szalai, C., \& Antal, P. \(2015\). VariantMetaCaller: automated fusion of variant calling pipelines for quantitative, precision-based filtering. BMC genomics, 16\(1\), 1.\\\item[] Huval, B., Wang, T., Tandon, S., Kiske, J., Song, W., Pazhayampallil, J., ... \& Mujica, F. \(2015\). An empirical evaluation of deep learning on highway driving.arXiv preprint arXiv:1504.01716.\\\item[] Hwang, S., Kim, E., Lee, I., \& Marcotte, E. M. \(2015\). Systematic comparison of variant calling pipelines using gold standard personal exome variants.Scientific reports,5, 17875.\\\item[] Jolliffe, I. \(2002\).Principal component analysis. John Wiley \& Sons, Ltd.\\\item[] Kingma, D., \& Ba, J. \(2014\). Adam: A method for stochastic optimization.arXiv preprint arXiv:1412.6980.\\\item[] LeCun, Y., Bengio, Y., \& Hinton, G. \(2015\). Deep learning.Nature,521\(7553\), 436-444.\\\item[] Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., ... \& Durbin, R. \(2009\). The sequence alignment/map format and SAMtools. Bioinformatics, 25\(16\), 2078-2079.\\\item[] Linderman, M. D., Brandt, T., Edelmann, L., Jabado, O., Kasai, Y., Kornreich, R., ... \& Schadt, E. E. \(2014\). Analytical validation of whole exome and whole genome sequencing for clinical applications.BMC medical genomics,7\(1\), 20.\\\item[] Liu, X., Han, S., Wang, Z., Gelernter, J., \& Yang, B. Z. \(2013\). Variant callers for next-generation sequencing data: a comparison study.PloS one,8\(9\), e75619.\\\item[] Liu, Y., Stolcke, A., Shriberg, E., \& Harper, M. \(2005, June\). Using conditional random fields for sentence boundary detection in speech. InProceedings of the 43rd Annual Meeting on Association for Computational Linguistics\(pp. 451-458\). Association for Computational Linguistics.\\\item[] Lpez, V., Fernndez, A., Garca, S., Palade, V., \& Herrera, F. \(2013\). An insight into classification with imbalanced data: Empirical results and current trends on using data intrinsic characteristics.Information Sciences,250, 113-141.\\\item[] Maas, A. L., Hannun, A. Y., \& Ng, A. Y. \(2013, June\). Rectifier nonlinearities improve neural network acoustic models. InProc. ICML\(Vol. 30, No. 1\).\\\item[] McKenna, A., Hanna, M., Banks, E., Sivachenko, A., Cibulskis, K., Kernytsky, A., ... \& DePristo, M. A. \(2010\). The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data.Genome research,20\(9\), 1297-1303.\\\item[] Mohiyuddin, M., Mu, J. C., Li, J., Asadi, N. B., Gerstein, M. B., Abyzov, A., ... \& Lam, H. Y. \(2015\). MetaSV: an accurate and integrative structural-variant caller for next generation sequencing. Bioinformatics, btv204.\\\item[] O'Rawe, J., Jiang, T., Sun, G., Wu, Y., Wang, W., Hu, J., ... \& Wei, Z. \(2013\). Low concordance of multiple variant-calling pipelines: practical implications for exome and genome sequencing.Genome medicine,5\(3\), 1.\\\item[] Pearson, K. \(1901\). Principal components analysis.The London, Edinburgh and Dublin Philosophical Magazine and Journal,6\(2\), 566.\\\item[] Rehm, H. L. \(2017\). Evolving health care through personal genomics.Nature Reviews Genetics.\\\item[] Ruder, S. \(2016\). An overview of gradient descent optimization algorithms.arXiv preprint arXiv:1609.04747.\\\item[] Sandmann, S., de Graaf, A. O., Karimi, M., van der Reijden, B. A., Hellstrm-Lindberg, E., Jansen, J. H., \& Dugas, M. \(2017\). Evaluating Variant Calling Tools for Non-Matched Next-Generation Sequencing Data.Scientific Reports,7.\\\item[] Schirmer, M., DAmore, R., Ijaz, U. Z., Hall, N., \& Quince, C. \(2016\). Illumina error profiles: resolving fine-scale variation in metagenomic sequencing data.BMC bioinformatics,17\(1\), 125.\\\item[] Spencer, D. H., Abel, H. J., Lockwood, C. M., Payton, J. E., Szankasi, P., Kelley, T. W., ... \& Duncavage, E. J. \(2013\). Detection of FLT3 internal tandem duplication in targeted, short-read-length, next-generation sequencing data. The Journal of molecular diagnostics, 15\(1\), 81-93.\\\item[] Srivastava, N., Hinton, G. E., Krizhevsky, A., Sutskever, I., \& Salakhutdinov, R. \(2014\). Dropout: a simple way to prevent neural networks from overfitting. Journal of Machine Learning Research, 15\(1\), 1929-1958.\\\item[] Sutskever, I., Martens, J., Dahl, G. E., \& Hinton, G. E. \(2013\). On the importance of initialization and momentum in deep learning. ICML \(3\), 28, 1139-1147.\\\item[] Talwalkar, A., Liptrap, J., Newcomb, J., Hartl, C., Terhorst, J., Curtis, K., ... \& Patterson, D. \(2014\). SMaSH: a benchmarking toolkit for human genome variant calling.Bioinformatics,30\(19\), 2787-2795.\\\item[] McKenna, A., Hanna, M., Banks, E., Sivachenko, A., Cibulskis, K., Kernytsky, A., ... \& DePristo, M. A. \(2010\). The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data.Genome research,20\(9\), 1297-1303.\\\item[] Tieleman, T. and Hinton, G. Lecture 6.5 - RMSProp, COURSERA: Neural Networks for Machine Learning. Technical report, 2012\\\item[] Van Der Maaten, L., Postma, E., \& Van den Herik, J. \(2009\). Dimensionality reduction: a comparative.J Mach Learn Res,10, 66-71.\\\item[] Xie, M., Lu, C., Wang, J., McLellan, M. D., Johnson, K. J., Wendl, M. C., ... \& Ozenberger, B. A. \(2014\). Age-related mutations associated with clonal hematopoietic expansion and malignancies.Nature medicine,20\(12\), 1472-1478.\\\item[] Yan, Y., Chen, M., Shyu, M. L., \& Chen, S. C. \(2015, December\). Deep learning for imbalanced multimedia data classification. InMultimedia \(ISM\), 2015 IEEE International Symposium on\(pp. 483-488\). IEEE.\\\item[] Ye, K., Schulz, M. H., Long, Q., Apweiler, R., \& Ning, Z. \(2009\). Pindel: a pattern growth approach to detect break points of large deletions and medium sized insertions from paired-end short reads.Bioinformatics,25\(21\), 2865-2871.\\\item[] Zook, J. M., Chapman, B., Wang, J., Mittelman, D., Hofmann, O., Hide, W., \& Salit, M. \(2014\). Integrating human sequence data sets provides a resource of benchmark SNP and indel genotype calls.Nature biotechnology,32\(3\), 246-251.\\
 
-\bibitem{knuthwebsite} 
-Mohiyuddin, M., Mu, J. C., Li, J., Asadi, N. B., Gerstein, M. B., Abyzov, A., ... \& Lam, H. Y. (2015). MetaSV: an accurate and integrative structural-variant caller for next generation sequencing. Bioinformatics, btv204.
 
-\bibitem{knuthwebsite} 
-Gézsi, A., Bolgár, B., Marx, P., Sarkozy, P., Szalai, C., \& Antal, P. (2015). VariantMetaCaller: automated fusion of variant calling pipelines for quantitative, precision-based filtering. BMC genomics, 16(1), 1.
+\end{list}
 
-\bibitem{knuthwebsite} 
-Huval, B., Wang, T., Tandon, S., Kiske, J., Song, W., Pazhayampallil, J., Andriluka, M., Rajpurkar, P., Migimatsu, T., Cheng-Yue, R. and Mujica, F., 2015. An empirical evaluation of deep learning on highway driving. arXiv preprint arXiv:1504.01716.
 
-\end{thebibliography}
+
+
+
 
 
 
