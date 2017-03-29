@@ -87,9 +87,15 @@ Chan Khai Ern Edwin\\
 \normalsize
 \pagenumbering{arabic} 
 \section{Introduction}
+\subsection{Next Generation Sequencing in Personal Genomics Pipelines}
+Explain NGS – a lot of datasets, Variant Calling – general problem that people face, Bamfiles, fastq files (alignment calling) – why is it a problem, large amount of sequence data, insert graph on variant calling problems. (MUST HIGHLIGHT THE PROBLEM, HIGHLIGHT THE TYPE OF OUTPUT) 
 
-Identification of functionally important mutations is a critical step in enabling personal genomic pipelines. Recently, there has been great interest in using a persons genome to help doctors treat and diagnose disease (Rehm, 2017;Angrist, 2016). The fundamental intuition is that sequencing the person's genome can help doctors and clinicians narrow down important disease subtypes and progression. This enables doctors to better diagnose the disease, as well as prepare targeted medication to treat the specific disease. \\\\However, there are still two critical steps in this pipeline that needs to be addressed. Firstly, we need to be able to obtain high confidence mutations, and secondly there needs to be a method to prioritise these mutations for clinicians and doctors. For the first problem we have to be able to find out mutations in the persons genome that is different from a reference genome. This step is termed in literature as variant calling as it involves the discovery (calling) of genes (variants) that differ from a reference genome. However, current variant callers still tend to have low concordances for variants called (O'Rawe et al., 2013; Cornish and Guda, 2015), primarily due to differences in variant calling algorithms and assumptions. The second problem, ranking of mutations is critical as these variant callers do not take into account the importance of each variants. Thus, an additional step must be taken to attempt to find out which might be the most important genes for clinicians. This is critical a clinician should be able to obtain variants that are of clinical significance without having to sieve through literature to manually pick out genes that important. This would allow them to narrow their search to the most likely candidate dates, and then be able to embark on the most ideal treatment pathway. \\\\In this paper, we describe a machine learning approach to solve these two problems - specifically using deep learning to validate high confidence variant calls, and using Bayesian networks to filter variants and prioritise their importance. \\
 
+Identification of functionally important mutations is a critical step in enabling personal genomic pipelines. Recently, there has been great interest in using a persons genome to help doctors treat and diagnose disease (Rehm, 2017;Angrist, 2016). The fundamental intuition is that sequencing the person's genome can help doctors and clinicians narrow down important disease subtypes and progression. This enables doctors to better diagnose the disease, as well as prepare targeted medication to treat the specific disease. \\\\ INSERT
+\subsection{Main Hurdles to Implementation}
+However, there are still two critical steps in this pipeline that needs to be addressed. Firstly, we need to be able to obtain high confidence mutations, and secondly there needs to be a method to prioritise these mutations for clinicians and doctors. For the first problem we have to be able to find out mutations in the persons genome that is different from a reference genome. This step is termed in literature as variant calling as it involves the discovery (calling) of genes (variants) that differ from a reference genome. However, current variant callers still tend to have low concordances for variants called (O'Rawe et al., 2013; Cornish and Guda, 2015), primarily due to differences in variant calling algorithms and assumptions. The second problem, ranking of mutations is critical as these variant callers do not take into account the importance of each variants. Thus, an additional step must be taken to attempt to find out which might be the most important genes for clinicians. This is critical a clinician should be able to obtain variants that are of clinical significance without having to sieve through literature to manually pick out genes that important. This would allow them to narrow their search to the most likely candidate dates, and then be able to embark on the most ideal treatment pathway. \\\\In this paper, we describe a machine learning approach to solve these two problems - specifically using deep learning to validate high confidence variant calls, and using Bayesian networks to filter variants and prioritise their importance. \\
+\subsection{Variant Calling in Personal Genomics Pipelines}
+INSERT
 \subsection{Deep Learning in Variant Calling Methodology}
 One large hurdle to overcome in enabling personal genomic pipelines is the generation of high quality variant calls. Variant calling primarily involves the use of various statistical and mathematical methods to discover variants, or mutations, in the genome. Calling variants allows the analysis of deviations and differences between the genome of interest and a standard human genome. However, there are still areas for improvement in current variant calling methods, including dealing with different classes of mutations, as well as reducing the number of false positives (Mohiyuddin, et al., 2015; Gézsi et al., 2015). \\\\Both these problems fundamentally result from assumptions and implementations of variant callers - certain algorithms are more sensitive and accurate in calling certain classes of mutations, but suffer from inaccuracies in calling other variant types and edge cases. Probabilistic haplotype generating callers (such as GATK's haplotype caller and FreeBayes) tend to be more accurate for SNPs and indels (McKenna et al. 2010; Garrison \& Marth, 2012). They perform de-novo local assembly, where they rebuild small portions of the genome, and subsequently use bayesian analysis to determine the existence of variants. Specifically, they generate short haplotypes of local regions from sampled sequences, and determine (based on the haplotypes and prior probabilities in the reference genome) whether a variant should be called. However, these methods can only handle limited window sizes, preventing the detection of larger structural variants. For these we have to rely on other tools that examine larger segments of the genome (Ning et al., 2009) or use libraries of known mutation regions, and study these breakpoints to check if any mutations have occurred (Gerstein et al., 2015). Due to the heterogenity in mutations, no single caller works best for all classes of mutations, pointing towards a variant calling framework that aggregates data from multiple callers.\\
 
@@ -127,18 +133,6 @@ In this paper, we describe the deep learning to validate high confidence variant
 \subsection{Artificial Datasets}
 Artificial genomes are the best methods to analyse deep learning networks on as the ground truth, which are the truth variants inside the genome, can be known. This allows accurate verification of prediction schemes and is a commonly used method to test next generation sequencing related software (Escalona, Rocha \& Posada, 2016). This is primarily because it is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called via Sanger sequencing. Thus, artificial genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform. Using a genome mutation software, we generation a mutated genome (using the hg19 genome from ucsc (Karolchik et al., 2014) as a reference) with over 300,000 random mutations spread over the chromosomes as can be seen below in Figures 3 and 4. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{MutationInSimulatedGenome.jpg}
-\caption{Number of ground truth mutations (variants) created in each chromosome }
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{MutationRateInSimulatedGenome.jpg}
-\caption{Mutation rate per base in each chromosome}
-\end{figure}
-
 After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants(figure 5). To accurately simulate variants, error profiles of Illumina sequencing data were obtained from published articles (Schirmer et al., 2016). Mason, an artificial genome simulator software was used in order to generate an artificial genome for analysis. This program takes in error rates and ground truth variants, and produces FastQ reads that can be used in later analysis as simulated sequencing data.
 
 \begin{figure}[H]
@@ -148,13 +142,40 @@ After generating a ground truth model, we simulated sequence reads with error ra
 \end{figure}
 
 \subsection{Feature Engineering}
-In order to train a neural network, features in the form of numerical vectors must be used an input. Thus, we engineered a set of 19 features to use as input data for our variant callers, using data obtained from the variant callers themselves as well as engineering other features from the dataset. A summary of the features used in the training can be found in table 1 - a description of the full list of features can be found in Appendix 5.2. Features were engineered based on obtaining information for the main aspects of variant calling, which includes the information contained in the sample bases (Base Quality, Entropy, Kullback–Leibler divergence etc), the confidence we have in the calling and alignment (Read Depth, Mapping Quality etc) and finally possible biases in the sequencing machine(Allele Balance, Allele Count, GC content).
-
-\begin{table}[H]
-\caption{Feature Engineering Table}
-\includegraphics[width=\textwidth]{featureengineering.png}
-\centering
-\end{table}
+In order to train a neural network, features in the form of numerical vectors must be used an input. We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Here we describe the computation of the features - please see Appendix 5.2 for an more in-depth explanation on their usage and interpretation.\\\\
+\textbf{Base Information} \\
+\underline{Shannon Entropy}\\
+Shannon Entropy captures the amount of information contained inside the allele sequences. It is calculated using the equation :
+\begin{equation}
+H(X) = -\sum_{i=1}^{n}P(x_i)\log_{2}P(x_i)
+\end{equation}
+where $P(x_i)$ is the probability of finding each base at each position. Thus, we calculate the entropy by summing up the probabilities/lg(probabilities) at each position. This prior probability is calculated in two ways and both are used as features - firstly, the overall genome base probabilities are calculated over the entire genome, and thus the entropy is related to the probability of finding a base at any position in the genome. The second way prior probability is calculated is to take a region of space around the allele (10 bases plus the length of the allele in our calculations) and use those probabilities to calculate the entropy of the allelic sequence.\\
+\underline{Kullback Leibler Divergence}\\
+The Kullback-Leibler Divergence feature is similar to Shannon entropy, but instead we use this to measure the informational change converting from the reference to the allele sequence. The Kullback-Leibler Divergence is calculated as follows :
+\begin{equation}
+D_{KL}(P||Q) = -\sum_{i=1}^{n}P(x_i)\log_{2}{\frac{P(x_i)}{Q(x_i)}}
+\end{equation}
+where $Q(x_i)$ is the prior probability of finding each base at each position based on the genomic region around the allele, while $P(X_i)$ is the posterior probability of finding a specific base inside the allelic sequence. Thus, the KL divergence describes the informational gain when the probabilities from Q is used to describe P.\\
+\underline{Base Quality}\\
+Base quality refers to the Phred score probability that the called allele is wrong. It is given by the equation :
+\[ \scalebox{1.2}{$P=10^{\frac{-Q}{10}}$} \]
+Where P is the Base Quality and Q is the probability that the allele called is wrong. This is a number computed by the sequencing machine based on the quality of the base samples provided, and tells us how much confidence the sequencing machine has in calling that base.\\\\
+\textbf{Sequencing Biases and Errors} \\
+\underline{GC content}\\
+This feature comprises the percentage GC content of reference genome for at least 10 bases around the mutation site.\\
+\underline{Longest homozygous run}\\
+This feature comprises the longest similar string of bases in the reference genome, for at least 10 bases around the mutation site.\\
+\underline{Allele Count and Allele Balance}\\
+This feature is an output from Haplotype Caller and Unified Genotyper, an describes the total number of alleles contributing to a call and the balance between reference and alternate alleles reads.\\\\
+\textbf{Calling and Mapping Qualities} \\
+\underline{Genotype Likelihood}\\
+The genotype likelihood provides the phred-scaled likelihood scores of how confident the caller is in determining that it is a homozygous or heterozygous call, and is provided by all variant callers.\\\
+\underline{Read Depth}\\
+Mapped read depth refers to the total number of bases sequenced and aligned at a given reference base position. It is provided by all variant callers.\\
+\underline{Quality by Depth}\\*
+Quality by Depth is computed by dividing the quality score against allele depth, to obtain an average score of allele quality. This is provided by Haplotype Caller and Unified Genotyper.\\
+\underline{Mapping Quality}\\
+Mapping quality is originally a score provided by the alignment method and gives the probability that a read is placed accurately. It is provided by all variant callers except Pindel.\\
 
 \subsection{Variant Callers}
 Variant callers were chosen for our deep learning neural network based on their orthogonal calling and reference methodologies - we wanted to maximise the range of variant callers in order to optimise the information that the neural network receives (See Table 2). We used two haplotype based callers, FreeBayes (Garrison \& Marth, 2012) and GATK Haplotype Caller (McKenna et al. 2010, DePristo et al. 2011), two position based callers GATK unified Genotyper and Samtools (Li H, et al., 2009) and finally Pindel, a pattern growth based caller (Ye et al., 2009). All callers have been well studied and are commonly used in variant calling pipelines (Sandmann et al., 2017, Hwang et al., 2015 Xie et al., 2014 and Liu et al., 2013). 
@@ -185,6 +206,43 @@ The general programming platform used was Python. Python was chosen due to its a
 
 \newpage
 \section{Results and Discussion}
+\subsection{Generation of Artificial Datasets}
+Artificial genomes are the best methods to analyse deep learning networks on as the ground truth, which are the truth variants inside the genome, can be known. This allows accurate verification of prediction schemes and is a commonly used method to test next generation sequencing related software (Escalona, Rocha \& Posada, 2016). This is primarily because it is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called via Sanger sequencing. Thus, artificial genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform. Using a genome mutation software, we generation a mutated genome (using the hg19 genome from ucsc (Karolchik et al., 2014) as a reference) with over 300,000 random mutations spread over the chromosomes as can be seen below in Figures 3 and 4. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{MutationInSimulatedGenome.jpg}
+\caption{Number of ground truth mutations (variants) created in each chromosome }
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{MutationRateInSimulatedGenome.jpg}
+\caption{Mutation rate per base in each chromosome}
+\end{figure}
+
+After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants(figure 5). To accurately simulate variants, error profiles of Illumina sequencing data were obtained from published articles (Schirmer et al., 2016). Mason, an artificial genome simulator software was used in order to generate an artificial genome for analysis. This program takes in error rates and ground truth variants, and produces FastQ reads that can be used in later analysis as simulated sequencing data.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{readsimulation.png}
+\caption{Pipeline for simulation of artificial genome for analysis}
+\centering
+\end{figure}
+\subsection{Feature Engineering}
+Thus, we engineered a set of 19 features to use as input data for our variant callers, using data obtained from the variant callers themselves as well as engineering other features from the dataset. A summary of the features used in the training can be found in table 1 - a description of the full list of features can be found in Appendix 5.2. Features were engineered based on obtaining information for the main aspects of variant calling, which includes the information contained in the sample bases (Base Quality, Entropy, Kullback–Leibler divergence etc), the confidence we have in the calling and alignment (Read Depth, Mapping Quality etc) and finally possible biases in the sequencing machine(Allele Balance, Allele Count, GC content).
+
+\begin{table}[H]
+\caption{Feature Engineering Table}
+\includegraphics[width=\textwidth]{featureengineering.png}
+\centering
+\end{table}
+\subsection{Variant Callers}
+Variant callers were chosen for our deep learning neural network based on their orthogonal calling and reference methodologies - we wanted to maximise the range of variant callers in order to optimise the information that the neural network receives (See Table 2). We used two haplotype based callers, FreeBayes (Garrison \& Marth, 2012) and GATK Haplotype Caller (McKenna et al. 2010, DePristo et al. 2011), two position based callers GATK unified Genotyper and Samtools (Li H, et al., 2009) and finally Pindel, a pattern growth based caller (Ye et al., 2009). All callers have been well studied and are commonly used in variant calling pipelines (Sandmann et al., 2017, Hwang et al., 2015 Xie et al., 2014 and Liu et al., 2013). 
+
+\begin{table}[H]
+\caption{Table Comparing Methods and Features of Different variant callers.}
+\includegraphics[width=\textwidth]{analysisofvariantcallers.png}
+\centering
+\end{table}
 
 \subsection{Network Architecture}
 We tested out various neural network architectures to see which architecture would perform the best. The architectures tested out were the flat architecture with 7 densely connected layers of 80 nodes each, the PCA + flat architecture which had the same neural network architecture, and a merged network. In the PCA architecture, before the input data was fed into the network, a Principal Components Analysis was done to reduce the dataset to 8 principal components which was then used as input data for the neural network (please see Appendix 5.3 for more details of the PCA analysis). Finally, the last architecture we tested was the merged network this network had a set of layers (initially 5 layers, 24 nodes per layer) that learns from each caller alone, and then the outputs from each of these layers are subsequently merged and used to make a prediction. The overall structure of the networks can be seen in Figure 7. 
@@ -340,8 +398,11 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 \end{figure}
 
 \newpage
-\section{General Conclusions}
-We have demonstrate the validation of high confidence variant calls using a deep learning neural network on both real and simulated datasets, and we also show that a Bayesian network is able to rank and prioritise genes in a systematic way so as to obtain important genes. Moving forward, we hope to be able to integrate extra sources of information into both networks. For the neural network, being able to include extra variant callers will provide it with even more feature data, enabling it to make better predictions. For the Bayesian network, one interesting direction we can take is to be able to integrate a druggable genome into the network, enabling the prioritisation of genes who have possible candidate drug targets, enabling 
+\section{Discussion}
+We have demonstrate the validation of high confidence variant calls using a deep learning neural network on both real and simulated datasets, and we also show that a Bayesian network is able to rank and prioritise genes in a systematic way so as to obtain important genes. 
+
+
+Moving forward, we hope to be able to integrate extra sources of information into both networks. For the neural network, being able to include extra variant callers will provide it with even more feature data, enabling it to make better predictions. For the Bayesian network, one interesting direction we can take is to be able to integrate a druggable genome into the network, enabling the prioritisation of genes who have possible candidate drug targets, enabling 
 \newpage
 \section{Appendixes}
 
