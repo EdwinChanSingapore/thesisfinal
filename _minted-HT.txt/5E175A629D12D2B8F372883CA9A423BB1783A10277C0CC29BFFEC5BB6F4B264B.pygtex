@@ -278,15 +278,32 @@
 \PYG{c+c1}{\PYGZsh{} to a file and reloaded at the end of the fitting. After training, the neural network is used to predict the original un\PYGZhy{}oversampled dataset}
 
 \PYG{k}{def} \PYG{n+nf}{train\PYGZus{}neural\PYGZus{}net}\PYG{p}{(}\PYG{n}{mybatch\PYGZus{}size}\PYG{p}{,} \PYG{n}{mynb\PYGZus{}epoch}\PYG{p}{,} \PYG{n}{myX\PYGZus{}train}\PYG{p}{,} \PYG{n}{myy\PYGZus{}train}\PYG{p}{,} \PYG{n}{location}\PYG{p}{,} \PYG{n}{arraysize}\PYG{p}{):}
-    \PYG{n}{number} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb}{reduce}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{:} \PYG{n}{x} \PYG{o}{+} \PYG{n}{y}\PYG{p}{,} \PYG{n}{arraysize}\PYG{p}{))}
+    \PYG{n}{fb\PYGZus{}size}\PYG{p}{,} \PYG{n}{hc\PYGZus{}size}\PYG{p}{,} \PYG{n}{ug\PYGZus{}size}\PYG{p}{,} \PYG{n}{pindel\PYGZus{}size}\PYG{p}{,} \PYG{n}{st\PYGZus{}size} \PYG{o}{=} \PYG{n}{get\PYGZus{}sizes}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{)}
     \PYG{n}{X\PYGZus{}resampled}\PYG{p}{,} \PYG{n}{y\PYGZus{}resampled} \PYG{o}{=} \PYG{n}{do\PYGZus{}smote\PYGZus{}resampling}\PYG{p}{(}\PYG{n}{myX\PYGZus{}train}\PYG{p}{,} \PYG{n}{myy\PYGZus{}train}\PYG{p}{)}
     \PYG{n}{X\PYGZus{}train}\PYG{p}{,} \PYG{n}{X\PYGZus{}test}\PYG{p}{,} \PYG{n}{y\PYGZus{}train}\PYG{p}{,} \PYG{n}{y\PYGZus{}test} \PYG{o}{=} \PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{X\PYGZus{}resampled}\PYG{p}{,} \PYG{n}{y\PYGZus{}resampled}\PYG{p}{,}
-                                                        \PYG{n}{test\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.2}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{n}{seed}\PYG{p}{)}
+                                                        \PYG{n}{test\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.33}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{n}{seed}\PYG{p}{)}
+    \PYG{n}{X\PYGZus{}fb}\PYG{p}{,} \PYG{n}{X\PYGZus{}hc}\PYG{p}{,} \PYG{n}{X\PYGZus{}ug}\PYG{p}{,} \PYG{n}{X\PYGZus{}pindel}\PYG{p}{,} \PYG{n}{X\PYGZus{}st} \PYG{o}{=} \PYG{n}{prep\PYGZus{}input\PYGZus{}samples}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{X\PYGZus{}train}\PYG{p}{)}
+    \PYG{n}{X\PYGZus{}fb\PYGZus{}test}\PYG{p}{,} \PYG{n}{X\PYGZus{}hc\PYGZus{}test}\PYG{p}{,} \PYG{n}{X\PYGZus{}ug\PYGZus{}test}\PYG{p}{,} \PYG{n}{X\PYGZus{}pindel\PYGZus{}test}\PYG{p}{,} \PYG{n}{X\PYGZus{}st\PYGZus{}test} \PYG{o}{=} \PYG{n}{prep\PYGZus{}input\PYGZus{}samples}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{X\PYGZus{}test}\PYG{p}{)}
     \PYG{n}{batch\PYGZus{}size} \PYG{o}{=} \PYG{n}{mybatch\PYGZus{}size}
     \PYG{n}{nb\PYGZus{}epoch} \PYG{o}{=} \PYG{n}{mynb\PYGZus{}epoch}
 
+    \PYG{n}{fb\PYGZus{}branch} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{fb\PYGZus{}branch}\PYG{p}{,} \PYG{n}{fb\PYGZus{}size}\PYG{p}{)}
+
+    \PYG{n}{hc\PYGZus{}branch} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{hc\PYGZus{}branch}\PYG{p}{,} \PYG{n}{hc\PYGZus{}size}\PYG{p}{)}
+
+    \PYG{n}{ug\PYGZus{}branch} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{ug\PYGZus{}branch}\PYG{p}{,} \PYG{n}{ug\PYGZus{}size}\PYG{p}{)}
+
+    \PYG{n}{pindel\PYGZus{}branch} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{pindel\PYGZus{}branch}\PYG{p}{,} \PYG{n}{pindel\PYGZus{}size}\PYG{p}{)}
+
+    \PYG{n}{st\PYGZus{}branch} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
+    \PYG{n}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{st\PYGZus{}branch}\PYG{p}{,} \PYG{n}{st\PYGZus{}size}\PYG{p}{)}
+
     \PYG{n}{final\PYGZus{}model} \PYG{o}{=} \PYG{n}{Sequential}\PYG{p}{()}
-    \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{BatchNormalization}\PYG{p}{(}\PYG{n}{input\PYGZus{}shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{number}\PYG{p}{,),} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{))}
+    \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Merge}\PYG{p}{([}\PYG{n}{fb\PYGZus{}branch}\PYG{p}{,} \PYG{n}{hc\PYGZus{}branch}\PYG{p}{,} \PYG{n}{ug\PYGZus{}branch}\PYG{p}{,} \PYG{n}{pindel\PYGZus{}branch}\PYG{p}{,} \PYG{n}{st\PYGZus{}branch}\PYG{p}{],} \PYG{n}{mode}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}concat\PYGZsq{}}\PYG{p}{,} \PYG{n}{concat\PYGZus{}axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{))}
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
@@ -294,9 +311,9 @@
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Activation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}sigmoid\PYGZsq{}}\PYG{p}{))}
     \PYG{k}{print} \PYG{p}{(}\PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{())}
-    \PYG{n}{rmsprop} \PYG{o}{=} \PYG{n}{RMSprop}\PYG{p}{(}\PYG{n}{lr}\PYG{o}{=}\PYG{l+m+mf}{0.000003}\PYG{p}{,} \PYG{n}{rho}\PYG{o}{=}\PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{n}{epsilon}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}08}\PYG{p}{,} \PYG{n}{decay}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{)}
+    \PYG{n}{adam} \PYG{o}{=} \PYG{n}{Adam}\PYG{p}{(}\PYG{n}{lr}\PYG{o}{=}\PYG{l+m+mf}{0.00001}\PYG{p}{,} \PYG{n}{rho}\PYG{o}{=}\PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{n}{epsilon}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}08}\PYG{p}{,} \PYG{n}{decay}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{)}
     \PYG{n}{final\PYGZus{}model}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}binary\PYGZus{}crossentropy\PYGZsq{}}\PYG{p}{,}
-                        \PYG{n}{optimizer}\PYG{o}{=}\PYG{n}{rmsprop}\PYG{p}{,}
+                        \PYG{n}{optimizer}\PYG{o}{=}\PYG{n}{adam}\PYG{p}{,}
                         \PYG{n}{metrics}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}accuracy\PYGZsq{}}\PYG{p}{])}
 
     \PYG{n}{filepath} \PYG{o}{=} \PYG{n}{location} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}/best\PYGZus{}weights.hdf5\PYGZdq{}}

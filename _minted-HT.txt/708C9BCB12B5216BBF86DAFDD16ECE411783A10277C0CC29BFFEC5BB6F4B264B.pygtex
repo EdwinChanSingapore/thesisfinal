@@ -3,7 +3,7 @@
 \PYG{c+c1}{\PYGZsh{}Input : a directory that contains all the vcf files for processing, as well as a truth file.}
 \PYG{c+c1}{\PYGZsh{}Output : np.arrays of features from generate\PYGZus{}matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of relevant sample features for easy reference}
 \PYG{c+c1}{\PYGZsh{}Notes :}
-\PYG{c+c1}{\PYGZsh{}Vcf files should be labelled with vcf and truth file should be labelled with truth.}
+\PYG{c+c1}{\PYGZsh{}Vcf files should have the \PYGZdq{}vcf\PYGZdq{} string in their name and truth file should have a \PYGZdq{}truth\PYGZdq{} string in its name.}
 \PYG{c+c1}{\PYGZsh{}No other file should be present in the folder}
 \PYG{c+c1}{\PYGZsh{}Overall Strategy :}
 \PYG{c+c1}{\PYGZsh{}Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers}
@@ -16,7 +16,7 @@
 \PYG{k+kn}{from} \PYG{n+nn}{ANNgenerateresults} \PYG{k+kn}{import} \PYG{o}{*}  \PYG{c+c1}{\PYGZsh{}this file contains all the main methods for actual neural network training}
 \PYG{k+kn}{from} \PYG{n+nn}{methods} \PYG{k+kn}{import} \PYG{o}{*}  \PYG{c+c1}{\PYGZsh{}this file contains all the methods for parsing each VCF entry into a numerical list of features}
 
-\PYG{c+c1}{\PYGZsh{}set of useful files that contains processed data to be saved}
+\PYG{c+c1}{\PYGZsh{}declare names of useful files that contains processed data to be saved}
 \PYG{n}{LIST\PYGZus{}OF\PYGZus{}INPUTS\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/samplelist.p\PYGZsq{}}
 \PYG{n}{TRUTH\PYGZus{}DICTIONARY\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/truthdict.p\PYGZsq{}}
 \PYG{n}{CALLER\PYGZus{}LENGTH\PYGZus{}FILE\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/callerlengths.txt\PYGZsq{}}
