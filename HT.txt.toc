@@ -16,19 +16,19 @@
 \contentsline {subsection}{\numberline {3.1}Generation of Artificial Datasets}{14}
 \contentsline {subsection}{\numberline {3.2}Feature Engineering}{15}
 \contentsline {subsection}{\numberline {3.3}Variant Callers}{15}
-\contentsline {subsection}{\numberline {3.4}Network Architecture}{16}
-\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{18}
-\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Datasets}{23}
-\contentsline {subsection}{\numberline {3.7}Benchmarking of Network with NA Datasets}{25}
-\contentsline {subsection}{\numberline {3.8}Analysis of gene importance using Bayesian Ranking systems}{27}
-\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{28}
-\contentsline {section}{\numberline {4}Discussion}{32}
-\contentsline {section}{\numberline {5}Appendixes}{35}
-\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{35}
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{39}
-\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{43}
-\contentsline {section}{\numberline {6}Bibilography}{46}
-\contentsline {section}{\numberline {7}Relevant Code}{51}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{51}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{60}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{69}
+\contentsline {subsection}{\numberline {3.4}Network Architecture}{17}
+\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{19}
+\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Datasets}{24}
+\contentsline {subsection}{\numberline {3.7}Benchmarking of Network with NA Datasets}{26}
+\contentsline {subsection}{\numberline {3.8}Analysis of gene importance using Bayesian Ranking systems}{28}
+\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{29}
+\contentsline {section}{\numberline {4}Discussion}{33}
+\contentsline {section}{\numberline {5}Appendixes}{36}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{36}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{40}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{44}
+\contentsline {section}{\numberline {6}Bibilography}{47}
+\contentsline {section}{\numberline {7}Relevant Code}{52}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{52}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{61}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{70}
