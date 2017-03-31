@@ -370,6 +370,5 @@
     \PYG{n}{input\PYGZus{}path} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{parse\PYGZus{}args}\PYG{p}{()}
     \PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,} \PYGZbs{}
     \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{paths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{load\PYGZus{}references}\PYG{p}{(}\PYG{n}{input\PYGZus{}path}\PYG{p}{)}
-    \PYG{n}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,}
-                                          \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{paths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{)}
+    \PYG{n}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{paths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{)}
 \end{Verbatim}
