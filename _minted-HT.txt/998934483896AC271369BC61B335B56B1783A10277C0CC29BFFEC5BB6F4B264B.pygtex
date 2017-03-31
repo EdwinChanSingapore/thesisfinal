@@ -1,0 +1,353 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{time}
+\PYG{k+kn}{from} \PYG{n+nn}{ANNgenerateresults} \PYG{k+kn}{import} \PYG{o}{*}  \PYG{c+c1}{\PYGZsh{}this file contains all the main methods for actual neural network training}
+\PYG{k+kn}{from} \PYG{n+nn}{methods} \PYG{k+kn}{import} \PYG{o}{*}  \PYG{c+c1}{\PYGZsh{}this file contains all the methods for parsing each VCF entry into a numerical list of features}
+
+\PYG{c+c1}{\PYGZsh{}set of useful files that contains processed data to be saved}
+\PYG{n}{LIST\PYGZus{}OF\PYGZus{}INPUTS\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/samplelist.p\PYGZsq{}}
+\PYG{n}{TRUTH\PYGZus{}DICTIONARY\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/truthdict.p\PYGZsq{}}
+\PYG{n}{CALLER\PYGZus{}LENGTH\PYGZus{}FILE\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/callerlengths.txt\PYGZsq{}}
+\PYG{n}{VCF\PYGZus{}LIST\PYGZus{}FILE\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/vcf\PYGZus{}list.p\PYGZsq{}}
+\PYG{n}{SCORES\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/scores.txt\PYGZsq{}}
+\PYG{n}{Y\PYGZus{}DATA\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/myydata.txt\PYGZsq{}}
+\PYG{n}{X\PYGZus{}DATA\PYGZus{}NAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/ANN/myXdata.txt\PYGZsq{}}
+
+\PYG{c+c1}{\PYGZsh{}Initialise NUMBER\PYGZus{}OF\PYGZus{}CALLERS}
+\PYG{n}{NUMBER\PYGZus{}OF\PYGZus{}CALLERS} \PYG{o}{=} \PYG{l+m+mi}{5}
+
+
+\PYG{c+c1}{\PYGZsh{} This method follows the typical input output processing pipeline}
+\PYG{c+c1}{\PYGZsh{} It takes in the user input, and loads it into local variables.}
+\PYG{c+c1}{\PYGZsh{} It then executes another method, main\PYGZus{}analyse\PYGZus{}samples\PYGZus{}and\PYGZus{}truth on the loaded variables}
+\PYG{c+c1}{\PYGZsh{} Finally, it then saves files into a directory determined by the final variables, and calls the next step of the pipeline}
+\PYG{c+c1}{\PYGZsh{} the neural network training, which is main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}
+
+\PYG{k}{def} \PYG{n+nf}{load\PYGZus{}and\PYGZus{}save\PYGZus{}data}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{):}
+    \PYG{n}{user\PYGZus{}input} \PYG{o}{=} \PYG{n+nb}{vars}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{)}
+    \PYG{n}{input\PYGZus{}samples}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{,} \PYG{n}{output\PYGZus{}location} \PYG{o}{=} \PYG{n}{load\PYGZus{}references}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} load user input}
+    \PYG{n}{my\PYGZus{}x\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{my\PYGZus{}y\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{,} \PYGZbs{}
+    \PYG{n}{vcf\PYGZus{}record\PYGZus{}list} \PYG{o}{=} \PYG{n}{main\PYGZus{}analyse\PYGZus{}samples\PYGZus{}and\PYGZus{}truth}\PYG{p}{(}\PYG{n}{input\PYGZus{}samples}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{)}
+    \PYG{n}{save\PYGZus{}files}\PYG{p}{(}\PYG{n}{output\PYGZus{}location}\PYG{p}{,} \PYG{n}{my\PYGZus{}x\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{,}
+               \PYG{n}{list\PYGZus{}of\PYGZus{}samples}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}record\PYGZus{}list}\PYG{p}{,} \PYG{n}{my\PYGZus{}y\PYGZus{}dataset}\PYG{p}{)}
+    \PYG{n}{orig\PYGZus{}stdout} \PYG{o}{=} \PYG{n}{sys}\PYG{o}{.}\PYG{n}{stdout}  \PYG{c+c1}{\PYGZsh{}save print statements into stdout}
+    \PYG{n}{f} \PYG{o}{=} \PYG{n+nb}{file}\PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{output\PYGZus{}location}\PYG{p}{)} \PYG{o}{+} \PYG{n}{SCORES\PYGZus{}NAME}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}w\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{sys}\PYG{o}{.}\PYG{n}{stdout} \PYG{o}{=} \PYG{n}{f}
+    \PYG{n}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{my\PYGZus{}x\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{my\PYGZus{}y\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples}\PYG{p}{,} \PYG{n}{output\PYGZus{}location}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}record\PYGZus{}list}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} This method first prepares a dictionary of truth to be checked against. It then initialises}
+\PYG{c+c1}{\PYGZsh{} a dictionary of samples with all the keys, each key being a variant call, and then fills it up each key with data from each caller}
+\PYG{c+c1}{\PYGZsh{} subsequently, it removes dictionary entries that are the wrong size, and then checks whether}
+\PYG{c+c1}{\PYGZsh{} each entry in the dictionary is true or not by looking up the truth dictionary}
+\PYG{c+c1}{\PYGZsh{} subsequently it performs array balancing, and converts the data to np.array, as well as the dictionary of truth}
+\PYG{c+c1}{\PYGZsh{} and list of called samples}
+
+
+\PYG{k}{def} \PYG{n+nf}{main\PYGZus{}analyse\PYGZus{}samples\PYGZus{}and\PYGZus{}truth}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{):}
+    \PYG{n}{os}\PYG{o}{.}\PYG{n}{chdir}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
+    \PYG{n}{truthdict} \PYG{o}{=} \PYG{n}{generate\PYGZus{}truth\PYGZus{}list}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
+    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}truth dictionary generated at time :\PYGZdq{}}\PYG{p}{,} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{start}
+    \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list} \PYG{o}{=} \PYG{n}{generate\PYGZus{}input}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{)}
+    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}samples generated at time :\PYGZdq{}}\PYG{p}{,} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{start}
+    \PYG{n}{clean\PYGZus{}truth\PYGZus{}array}\PYG{p}{,} \PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array} \PYG{o}{=} \PYG{n}{check\PYGZus{}predicted\PYGZus{}with\PYGZus{}truth}\PYG{p}{(}\PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{truthdict}\PYG{p}{)}
+    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}samples checked with truth at time :\PYGZdq{}}\PYG{p}{,} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{start}
+    \PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{float64}\PYG{p}{)}
+    \PYG{n}{clean\PYGZus{}truth\PYGZus{}array} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{clean\PYGZus{}truth\PYGZus{}array}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array}\PYG{p}{,} \PYG{n}{clean\PYGZus{}truth\PYGZus{}array}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{truthdict}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}
+
+
+\PYG{c+c1}{\PYGZsh{} This method generates the truth dictionary, by iterating through the vcf file, parsing all the vcf entries and appending them all as keys in the dictionary}
+
+\PYG{k}{def} \PYG{n+nf}{create\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{generated\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{truth\PYGZus{}file}\PYG{p}{):}
+    \PYG{n}{vcf\PYGZus{}reader} \PYG{o}{=} \PYG{n}{vcf}\PYG{o}{.}\PYG{n}{Reader}\PYG{p}{(}\PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{truth\PYGZus{}file}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{))}
+    \PYG{k}{for} \PYG{n}{record} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}reader}\PYG{p}{:}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}GL\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{record}\PYG{o}{.}\PYG{n}{CHROM}\PYG{p}{:}    \PYG{c+c1}{\PYGZsh{}Ignore non\PYGZhy{}regular chromosomes in our dataset}
+            \PYG{k}{continue}
+        \PYG{n}{templist} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{record}\PYG{o}{.}\PYG{n}{ALT}\PYG{p}{:}
+            \PYG{n}{templist}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{item}\PYG{p}{)}\PYG{o}{.}\PYG{n}{upper}\PYG{p}{())}          \PYG{c+c1}{\PYGZsh{}Alternates might be a list, so they have to be saved as a immutable tuple}
+        \PYG{n}{generated\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{[(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{CHROM}\PYG{p}{),} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{POS}\PYG{p}{),} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{REF}\PYG{p}{)}\PYG{o}{.}\PYG{n}{upper}\PYG{p}{())]} \PYG{o}{=} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{templist}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} This method generates the input dictionary, by first initialising the keys of the dictionary by iterating through the vcf file once, and then}
+\PYG{c+c1}{\PYGZsh{} Iterating through the vcf file again and parsing all the entries as input vectors}
+
+\PYG{k}{def} \PYG{n+nf}{generate\PYGZus{}input}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{):}
+    \PYG{n}{reference\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{get\PYGZus{}reference\PYGZus{}dictionary\PYGZus{}for\PYGZus{}entropy}\PYG{p}{(}\PYG{n}{referencepath}\PYG{p}{)}
+    \PYG{n}{base\PYGZus{}entropy} \PYG{o}{=} \PYG{n}{get\PYGZus{}ref\PYGZus{}entropy}\PYG{p}{(}\PYG{n}{referencepath}\PYG{p}{)}
+    \PYG{n}{full\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{get\PYGZus{}dictionary\PYGZus{}keys}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list} \PYG{o}{=} \PYG{n}{fill\PYGZus{}sample\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{base\PYGZus{}entropy}\PYG{p}{,} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{path}\PYG{p}{,} \PYG{n}{reference\PYGZus{}dictionary}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}
+
+
+\PYG{c+c1}{\PYGZsh{} This method goes through all the training variant calling files and extracts unique calls as keys in the sample dictionary}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}dictionary\PYGZus{}keys}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+    \PYG{n}{sample\PYGZus{}dictionary} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{for} \PYG{n}{vcf\PYGZus{}file} \PYG{o+ow}{in} \PYG{n}{os}\PYG{o}{.}\PYG{n}{listdir}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{ignore\PYGZus{}file}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{):}
+            \PYG{k}{continue}
+        \PYG{n}{vcf\PYGZus{}reader} \PYG{o}{=} \PYG{n}{vcf}\PYG{o}{.}\PYG{n}{Reader}\PYG{p}{(}\PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{))}
+        \PYG{n}{sample\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{create\PYGZus{}dictionary\PYGZus{}keys}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}reader}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{sample\PYGZus{}dictionary}
+
+
+\PYG{c+c1}{\PYGZsh{}This method ensures the feature vector is in the right order \PYGZhy{} the entries must always be in the order fb, hc, ug, pindel and st.}
+
+\PYG{k}{def} \PYG{n+nf}{create\PYGZus{}list\PYGZus{}of\PYGZus{}paths}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}paths} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{n}{NUMBER\PYGZus{}OF\PYGZus{}CALLERS}
+    \PYG{k}{for} \PYG{n}{vcf\PYGZus{}file} \PYG{o+ow}{in} \PYG{n}{os}\PYG{o}{.}\PYG{n}{listdir}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{ignore\PYGZus{}file}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{):}
+            \PYG{k}{continue}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}fb\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+            \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{vcf\PYGZus{}file}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}hc\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+            \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{vcf\PYGZus{}file}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}ug\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+            \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{vcf\PYGZus{}file}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}pind\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+            \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{n}{vcf\PYGZus{}file}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}st\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+            \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{=} \PYG{n}{vcf\PYGZus{}file}
+    \PYG{k}{return} \PYG{n}{list\PYGZus{}of\PYGZus{}paths}
+
+\PYG{c+c1}{\PYGZsh{} This method goes through all the training variant calling files and fills each entry in a sample dictionary}
+\PYG{c+c1}{\PYGZsh{} with data. If it is empty, it returns an array of length n, where n is the number of variables}
+\PYG{c+c1}{\PYGZsh{} that same caller would have provided.}
+\PYG{c+c1}{\PYGZsh{} Each caller has a different amount of variables because it contains different datasets}
+
+\PYG{k}{def} \PYG{n+nf}{fill\PYGZus{}sample\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{base\PYGZus{}entropy}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{path}\PYG{p}{,} \PYG{n}{reference\PYGZus{}dictionary}\PYG{p}{):}
+    \PYG{n}{callerlengths} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{n}{number\PYGZus{}of\PYGZus{}callers}
+    \PYG{n}{index} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{total\PYGZus{}mode\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}paths} \PYG{o}{=} \PYG{n}{create\PYGZus{}list\PYGZus{}of\PYGZus{}paths}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{vcf\PYGZus{}file} \PYG{o+ow}{in} \PYG{n}{list\PYGZus{}of\PYGZus{}paths}\PYG{p}{:}
+        \PYG{n}{index} \PYG{o}{+=} \PYG{l+m+mi}{1}
+        \PYG{n}{opened\PYGZus{}vcf\PYGZus{}file} \PYG{o}{=} \PYG{n}{vcf}\PYG{o}{.}\PYG{n}{Reader}\PYG{p}{(}\PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{))}
+        \PYG{n}{removaldict} \PYG{o}{=} \PYG{n}{iterate\PYGZus{}over\PYGZus{}file\PYGZus{}to\PYGZus{}extract\PYGZus{}data}\PYG{p}{(}\PYG{n}{base\PYGZus{}entropy}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{,}
+                                                        \PYG{n}{reference\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{opened\PYGZus{}vcf\PYGZus{}file}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{)}
+        \PYG{n}{mode\PYGZus{}value} \PYG{o}{=} \PYG{n}{get\PYGZus{}mode\PYGZus{}value}\PYG{p}{(}\PYG{n}{removaldict}\PYG{p}{)}
+        \PYG{n}{add\PYGZus{}length\PYGZus{}to\PYGZus{}caller\PYGZus{}lengths\PYGZus{}based\PYGZus{}on\PYGZus{}file\PYGZus{}name}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{,} \PYG{n}{mode\PYGZus{}value}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{)}
+        \PYG{n}{refill\PYGZus{}dictionary\PYGZus{}with\PYGZus{}zero\PYGZus{}arrays\PYGZus{}for\PYGZus{}each\PYGZus{}file}\PYG{p}{(}\PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{index}\PYG{p}{,} \PYG{n}{mode\PYGZus{}value}\PYG{p}{)}
+        \PYG{n}{total\PYGZus{}mode\PYGZus{}value} \PYG{o}{+=} \PYG{n}{mode\PYGZus{}value}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}passed\PYGZus{}samples}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list} \PYG{o}{=} \PYG{n}{add\PYGZus{}mode\PYGZus{}values\PYGZus{}into\PYGZus{}list\PYGZus{}of\PYGZus{}samples}\PYG{p}{(}\PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{total\PYGZus{}mode\PYGZus{}value}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{list\PYGZus{}of\PYGZus{}passed\PYGZus{}samples}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}
+
+
+\PYG{c+c1}{\PYGZsh{} this method fills the dictionary with empty arrays with the same length as the ones that were supposed to be added}
+
+\PYG{k}{def} \PYG{n+nf}{refill\PYGZus{}dictionary\PYGZus{}with\PYGZus{}zero\PYGZus{}arrays\PYGZus{}for\PYGZus{}each\PYGZus{}file}\PYG{p}{(}\PYG{n}{full\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{index}\PYG{p}{,} \PYG{n}{length\PYGZus{}of\PYGZus{}data\PYGZus{}array}\PYG{p}{):}
+    \PYG{n}{empty\PYGZus{}set} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{length\PYGZus{}of\PYGZus{}data\PYGZus{}array}\PYG{p}{):}
+        \PYG{n}{empty\PYGZus{}set}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{:}
+        \PYG{n}{checksum} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{item}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{])}
+        \PYG{k}{if} \PYG{n}{checksum} \PYG{o}{\PYGZlt{}} \PYG{n}{index}\PYG{p}{:}
+            \PYG{n}{arbinfo} \PYG{o}{=} \PYG{n}{empty\PYGZus{}set}
+            \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{item}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{arbinfo}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} this method iterates through all the files to extract data from each sample. It uses methods from the}
+\PYG{c+c1}{\PYGZsh{} methods.py function, which parses each record for data.}
+
+\PYG{k}{def} \PYG{n+nf}{iterate\PYGZus{}over\PYGZus{}file\PYGZus{}to\PYGZus{}extract\PYGZus{}data}\PYG{p}{(}\PYG{n}{base\PYGZus{}entropy}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{recorddictionary}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}reader1}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{):}
+    \PYG{n}{removaldict} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{for} \PYG{n}{record} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}reader1}\PYG{p}{:}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}GL\PYGZdq{}} \PYG{o+ow}{in} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{CHROM}\PYG{p}{):}
+            \PYG{k}{continue}
+        \PYG{n}{sample\PYGZus{}name} \PYG{o}{=} \PYG{n}{get\PYGZus{}sample\PYGZus{}name\PYGZus{}from\PYGZus{}record}\PYG{p}{(}\PYG{n}{record}\PYG{p}{)}
+        \PYG{n}{sample\PYGZus{}data} \PYG{o}{=} \PYG{n}{getallvalues}\PYG{p}{(}\PYG{n}{record}\PYG{p}{,} \PYG{n}{recorddictionary}\PYG{p}{,} \PYG{n}{base\PYGZus{}entropy}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{)}
+        \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{sample\PYGZus{}name}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{sample\PYGZus{}data}\PYG{p}{)}
+        \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{sample\PYGZus{}name}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{record}
+        \PYG{n}{create\PYGZus{}removal\PYGZus{}dict}\PYG{p}{(}\PYG{n}{sample\PYGZus{}data}\PYG{p}{,} \PYG{n}{removaldict}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{removaldict}
+
+\PYG{c+c1}{\PYGZsh{} this method counts the mode number of entries in the dictionary. Due to certain vcf files having multiple possible number of entries for a field, this will create an error}
+\PYG{c+c1}{\PYGZsh{} as the size of the input arrays should always be constant. Thus, any sample that does not fit the array should be removed.}
+\PYG{c+c1}{\PYGZsh{} TO\PYGZhy{}DO See if a better implementation can be done that doesn\PYGZsq{}t reduce data available}
+
+\PYG{k}{def} \PYG{n+nf}{create\PYGZus{}removal\PYGZus{}dict}\PYG{p}{(}\PYG{n}{sample\PYGZus{}data}\PYG{p}{,} \PYG{n}{removaldict}\PYG{p}{):}
+    \PYG{n}{count} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{count} \PYG{o}{+=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{sample\PYGZus{}data}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{count} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{removaldict}\PYG{p}{:}
+        \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+
+\PYG{c+c1}{\PYGZsh{} this method prepares the reference genome dictionary for use in entropy calculations}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}reference\PYGZus{}dictionary\PYGZus{}for\PYGZus{}entropy}\PYG{p}{(}\PYG{n}{reference\PYGZus{}path}\PYG{p}{):}
+    \PYG{n}{record\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{SeqIO}\PYG{o}{.}\PYG{n}{to\PYGZus{}dict}\PYG{p}{(}\PYG{n}{SeqIO}\PYG{o}{.}\PYG{n}{parse}\PYG{p}{(}\PYG{n}{reference\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}fasta\PYGZdq{}}\PYG{p}{),} \PYG{n}{key\PYGZus{}function}\PYG{o}{=}\PYG{n}{get\PYGZus{}chr}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{record\PYGZus{}dictionary}
+
+\PYG{c+c1}{\PYGZsh{} this method ensures that the files inputed are correct}
+
+\PYG{k}{def} \PYG{n+nf}{ignore\PYGZus{}file}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{):}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}vcf\PYGZdq{}} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file} \PYG{o+ow}{or} \PYG{l+s+s2}{\PYGZdq{}truth\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n+nb+bp}{True}
+    \PYG{k}{return} \PYG{n+nb+bp}{False}
+
+\PYG{c+c1}{\PYGZsh{} this method creates the set of keys for the dictionary}
+
+\PYG{k}{def} \PYG{n+nf}{create\PYGZus{}dictionary\PYGZus{}keys}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}reader}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{):}
+    \PYG{k}{for} \PYG{n}{record} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}reader}\PYG{p}{:}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}GL\PYGZdq{}} \PYG{o+ow}{in} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{CHROM}\PYG{p}{):}
+            \PYG{k}{continue}
+        \PYG{n}{sample\PYGZus{}name} \PYG{o}{=} \PYG{n}{get\PYGZus{}sample\PYGZus{}name\PYGZus{}from\PYGZus{}record}\PYG{p}{(}\PYG{n}{record}\PYG{p}{)}
+        \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{sample\PYGZus{}name}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[[],} \PYG{p}{[]]}  \PYG{c+c1}{\PYGZsh{} fullname has become a key in fulldictionary}
+    \PYG{k}{return} \PYG{n}{sample\PYGZus{}dictionary}
+
+\PYG{c+c1}{\PYGZsh{} standard method that returns a tuple of the variant call object with the chromosome, position, reference and tuple of alternates}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sample\PYGZus{}name\PYGZus{}from\PYGZus{}record}\PYG{p}{(}\PYG{n}{record}\PYG{p}{):}
+    \PYG{n}{templist} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{record}\PYG{o}{.}\PYG{n}{ALT}\PYG{p}{:}
+        \PYG{n}{templist}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{item}\PYG{p}{)}\PYG{o}{.}\PYG{n}{upper}\PYG{p}{())}
+    \PYG{n}{sample\PYGZus{}name} \PYG{o}{=} \PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{CHROM}\PYG{p}{),} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{POS}\PYG{p}{),} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{record}\PYG{o}{.}\PYG{n}{REF}\PYG{p}{)}\PYG{o}{.}\PYG{n}{upper}\PYG{p}{(),} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{templist}\PYG{p}{))}
+    \PYG{k}{return} \PYG{n}{sample\PYGZus{}name}
+
+\PYG{c+c1}{\PYGZsh{} this method sets the length of the input neural networks}
+
+\PYG{k}{def} \PYG{n+nf}{add\PYGZus{}length\PYGZus{}to\PYGZus{}caller\PYGZus{}lengths\PYGZus{}based\PYGZus{}on\PYGZus{}file\PYGZus{}name}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{,} \PYG{n}{caller\PYGZus{}length}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{):}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}fb\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{n}{callerlengths}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{caller\PYGZus{}length}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}hc\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{n}{callerlengths}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{caller\PYGZus{}length}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}ug\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{n}{callerlengths}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{caller\PYGZus{}length}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}pind\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{n}{callerlengths}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{n}{caller\PYGZus{}length}
+    \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}st\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{vcf\PYGZus{}file}\PYG{p}{:}
+        \PYG{n}{callerlengths}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{=} \PYG{n}{caller\PYGZus{}length}
+
+\PYG{c+c1}{\PYGZsh{} this method wraps the create truth dictionary method and is used to checking that the dictionary file has the correct name}
+
+\PYG{k}{def} \PYG{n+nf}{generate\PYGZus{}truth\PYGZus{}list}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+    \PYG{n}{generated\PYGZus{}truth\PYGZus{}dictionary} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{for} \PYG{n}{truth\PYGZus{}file} \PYG{o+ow}{in} \PYG{n}{os}\PYG{o}{.}\PYG{n}{listdir}\PYG{p}{(}\PYG{n}{path}\PYG{p}{):}
+        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}truth\PYGZdq{}} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{truth\PYGZus{}file}\PYG{p}{:}
+            \PYG{k}{continue}
+        \PYG{n}{create\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{generated\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{truth\PYGZus{}file}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{generated\PYGZus{}truth\PYGZus{}dictionary}
+
+\PYG{c+c1}{\PYGZsh{} this method takes in the mutation (in a tuple) and checks if that mutation exists in the truth dictionary}
+\PYG{c+c1}{\PYGZsh{} A mutation exists if the chromosome, reference and position of the variant call is correct, AND one of the alternate alleles it contains}
+\PYG{c+c1}{\PYGZsh{} is also an alternate allele in the truth dataset}
+
+\PYG{k}{def} \PYG{n+nf}{check\PYGZus{}sample\PYGZus{}against\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{tuple\PYGZus{}name}\PYG{p}{,} \PYG{n}{final\PYGZus{}truth\PYGZus{}list}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{):}
+    \PYG{n}{temp\PYGZus{}tuple} \PYG{o}{=} \PYG{p}{(}\PYG{n}{tuple\PYGZus{}name}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{tuple\PYGZus{}name}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{tuple\PYGZus{}name}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{])}
+    \PYG{k}{if} \PYG{n}{temp\PYGZus{}tuple} \PYG{o+ow}{in} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{alternate} \PYG{o+ow}{in} \PYG{n}{tuple\PYGZus{}name}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]:}
+            \PYG{k}{if} \PYG{n}{alternate} \PYG{o+ow}{in} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{temp\PYGZus{}tuple}\PYG{p}{]:}
+                \PYG{n}{final\PYGZus{}truth\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+                \PYG{k}{return}
+    \PYG{n}{final\PYGZus{}truth\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{k}{return}
+
+\PYG{c+c1}{\PYGZsh{} This method loads the paths of the files into local variables}
+
+\PYG{k}{def} \PYG{n+nf}{load\PYGZus{}references}\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{p}{):}
+    \PYG{n}{file1} \PYG{o}{=} \PYG{n}{user\PYGZus{}input}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}input\PYGZsq{}}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{n}{referencepath} \PYG{o}{=} \PYG{n}{user\PYGZus{}input}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}reference\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{output\PYGZus{}location} \PYG{o}{=} \PYG{n}{user\PYGZus{}input}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}output\PYGZsq{}}\PYG{p}{]}
+    \PYG{k}{return} \PYG{n}{file1}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{,} \PYG{n}{output\PYGZus{}location}
+
+\PYG{c+c1}{\PYGZsh{} This method saves all the processed data into files that can be used for other purposes later or loaded natively instead of doing the processing again}
+
+\PYG{k}{def} \PYG{n+nf}{save\PYGZus{}files}\PYG{p}{(}\PYG{n}{output\PYGZus{}location}\PYG{p}{,} \PYG{n}{x\PYGZus{}array}\PYG{p}{,} \PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}list}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dict}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary\PYGZus{}file}\PYG{p}{,}
+               \PYG{n}{y\PYGZus{}array}\PYG{o}{=}\PYG{p}{[]):}
+    \PYG{n}{file2} \PYG{o}{=} \PYG{n}{output\PYGZus{}location}
+    \PYG{n}{x\PYGZus{}data\PYGZus{}file\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{X\PYGZus{}DATA\PYGZus{}NAME}\PYG{p}{)}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{x\PYGZus{}data\PYGZus{}file\PYGZus{}name}\PYG{p}{,} \PYG{n}{x\PYGZus{}array}\PYG{p}{)}
+    \PYG{n}{vcf\PYGZus{}file\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{VCF\PYGZus{}LIST\PYGZus{}FILE\PYGZus{}NAME}\PYG{p}{)}
+    \PYG{n}{caller\PYGZus{}length\PYGZus{}file\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{CALLER\PYGZus{}LENGTH\PYGZus{}FILE\PYGZus{}NAME}\PYG{p}{)}
+    \PYG{n}{truth\PYGZus{}dictionary\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{TRUTH\PYGZus{}DICTIONARY\PYGZus{}NAME}\PYG{p}{)}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}inputs\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{LIST\PYGZus{}OF\PYGZus{}INPUTS\PYGZus{}NAME}\PYG{p}{)}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{caller\PYGZus{}length\PYGZus{}file\PYGZus{}name}\PYG{p}{,} \PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{)}
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{list\PYGZus{}of\PYGZus{}inputs\PYGZus{}name}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}wb\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{samplesave1}\PYG{p}{:}
+        \PYG{n}{pickle}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}\PYG{n}{sample\PYGZus{}list}\PYG{p}{,} \PYG{n}{samplesave1}\PYG{p}{)}
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{truth\PYGZus{}dictionary\PYGZus{}name}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}wb\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{samplesave2}\PYG{p}{:}
+        \PYG{n}{pickle}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}\PYG{n}{truth\PYGZus{}dict}\PYG{p}{,} \PYG{n}{samplesave2}\PYG{p}{)}
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file\PYGZus{}name}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}wb\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{samplesave3}\PYG{p}{:}
+        \PYG{n}{pickle}\PYG{o}{.}\PYG{n}{dump}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}dictionary\PYGZus{}file}\PYG{p}{,} \PYG{n}{samplesave3}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{y\PYGZus{}array} \PYG{o}{!=} \PYG{p}{[]:}
+        \PYG{n}{y\PYGZus{}data\PYGZus{}file\PYGZus{}name} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{file2}\PYG{p}{)} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{Y\PYGZus{}DATA\PYGZus{}NAME}\PYG{p}{)}
+        \PYG{n}{np}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{n}{y\PYGZus{}data\PYGZus{}file\PYGZus{}name}\PYG{p}{,} \PYG{n}{y\PYGZus{}array}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} This method takes in two dictionaries, a dictionary of truth mutations and a dictionary of sample mutations,}
+\PYG{c+c1}{\PYGZsh{} checks whether each of the sample variables are inside the truth dictionary}
+\PYG{c+c1}{\PYGZsh{} and returns 2 arrays, an array of samples and an array of accompanying truth labels}
+
+\PYG{k}{def} \PYG{n+nf}{check\PYGZus{}predicted\PYGZus{}with\PYGZus{}truth}\PYG{p}{(}\PYG{n}{passed\PYGZus{}list\PYGZus{}of\PYGZus{}samples}\PYG{p}{,} \PYG{n}{dictionary\PYGZus{}of\PYGZus{}truth}\PYG{o}{=}\PYG{p}{[]):}
+    \PYG{n}{final\PYGZus{}array\PYGZus{}of\PYGZus{}samples} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{final\PYGZus{}truth\PYGZus{}list} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{passed\PYGZus{}list\PYGZus{}of\PYGZus{}samples}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{dictionary\PYGZus{}of\PYGZus{}truth}\PYG{p}{:}
+            \PYG{n}{check\PYGZus{}sample\PYGZus{}against\PYGZus{}truth\PYGZus{}dictionary}\PYG{p}{(}\PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{final\PYGZus{}truth\PYGZus{}list}\PYG{p}{,} \PYG{n}{dictionary\PYGZus{}of\PYGZus{}truth}\PYG{p}{)}
+        \PYG{n}{temp\PYGZus{}array} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{k}{for} \PYG{n}{row} \PYG{o+ow}{in} \PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]:}
+            \PYG{n}{temp\PYGZus{}array}\PYG{o}{.}\PYG{n}{extend}\PYG{p}{(}\PYG{n}{row}\PYG{p}{)}
+        \PYG{n}{final\PYGZus{}array\PYGZus{}of\PYGZus{}samples}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{temp\PYGZus{}array}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{dictionary\PYGZus{}of\PYGZus{}truth}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{final\PYGZus{}truth\PYGZus{}list}\PYG{p}{,} \PYG{n}{final\PYGZus{}array\PYGZus{}of\PYGZus{}samples}
+    \PYG{k}{return} \PYG{n}{final\PYGZus{}array\PYGZus{}of\PYGZus{}samples}
+
+\PYG{c+c1}{\PYGZsh{} This method ensures that only the variables that have the modal number of features are used}
+\PYG{c+c1}{\PYGZsh{} in neural network training to ensure all array sizes are the same}
+
+\PYG{k}{def} \PYG{n+nf}{add\PYGZus{}mode\PYGZus{}values\PYGZus{}into\PYGZus{}list\PYGZus{}of\PYGZus{}samples}\PYG{p}{(}\PYG{n}{full\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{mode\PYGZus{}value}\PYG{p}{):}
+    \PYG{n}{list\PYGZus{}of\PYGZus{}passed\PYGZus{}samples} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{vcf\PYGZus{}list} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{k}{for} \PYG{n}{key} \PYG{o+ow}{in} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{:}
+        \PYG{n}{second\PYGZus{}count} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]:}
+            \PYG{n}{second\PYGZus{}count} \PYG{o}{+=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{item}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{second\PYGZus{}count} \PYG{o}{!=} \PYG{n}{mode\PYGZus{}value}\PYG{p}{:}
+            \PYG{k}{continue}
+        \PYG{n}{list\PYGZus{}of\PYGZus{}passed\PYGZus{}samples}\PYG{o}{.}\PYG{n}{append}\PYG{p}{([}\PYG{n}{key}\PYG{p}{,} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}
+        \PYG{n}{vcf\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{key}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{])}
+    \PYG{k}{return} \PYG{n}{list\PYGZus{}of\PYGZus{}passed\PYGZus{}samples}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}
+
+\PYG{c+c1}{\PYGZsh{} This method gets the modal number of features from a modal dictionary}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}mode\PYGZus{}value}\PYG{p}{(}\PYG{n}{removaldict}\PYG{p}{):}
+    \PYG{n}{curr} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n}{mode\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{new\PYGZus{}key} \PYG{o+ow}{in} \PYG{n}{removaldict}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{new\PYGZus{}key}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{n}{curr}\PYG{p}{:}
+            \PYG{n}{curr} \PYG{o}{=} \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{new\PYGZus{}key}\PYG{p}{]}
+            \PYG{n}{mode\PYGZus{}value} \PYG{o}{=} \PYG{n}{new\PYGZus{}key}
+    \PYG{k}{return} \PYG{n}{mode\PYGZus{}value}
+
+\PYG{c+c1}{\PYGZsh{} This method iterates through the dataset to create a modal dictionary which contains a key\PYGZhy{}value pair of (number of features \PYGZhy{} number of times seen).}
+\PYG{c+c1}{\PYGZsh{} The mode number of features is kept}
+
+\PYG{k}{def} \PYG{n+nf}{iterate\PYGZus{}through\PYGZus{}dictionary\PYGZus{}to\PYGZus{}find\PYGZus{}mode\PYGZus{}size}\PYG{p}{(}\PYG{n}{full\PYGZus{}dictionary}\PYG{p}{):}
+    \PYG{n}{removaldict} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{n}{samples} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{key} \PYG{o+ow}{in} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{:}
+        \PYG{n}{samples} \PYG{o}{+=} \PYG{l+m+mi}{1}
+        \PYG{k}{if} \PYG{n}{samples} \PYG{o}{==} \PYG{n}{sample\PYGZus{}limit}\PYG{p}{:}
+            \PYG{k}{break}
+        \PYG{n}{count} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{full\PYGZus{}dictionary}\PYG{p}{[}\PYG{n}{key}\PYG{p}{]:}
+            \PYG{n}{count} \PYG{o}{+=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{item}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{count} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{removaldict}\PYG{p}{:}
+            \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{removaldict}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]} \PYG{o}{+=} \PYG{l+m+mi}{1}
+    \PYG{k}{return} \PYG{n}{removaldict}
+
+
+\PYG{k}{if} \PYG{n}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{seterr}\PYG{p}{(}\PYG{n}{divide}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}raise\PYGZsq{}}\PYG{p}{,} \PYG{n}{invalid}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}raise\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}train neural net\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}i\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}input\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}give directories with files\PYGZdq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}+\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}d\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}debug\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}look at matrixes built\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}r\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}reference\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}o\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}output\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{paths} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{parse\PYGZus{}args}\PYG{p}{()}
+    \PYG{n}{start} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()}
+    \PYG{n}{load\PYGZus{}and\PYGZus{}save\PYGZus{}data}\PYG{p}{(}\PYG{n}{paths}\PYG{p}{)}
+\end{Verbatim}

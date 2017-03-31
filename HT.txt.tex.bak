@@ -1,10 +1,13 @@
 \documentclass{article}
-
+\usepackage{listings}
+\usepackage{minted}
 \usepackage{lipsum}
-\usepackage[letterpaper, margin=1.4in]{geometry}
+\usepackage[a4paper, margin=1.4in]{geometry}
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hanging}
+\usepackage{xcolor}
+\usepackage{textcomp}
 %
 \usepackage{tikz}
 %
@@ -406,9 +409,9 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 INSERT-CITATIONS
 We demonstrate the validation of high confidence variant calls using a deep learning neural network on both real and simulated datasets, and we also show that a Bayesian network is able to rank and prioritise genes in a systematic way so as to obtain important genes. We then compared our results with other methods like VariantMetaCaller(using Support Vector Machines) and BAYSIC(using Bayesian Latent Analysis). Both methods were used to analyse and predict variants for NA12878 data, but due to differences in metrics, processes and datasets, absolute comparison of precision and recall is difficult. Thus, it is more suitable to study the looking at relative improvements seen when using each method. VariantMetaCaller increased SNP prediction by 0.04 and indel prediction by 0.07 in terms of the Area Under Prediction Recall Curve (AUPRC) metric when compared to their best single variant caller. BAYSIC noted a 0.03 increase in SNP prediction and 0.05 increase in indel prediction compared to the best single variant caller. This is comparable to our own results of a 0.06 increase in both indel and SNP prediction for the NA dataset compared to the best single variant caller. However, we used the F1 score metric, instead of the AUPRC metric. Thus, while their results provide evidence of precision improvements at all levels of recall (the AUPRC compares precision at all levels of recall), our results provide evidence that at the optimal threshold for each specific caller, we can show an F1 score improvement of 0.06. This metric is more relevant in clinical practice as we are mainly interested in the optimal operating conditions where precision and recall are maximised and not the fringe conditions. This is critical as we do not want to miss out on any mutations, but we also want all the mutations called to be true. \\\\ One definite step moving forward is to incorporate VariantMetaCaller and BAYSIC into our pipelines as negative controls, and measure using the same dataset and same processes whether deep learning is able to outperform these two methods. Intuitively, we believe that deep learning will be able to edge out improvements as deep learning is able to form complex representations of the data to learn from that Support Vector Machines are unable to do. Furthermore, evidence from our flat and dense network architecture shows that putting all the features in a single vector and using that to performing machine learning might not be the best method as it is difficult to learn features from it. Finally, deep learning has been shown to outperform other methods in terms of data prediction and classification. \\\\
 
-However, one large limitation in the overall approach of measuring each of the methods against the NA12878 dataset is that the high confidence calls provided are not the ground truth. While they have been verified by multiple sets of sequencing methods, they have not been verified by the gold standard Sanger sequencing, and so it is difficult to know if there are variants inside the high confidence dataset that are actually false. Furthermore, there might be variants that are not inside the high confidence dataset that are actually true. Hence, this would result in misclassification and wrongly called false negative and false positive results. To solve this problem, a lot of effort has to be put in to obtain a set of verified truth variants, but this might be prohibitively expensive for a large sample size. Still, this would have to be done for us to have a good set of truth variables to test prediction software with before such software can be even considered for use in actual treatment and diagnosis. \\\\
+However, one large limitation in the overall approach of measuring each of the methods against the NA12878 dataset is that the high confidence calls provided are not the ground truth. While they have been verified by multiple sets of sequencing methods, they have not been verified by the gold standard Sanger sequencing, and so it is difficult to know if there are variants inside the high confidence dataset that are actually false. Furthermore, there might be true variants that are not inside the high confidence dataset because of errors in one sequencing machine. Hence, this would result in misclassification and wrongly called false negative and false positive results, thus skewing the classification results. To solve this problem, a lot of effort has to be put in to obtain a set of verified truth variants, but this might be prohibitively expensive for a large sample of mutations. Still, this would have to be done for us to have a good set of truth variables to test prediction software with before such software can be considered for use in actual treatment and diagnosis. \\\\
 
-It is more difficult to benchmark our results for the Bayesian Network analysis in terms of gene priorisation, because currently used platforms include gene panels (Olek and Berlin, 2002) or manual literature look-ups of disease related genes, such as using the ClinVar database. While gene panels work well in a clinical setting, with NGS data it is hoped that as much information about a person's genome as possible can be used in treatment and diagnosis. Using a gene ranking system instead of just looking at a set of implicated genes might allow doctors to find out tease out possible homologs or interacting agents that might be related to the known deleterious genes (perhaps in the gene panel) and integrate that into their treatment and diagnosis. One interesting extension we would definitely like to move into in the future is to be able to integrate a druggable genome into the network, enabling the prioritisation of genes who have possible candidate drug targets. This would enable doctors to notice further possible drug candidates that would work very well on the gene profile of the patient that they might not have considered previously, thus increasing their scope of possible treatment options and augmenting their skills. \\\\
+For the Bayesian Network analysis, it is more difficult to benchmark our results for gene priorisation. This is because currently used platforms include gene panels (Olek and Berlin, 2002) or manual literature look-ups of disease related genes, such as using the ClinVar database. While gene panels work well in a clinical setting, with NGS data it is hoped that as much information about a person's genome as possible can be used in treatment and diagnosis. Using a gene ranking system instead of just looking at a set of implicated genes might allow doctors to find out tease out possible homologs or interacting agents that might be related to the known deleterious genes (perhaps in the gene panel) and integrate that into their treatment and diagnosis. One interesting extension we would definitely like to move into in the future is to be able to integrate a druggable genome into the network, enabling the prioritisation of genes who have possible candidate drug targets. This would enable doctors to notice further possible drug candidates that would work very well on the gene profile of the patient that they might not have considered previously, thus increasing their scope of possible treatment options and augmenting their skills. \\\\
 
 Other directions in the future include being able to include extra variant callers which will provide it with even more feature data, enabling it to make better predictions. We would also like to move everything onto a web interface such that it is accessible for use in terms of both variant validation and gene priorisation. This would enable easy access to both the validation and priorisation pipelines. \\\\
 
@@ -548,11 +551,1021 @@ In doing so, it creates a more generalised representation of the sample class wi
 
 \end{list}
 
+\newpage
+\newgeometry{a4paper, margin=1in}
+\section{Relevant Code}
+5 code segments are provided to clarify the implementation of deep learning and bayesian networks. Other code segments not included are the NextFlow and Bash code used to simulate and process genomic data, Nextflow code used to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).
+\subsection{generate\_matrixes.py}
+This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.\\
+Input : a directory that contains all the vcf files for processing, as well as a truth file. \\
+Output : A set of matrixes to be used in deep learning training, as well as their accompanying truth labels. \\
+Notes : \\
+Vcf files should be labelled with vcf and truth file should be labelled with truth.\\
+No other file should be present in the folder\\
+Overall Strategy :\\
+Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers\\
+Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary\\
+Finally, pass the set of features with accompanying truth labels to the neural network \\
+The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times \\
+\begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
+fontsize=\footnotesize,breakautoindent=true]{python}
+
+import os  
+import time
+from ANNgenerateresults import *  #this file contains all the main methods for actual neural network training
+from methods import *  #this file contains all the methods for parsing each VCF entry into a numerical list of features
+
+#set of useful files that contains processed data to be saved
+LIST_OF_INPUTS_NAME = '/ANN/samplelist.p'     
+TRUTH_DICTIONARY_NAME = '/ANN/truthdict.p'
+CALLER_LENGTH_FILE_NAME = '/ANN/callerlengths.txt'
+VCF_LIST_FILE_NAME = '/ANN/vcf_list.p'
+SCORES_NAME = '/ANN/scores.txt'
+Y_DATA_NAME = '/ANN/myydata.txt'
+X_DATA_NAME = '/ANN/myXdata.txt'
+
+#Initialise NUMBER_OF_CALLERS
+NUMBER_OF_CALLERS = 5
 
 
+# This method follows the typical input output processing pipeline 
+# It takes in the user input, and loads it into local variables. 
+# It then executes another method, main_analyse_samples_and_truth on the loaded variables
+# Finally, it then saves files into a directory determined by the final variables, and calls the next step of the pipeline
+# the neural network training, which is main_gather_input_execute_prep_output
+
+def load_and_save_data(user_input):
+    user_input = vars(user_input)   
+    input_samples, referencepath, output_location = load_references(user_input)   # load user input
+    my_x_dataset, my_y_dataset, list_of_samples, truth_dictionary, length_of_caller_outputs, \
+    vcf_record_list = main_analyse_samples_and_truth(input_samples, referencepath) 
+    save_files(output_location, my_x_dataset, length_of_caller_outputs,
+               list_of_samples, truth_dictionary, vcf_record_list, my_y_dataset) 
+    orig_stdout = sys.stdout  #save print statements into stdout
+    f = file(str(output_location) + SCORES_NAME, 'w')
+    sys.stdout = f
+    main_gather_input_execute_prep_output(length_of_caller_outputs, truth_dictionary, my_x_dataset, my_y_dataset, list_of_samples, output_location, vcf_record_list) 
 
 
+# This method first prepares a dictionary of truth to be checked against. It then initialises
+# a dictionary of samples with all the keys, each key being a variant call, and then fills it up each key with data from each caller
+# subsequently, it removes dictionary entries that are the wrong size, and then checks whether
+# each entry in the dictionary is true or not by looking up the truth dictionary
+# subsequently it performs array balancing, and converts the data to np.array, as well as the dictionary of truth
+# and list of called samples
 
 
+def main_analyse_samples_and_truth(path, referencepath):
+    os.chdir(path)
+    truthdict = generate_truth_list(path)       
+    print "truth dictionary generated at time :", time.time() - start
+    callerlengths, list_of_called_samples, vcf_list = generate_input(path, referencepath)
+    print "samples generated at time :", time.time() - start
+    clean_truth_array, cleaned_sample_array = check_predicted_with_truth(list_of_called_samples, truthdict)
+    print "samples checked with truth at time :", time.time() - start
+    cleaned_sample_array = np.array(cleaned_sample_array, np.float64)
+    clean_truth_array = np.array(clean_truth_array)
+    return cleaned_sample_array, clean_truth_array, list_of_called_samples, truthdict, callerlengths, vcf_list
+
+	
+# This method generates the truth dictionary, by iterating through the vcf file, parsing all the vcf entries and appending them all as keys in the dictionary 
+
+def create_truth_dictionary(generated_truth_dictionary, truth_file):
+    vcf_reader = vcf.Reader(open(truth_file, 'r'))    
+    for record in vcf_reader:
+        if "GL" in record.CHROM:    #Ignore non-regular chromosomes in our dataset
+            continue
+        templist = []
+        for item in record.ALT:
+            templist.append(str(item).upper())          #Alternates might be a list, so they have to be saved as a immutable tuple
+        generated_truth_dictionary[(str(record.CHROM), str(record.POS), str(record.REF).upper())] = tuple(templist)
+
+# This method generates the input dictionary, by first initialising the keys of the dictionary by iterating through the vcf file once, and then
+# Iterating through the vcf file again and parsing all the entries as input vectors
+
+def generate_input(path, referencepath):
+    reference_dictionary = get_reference_dictionary_for_entropy(referencepath)
+    base_entropy = get_ref_entropy(referencepath)
+    full_dictionary = get_dictionary_keys(path)
+    list_of_called_samples, callerlengths, vcf_list = fill_sample_dictionary(base_entropy, full_dictionary, path, reference_dictionary)
+    return callerlengths, list_of_called_samples, vcf_list
+
+
+# This method goes through all the training variant calling files and extracts unique calls as keys in the sample dictionary
+
+def get_dictionary_keys(path):
+    sample_dictionary = {}
+    for vcf_file in os.listdir(path):
+        if ignore_file(vcf_file):
+            continue
+        vcf_reader = vcf.Reader(open(vcf_file, 'r'))
+        sample_dictionary = create_dictionary_keys(vcf_reader, sample_dictionary)
+    return sample_dictionary
+
+
+#This method ensures the feature vector is in the right order - the entries must always be in the order fb, hc, ug, pindel and st.
+
+def create_list_of_paths(path):
+    list_of_paths = [0] * NUMBER_OF_CALLERS
+    for vcf_file in os.listdir(path):
+        if ignore_file(vcf_file):
+            continue
+        if "fb" in vcf_file:
+            list_of_paths[0] = vcf_file
+        if "hc" in vcf_file:
+            list_of_paths[1] = vcf_file
+        if "ug" in vcf_file:
+            list_of_paths[2] = vcf_file
+        if "pind" in vcf_file:
+            list_of_paths[3] = vcf_file
+        if "st" in vcf_file:
+            list_of_paths[4] = vcf_file
+    return list_of_paths
+
+# This method goes through all the training variant calling files and fills each entry in a sample dictionary
+# with data. If it is empty, it returns an array of length n, where n is the number of variables
+# that same caller would have provided.
+# Each caller has a different amount of variables because it contains different datasets
+
+def fill_sample_dictionary(base_entropy, sample_dictionary, path, reference_dictionary):
+    callerlengths = [0] * number_of_callers
+    index = 0
+    total_mode_value = 0
+    list_of_paths = create_list_of_paths(path)
+    for vcf_file in list_of_paths:
+        index += 1
+        opened_vcf_file = vcf.Reader(open(vcf_file, 'r'))
+        removaldict = iterate_over_file_to_extract_data(base_entropy, sample_dictionary,
+                                                        reference_dictionary, opened_vcf_file, vcf_file)
+        mode_value = get_mode_value(removaldict)
+        add_length_to_caller_lengths_based_on_file_name(vcf_file, mode_value, callerlengths)
+        refill_dictionary_with_zero_arrays_for_each_file(sample_dictionary, index, mode_value)
+        total_mode_value += mode_value
+    list_of_passed_samples, vcf_list = add_mode_values_into_list_of_samples(sample_dictionary, total_mode_value)
+    return list_of_passed_samples, callerlengths, vcf_list
+
+
+# this method fills the dictionary with empty arrays with the same length as the ones that were supposed to be added
+
+def refill_dictionary_with_zero_arrays_for_each_file(full_dictionary, index, length_of_data_array):
+    empty_set = []
+    for i in range(length_of_data_array):
+        empty_set.append(0)
+    for item in full_dictionary:
+        checksum = len(full_dictionary[item][0])
+        if checksum < index:
+            arbinfo = empty_set
+            full_dictionary[item][0].append(arbinfo)
+
+
+# this method iterates through all the files to extract data from each sample. It uses methods from the
+# methods.py function, which parses each record for data.
+
+def iterate_over_file_to_extract_data(base_entropy, sample_dictionary, recorddictionary, vcf_reader1, vcf_file):
+    removaldict = {}
+    for record in vcf_reader1:
+        if "GL" in str(record.CHROM):
+            continue
+        sample_name = get_sample_name_from_record(record)
+        sample_data = getallvalues(record, recorddictionary, base_entropy, vcf_file)
+        sample_dictionary[sample_name][0].append(sample_data)
+        sample_dictionary[sample_name][1] = record
+        create_removal_dict(sample_data, removaldict)
+    return removaldict
+
+# this method counts the mode number of entries in the dictionary. Due to certain vcf files having multiple possible number of entries for a field, this will create an error
+# as the size of the input arrays should always be constant. Thus, any sample that does not fit the array should be removed. 
+# TO-DO See if a better implementation can be done that doesn't reduce data available
+	
+def create_removal_dict(sample_data, removaldict):
+    count = 0
+    count += len(sample_data)
+    if count not in removaldict:
+        removaldict[count] = 1
+    else:
+        removaldict[count] += 1
+
+
+# this method prepares the reference genome dictionary for use in entropy calculations
+
+def get_reference_dictionary_for_entropy(reference_path):
+    record_dictionary = SeqIO.to_dict(SeqIO.parse(reference_path, "fasta"), key_function=get_chr)
+    return record_dictionary
+
+# this method ensures that the files inputed are correct
+
+def ignore_file(vcf_file):
+    if "vcf" not in vcf_file or "truth" in vcf_file:
+        return True
+    return False
+
+# this method creates the set of keys for the dictionary
+	
+def create_dictionary_keys(vcf_reader, sample_dictionary):
+    for record in vcf_reader:
+        if "GL" in str(record.CHROM):
+            continue
+        sample_name = get_sample_name_from_record(record)
+        sample_dictionary[sample_name] = [[], []]  # fullname has become a key in fulldictionary
+    return sample_dictionary
+
+# standard method that returns a tuple of the variant call object with the chromosome, position, reference and tuple of alternates
+
+def get_sample_name_from_record(record):
+    templist = []
+    for item in record.ALT:
+        templist.append(str(item).upper())
+    sample_name = (str(record.CHROM), str(record.POS), str(record.REF).upper(), tuple(templist))
+    return sample_name
+
+# this method sets the length of the input neural networks
+	
+def add_length_to_caller_lengths_based_on_file_name(vcf_file, caller_length, callerlengths):
+    if "fb" in vcf_file:
+        callerlengths[0] = caller_length
+    if "hc" in vcf_file:
+        callerlengths[1] = caller_length
+    if "ug" in vcf_file:
+        callerlengths[2] = caller_length
+    if "pind" in vcf_file:
+        callerlengths[3] = caller_length
+    if "st" in vcf_file:
+        callerlengths[4] = caller_length
+
+# this method wraps the create truth dictionary method and is used to checking that the dictionary file has the correct name
+		
+def generate_truth_list(path):
+    generated_truth_dictionary = {}
+    for truth_file in os.listdir(path):
+        if "truth" not in truth_file:
+            continue
+        create_truth_dictionary(generated_truth_dictionary, truth_file)
+    return generated_truth_dictionary
+
+# this method takes in the mutation (in a tuple) and checks if that mutation exists in the truth dictionary
+# A mutation exists if the chromosome, reference and position of the variant call is correct, AND one of the alternate alleles it contains
+# is also an alternate allele in the truth dataset
+	
+def check_sample_against_truth_dictionary(tuple_name, final_truth_list, truth_dictionary):
+    temp_tuple = (tuple_name[0], tuple_name[1], tuple_name[2])
+    if temp_tuple in truth_dictionary:
+        for alternate in tuple_name[3]:
+            if alternate in truth_dictionary[temp_tuple]:
+                final_truth_list.append(1)
+                return
+    final_truth_list.append(0)
+    return
+
+# This method loads the paths of the files into local variables
+
+def load_references(user_input):
+    file1 = user_input['input'][0]
+    referencepath = user_input['reference']
+    output_location = user_input['output']
+    return file1, referencepath, output_location
+
+# This method saves all the processed data into files that can be used for other purposes later or loaded natively instead of doing the processing again
+
+def save_files(output_location, x_array, length_of_caller_outputs, sample_list, truth_dict, vcf_dictionary_file,
+               y_array=[]):
+    file2 = output_location
+    x_data_file_name = str(file2) + str(X_DATA_NAME)
+    np.save(x_data_file_name, x_array)
+    vcf_file_name = str(file2) + str(VCF_LIST_FILE_NAME)
+    caller_length_file_name = str(file2) + str(CALLER_LENGTH_FILE_NAME)
+    truth_dictionary_name = str(file2) + str(TRUTH_DICTIONARY_NAME)
+    list_of_inputs_name = str(file2) + str(LIST_OF_INPUTS_NAME)
+    np.save(caller_length_file_name, length_of_caller_outputs)
+    with open(list_of_inputs_name, 'wb') as samplesave1:
+        pickle.dump(sample_list, samplesave1)
+    with open(truth_dictionary_name, 'wb') as samplesave2:
+        pickle.dump(truth_dict, samplesave2)
+    with open(vcf_file_name, 'wb') as samplesave3:
+        pickle.dump(vcf_dictionary_file, samplesave3)
+    if y_array != []:
+        y_data_file_name = str(file2) + str(Y_DATA_NAME)
+        np.save(y_data_file_name, y_array)
+
+# This method takes in two dictionaries, a dictionary of truth mutations and a dictionary of sample mutations, 
+# checks whether each of the sample variables are inside the truth dictionary
+# and returns 2 arrays, an array of samples and an array of accompanying truth labels
+		
+def check_predicted_with_truth(passed_list_of_samples, dictionary_of_truth=[]):
+    final_array_of_samples = []
+    final_truth_list = []
+    for item in passed_list_of_samples:
+        if dictionary_of_truth:
+            check_sample_against_truth_dictionary(item[0], final_truth_list, dictionary_of_truth)
+        temp_array = []
+        for row in item[1]:
+            temp_array.extend(row)
+        final_array_of_samples.append(temp_array)
+    if dictionary_of_truth:
+        return final_truth_list, final_array_of_samples
+    return final_array_of_samples
+
+# This method ensures that only the variables that have the modal number of features are used 
+# in neural network training to ensure all array sizes are the same
+
+def add_mode_values_into_list_of_samples(full_dictionary, mode_value):
+    list_of_passed_samples = []
+    vcf_list = []
+    for key in full_dictionary:
+        second_count = 0
+        for item in full_dictionary[key][0]:
+            second_count += len(item)
+        if second_count != mode_value:
+            continue
+        list_of_passed_samples.append([key, full_dictionary[key][0]])
+        vcf_list.append(full_dictionary[key][1])
+    return list_of_passed_samples, vcf_list
+
+# This method gets the modal number of features from a modal dictionary
+
+def get_mode_value(removaldict):
+    curr = 0
+    mode_value = 0
+    for new_key in removaldict:
+        if removaldict[new_key] > curr:
+            curr = removaldict[new_key]
+            mode_value = new_key
+    return mode_value
+
+# This method iterates through the dataset to create a modal dictionary which contains a key-value pair of (number of features - number of times seen).
+# The mode number of features is kept
+	
+def iterate_through_dictionary_to_find_mode_size(full_dictionary):
+    removaldict = {}
+    samples = 0
+    for key in full_dictionary:
+        samples += 1
+        if samples == sample_limit:
+            break
+        count = 0
+        for item in full_dictionary[key]:
+            count += len(item)
+        if count not in removaldict:
+            removaldict[count] = 1
+        else:
+            removaldict[count] += 1
+    return removaldict
+
+
+if __name__ == "__main__":
+    np.seterr(divide='raise', invalid='raise')
+    parser = argparse.ArgumentParser(description="train neural net")
+    parser.add_argument('-i', '--input', help="give directories with files", nargs='+')
+    parser.add_argument('-d', '--debug', help="look at matrixes built")
+    parser.add_argument('-r', '--reference', help="")
+    parser.add_argument('-o', '--output', help="")
+    paths = parser.parse_args()
+    start = time.time()
+    load_and_save_data(paths)                              
+\end{minted}
+\subsection{train\_network.py}
+This script is called by the ANNgeneratematrixes.py script and contains the implementation of the neural network. It saves \\
+Input :
+Output :
+Overall Strategy : \\
+
+\begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
+fontsize=\footnotesize,breakautoindent=true]{python}
+#import all necessary components 
+import argparse
+import cPickle as pickle
+import sys
+import numpy as np
+import vcf
+from imblearn.over_sampling import SMOTE
+from keras.callbacks import *
+from keras.layers import Dense, Dropout, Activation
+from keras.layers.advanced_activations import LeakyReLU
+from keras.layers.normalization import BatchNormalization
+from keras.models import Sequential
+from keras.models import load_model
+from keras.optimizers import RMSprop
+from sklearn.metrics import *
+from sklearn.model_selection import train_test_split
+
+
+#set constants
+PCA_COMPONENTS = 8
+STEP_INCREMENT = 10
+RECURSION_LIMIT = 0.0002
+VERBOSE = 1
+seed = 1337
+
+# Initialise random seed for reproducibility
+np.random.seed(seed) 
+
+#Prepare file names for saving
+vcf_file_name = "/ANN/truevcf.vcf"
+keras_model_name = "/ANN/model"
+model_truth_name = "/ANN/modeltruths.txt"
+model_predictions_name = "/ANN/modelpredictions.txt"
+original_vcf_reader = "/data/backup/metacaller/stage/data/version6.3a/hc.vcf.normalisedtrain.vcf"
+
+# this method takes in a path and returns training matrixes for the ANN
+# The path should contain n caller vcf files and 1 truth file
+# vcf files should be labelled with vcf and truth file should be labelled with truth
+# no other file should be present in the folder
+def main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth,
+                                          list_of_samples_input, save_location, vcf_dictionary):
+    calculated_prediction_actual, calculated_truth_actual = train_neural_net(20, 10, fullmatrix_sample,
+                                                                             fullmatrix_truth,
+                                                                             save_location, array_sizes)
+    get_all_relevant_scores(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
+                            list_of_samples_input, vcf_dictionary, save_location)
+
+# This method counts the number of false negatives inside the input sample
+
+def count_false_negative(calculated_prediction_actual, calculated_truth_actual):
+    count_false_negative = 0
+    for i in range(len(calculated_prediction_actual)):
+        if calculated_prediction_actual[i] == 0 and calculated_truth_actual[i] == 1:
+            count_false_negative += 1
+    return count_false_negative
+
+# this is the wrapper function for the recursive hill climbing algorithm to get the best f1 score
+# It starts from a low threshold value, and marginally increases the threshold until it is unable to find
+# any better F1 scores. It then reports the threshold, F1 score and produces the filtered callset 
+
+def get_all_relevant_scores(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
+                            list_of_samples_input, vcf_list, outputpath):
+    print "Here are some predictions", calculated_prediction_actual[:100]
+    print "here are some truths", calculated_prediction_actual[:100]
+    f1_score_left = get_scores(calculated_prediction_actual, calculated_truth_actual, 0.0,
+                               list_of_samples_input,
+                               dict_of_truth_input)
+    guess_f1_final_score, guess_f1_final = recursive_best_f1_score(calculated_prediction_actual,
+                                                                   calculated_truth_actual, dict_of_truth_input,
+                                                                   list_of_samples_input, 0.0, f1_score_left, 0.2)
+    get_scores(calculated_prediction_actual, calculated_truth_actual, guess_f1_final, list_of_samples_input,
+               dict_of_truth_input, VERBOSE)
+    promise_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath)
+
+# This method produces the vcf file through filtering with the neural network threshold calls
+
+def promise_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath):
+    prediction = []
+    for item in calculated_prediction_actual:
+        if item > guess_f1_final:
+            prediction.append(1)
+        else:
+            prediction.append(0)
+    list_of_records = []
+    for i in range(len(list_of_samples_input)):
+        if prediction[i] == 1:
+            list_of_records.append(vcf_list[i])
+    vcf_reader = vcf.Reader(filename=original_vcf_reader)
+    vcf_writer = vcf.Writer(open(outputpath + vcf_file_name, 'w'), vcf_reader)
+    for record in list_of_records:
+        vcf_writer.write_record(record)
+
+# This method is the recursive function that attempts to find the threshold that produces the best f1 score. It does this
+# by iterating through steps of thresholds (0.2, 0.02 and 0.002) until no better F1 score can be found for a marginal increase in threshold. 
+# It then returns the best F1 score and the threshold
+
+def recursive_best_f1_score(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
+                            list_of_samples_input, guess, guess_score, step):
+    if step <= RECURSION_LIMIT:
+        return guess_score, guess
+    new_guess = guess + step
+    new_guess_score = get_scores(calculated_prediction_actual, calculated_truth_actual, new_guess,
+                                 list_of_samples_input, dict_of_truth_input)
+    if new_guess_score > guess_score:
+        return recursive_best_f1_score(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
+                                       list_of_samples_input, new_guess, new_guess_score, step)
+    return recursive_best_f1_score(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
+                                   list_of_samples_input, guess, guess_score, step / STEP_INCREMENT)
+
+# this method uses pre-loaded data to train the neural network. It is optional and only used when this python script is called natively and not imported
+
+def load_references(input_paths):
+    input_paths = vars(input_paths)
+    fullmatrix_sample = np.load(input_paths['input'][0])
+    fullmatrix_truth = np.load(input_paths['input'][1])
+    with open(input_paths['input'][3], 'rb') as fp1:
+        list_of_samples_input = pickle.load(fp1)
+    with open(input_paths['input'][4], 'rb') as fp2:
+        dict_of_truth_input = pickle.load(fp2)
+    array_sizes = np.load(input_paths['input'][5])
+    with open(input_paths['input'][6], 'rb') as fp3:
+        vcf_dictionary = pickle.load(fp3)
+    orig_stdout = sys.stdout
+    f = file(str(input_paths['input'][3]) + '.txt', 'w')
+    sys.stdout = f
+    return array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth, list_of_samples_input, input_paths, vcf_dictionary
+
+# this method solves the double false negative problem that is created due to the neural network prediction scheme
+	
+def remove_duplicated_false_negative(prediction_list, truth_list, false_negatives):
+    count = 0
+    removal_list = []
+    for i in range(len(prediction_list) - 1, -1, -1):
+        if count == false_negatives:
+            break
+        if prediction_list[i] == 0 and truth_list[i] == 1:
+            removal_list.insert(0, i)
+            count += 1
+    for index in removal_list:
+        prediction_list.pop(index)
+        truth_list.pop(index)
+    return prediction_list, truth_list
+
+# this method takes in the binary truth and predicted samples and calculates the true positive rate, false positive rate, recall, precision and f1 score
+	
+def get_scores(actual_predictions, actual_truth, value, sample_list, truth_dictionary, verbose=0):
+    temp_actual_truth = list(actual_truth)
+    prediction = []
+    for item in actual_predictions:
+        if item > value:
+            prediction.append(1)
+        else:
+            prediction.append(0)
+    false_negatives = count_false_negative(actual_predictions, actual_truth)
+    finalpredictionnumbers, finaltruthnumbers = add_negative_data(sample_list, truth_dictionary,
+                                                                  prediction, temp_actual_truth)
+    finalpredictionnumbers, finaltruthnumbers = remove_duplicated_false_negative(finalpredictionnumbers,
+                                                                                 finaltruthnumbers, false_negatives)
+    final_f1_score = f1_score(finaltruthnumbers, finalpredictionnumbers)
+    if verbose:
+        print_scores(actual_truth, final_f1_score, finalpredictionnumbers, finaltruthnumbers, prediction, value)
+    return final_f1_score
+
+# default method for printing all relevant scores
+	
+def print_scores(actual_truth, final_f1_score, finalpredictionnumbers, finaltruthnumbers, prediction, value):
+    false_positive_before_adjust, true_negative_before_adjust = perf_measure(actual_truth, prediction)
+    print "false positive is :", false_positive_before_adjust
+    print "true negative is :", true_negative_before_adjust
+    print "precision score is :", precision_score(actual_truth, prediction)
+    print "recall score is :", recall_score(actual_truth, prediction)
+    print "F1 score is : ", f1_score(actual_truth, prediction)
+    final_false_positive, final_true_negative = perf_measure(finaltruthnumbers, finalpredictionnumbers)
+    print "final false positive is :", final_false_positive
+    print "final true negative is :", final_true_negative
+    print "final precision score is :", precision_score(finaltruthnumbers, finalpredictionnumbers)
+    print "final recall score is :", recall_score(finaltruthnumbers, finalpredictionnumbers)
+    print "threshold is", value
+    print "final F1 score is : ", final_f1_score
+
+# This method looks at the set of predicted samples and the set of truths and adds the false negatives to the predicted sample.
+	
+def add_negative_data(list_of_samples, dict_of_truth, array_of_predicted, array_of_truth):
+    dict_of_samples = generate_sample_dictionary(array_of_predicted, list_of_samples)
+    list_of_truth = generate_list_of_truth(dict_of_truth)
+    new_array_of_predicted = list(array_of_predicted)
+    new_array_of_truth = list(array_of_truth)
+    original_length = len(new_array_of_predicted)
+    for item in list_of_truth:
+        fillnegative(item, dict_of_samples, new_array_of_predicted, new_array_of_truth)
+    print "number of false data samples are", (len(new_array_of_predicted) - original_length)
+    return new_array_of_predicted, new_array_of_truth
+
+# This method generates a list of truth variant calls from a dictionary of truth variant calls.
+
+def generate_list_of_truth(dict_of_truth):
+    list_of_truth = []
+    for key in dict_of_truth:
+        mytuple = dict_of_truth[key]
+        temptuple = []
+        for item in mytuple:
+            temptuple.append(item)
+        list_of_truth.append([key[0], key[1], key[2], temptuple])
+    return list_of_truth
+
+# This method generates a dictionary of sample variant calls from a list of sample variant calls.
+	
+def generate_sample_dictionary(array_of_predicted, list_of_samples):
+    dict_of_samples = {}
+    for i in range(len(list_of_samples)):
+        item = list_of_samples[i]
+        if array_of_predicted[i] == 0:
+            continue
+        new_key = (item[0][0], item[0][1], item[0][2])
+        new_value = item[0][3]
+        if new_key not in dict_of_samples:
+            dict_of_samples[new_key] = new_value
+        else:
+            dict_of_samples[new_key] = list(dict_of_samples[new_key])
+            dict_of_samples[new_key].extend(new_value)
+            dict_of_samples[new_key] = tuple(dict_of_samples[new_key])
+            # print dict_of_samples[new_key]
+    return dict_of_samples
+
+# Actual method to calculated false positive, false negative rates
+	
+def perf_measure(y_actual, y_hat):
+    true_positive = 0
+    false_positive = 0
+    false_negative = 0
+    true_negative = 0
+
+    for i in range(len(y_hat)):
+        if y_actual[i] == 1 and y_hat[i] == 1:
+            true_positive += 1
+    for i in range(len(y_hat)):
+        if y_hat[i] == 1 and y_actual[i] == 0:
+            false_positive += 1
+    for i in range(len(y_hat)):
+        if y_actual[i] == 1 and y_hat[i] == 0:
+            false_negative += 1
+    for i in range(len(y_hat)):
+        if y_hat[i] == 0 and y_actual[i] == 0:
+            true_negative += 1
+
+    print "true positives :", true_positive
+    print "false positives :", false_positive
+    print "false negatives :", false_negative
+    print "true negatives :", true_negative
+
+    true_positive = float(true_positive)
+    false_positive = float(false_positive)
+    false_negative = float(false_negative)
+    if false_positive == 0 and true_positive == 0:
+        false_positive_rate = 0
+    else:
+        false_positive_rate = false_positive / (false_positive + true_positive)
+    if false_negative == 0 and true_positive == 0:
+        true_negative_rate = 0
+    else:
+        true_negative_rate = false_negative / (false_negative + true_positive)
+
+    return false_positive_rate, true_negative_rate
+
+
+# comparator method that takes a tuple and checks whether it is in the dictionary of samples, if it is not, then add a false negative call to the dataset
+	
+def fillnegative(tuple1, sampledict, arrayofsamples, arrayoftruths):
+    tuple2 = (tuple1[0], tuple1[1], tuple1[2])
+    if tuple2 in sampledict:
+        for ALT in tuple1[3]:
+            if ALT in sampledict[tuple2]:
+                return
+    arrayofsamples.append(0)
+    arrayoftruths.append(1)
+
+# main method that performs neural network training. This method takes in the sample matrixes, the truth variables, a save file location, number of epochs, 
+# size of input arrays and the minibatch training size. It first performs SMOTE on the input dataset, then splits it into training and test dataset. It then
+# initialises the deep learning layers, compiles the neural network and uses the input data to fit the network. The best set of weights at any point is saved
+# to a file and reloaded at the end of the fitting. After training, the neural network is used to predict the original un-oversampled dataset
+	
+def train_neural_net(mybatch_size, mynb_epoch, myX_train, myy_train, location, arraysize):
+    number = int(reduce(lambda x, y: x + y, arraysize))
+    X_resampled, y_resampled = do_smote_resampling(myX_train, myy_train)
+    X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled,
+                                                        test_size=0.2, random_state=seed)
+    batch_size = mybatch_size
+    nb_epoch = mynb_epoch
+
+    final_model = Sequential()
+    final_model.add(BatchNormalization(input_shape=(number,), axis=1))
+    final_model.add(Dense(24, activation='linear'))
+    final_model.add(LeakyReLU(alpha=0.05))
+    final_model.add(Dense(6, activation='linear'))
+    final_model.add(LeakyReLU(alpha=0.05))
+    final_model.add(Dense(1, activation='linear'))
+    final_model.add(Activation('sigmoid'))
+    print (final_model.summary())
+    rmsprop = RMSprop(lr=0.000003, rho=0.9, epsilon=1e-08, decay=0.0)
+    final_model.compile(loss='binary_crossentropy',
+                        optimizer=rmsprop,
+                        metrics=['accuracy'])
+
+    filepath = location + "/best_weights.hdf5"
+    checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+    callbacks_list = [checkpoint]
+    model_history = final_model.fit([X_train], y_train, batch_size=batch_size, nb_epoch=nb_epoch,
+                                    validation_split=0.2, verbose=2, callbacks=callbacks_list)
+    final_model = load_model(location + "/best_weights.hdf5")
+    print model_history.history['val_acc'], model_history.history['val_acc']
+    print model_history.history['val_loss'], model_history.history['val_loss']
+    np.save(location + "/best_weights.hdf5", model_history.history['val_acc'])
+    np.save(location + "/best_weights.hdf5", model_history.history['val_loss'])
+    scores = final_model.evaluate([X_test], y_test)
+    print scores
+    final_prediction_array_probabilities = final_model.predict([myX_train])
+    final_prediction_array_probabilities = np.squeeze(final_prediction_array_probabilities)
+    save_model_details(final_model, final_prediction_array_probabilities, myy_train, location)
+
+    return final_prediction_array_probabilities, myy_train
+
+# Method to perform SMOTE oversampling
+
+def do_smote_resampling(myX_train, myy_train):
+    sm = SMOTE(kind='regular')
+    where_are_NaNs = np.isnan(myX_train)
+    myX_train[where_are_NaNs] = 0
+    X_resampled, y_resampled = sm.fit_sample(myX_train, myy_train)
+    return X_resampled, y_resampled
+
+# this method saves the details of the neural network
+
+def save_model_details(final_model, save_model_probabilities, trutharray, location):
+    name1 = location + model_predictions_name
+    name2 = location + model_truth_name
+    name3 = location + keras_model_name
+    np.save(name1, save_model_probabilities)
+    np.save(name2, trutharray)
+    final_model.save(name3)
+
+# this method gets the array size of the features used
+
+def get_sizes(array_sizes):
+    fb_size = array_sizes[0]
+    hc_size = array_sizes[1]
+    ug_size = array_sizes[2]
+    pindel_size = array_sizes[3]
+    st_size = array_sizes[4]
+    return fb_size + hc_size + ug_size + pindel_size + st_size
+
+	
+# this method uses a map function to filter data such that each merge layer gets the correct set of data
+
+def prep_input_samples(array_sizes, x_training_data):
+    count = 0
+    X_fb = np.array(map(lambda x: x[count:array_sizes[0]], x_training_data))
+    count += array_sizes[0]
+    X_hc = np.array(map(lambda x: x[count:count + array_sizes[1]], x_training_data))
+    count += array_sizes[1]
+    X_ug = np.array(map(lambda x: x[count:count + array_sizes[2]], x_training_data))
+    count += array_sizes[2]
+    X_pindel = np.array(map(lambda x: x[count:count + array_sizes[3]], x_training_data))
+    count += array_sizes[3]
+    X_st = np.array(map(lambda x: x[count:count + array_sizes[4]], x_training_data))
+    count += array_sizes[4]
+    return X_fb, X_hc, X_ug, X_pindel, X_st
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="train neural net")
+    parser.add_argument('-i', '--input', help="give directories with files", nargs='+')
+    input_path = parser.parse_args()
+    array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth, \
+    list_of_samples_input, paths, vcf_dictionary = load_references(input_path)
+    main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth,
+                                          list_of_samples_input, paths, vcf_dictionary)
+\end{minted}
+
+\subsection{compute\_bayesian.py}
+\begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
+fontsize=\footnotesize,breakautoindent=true]{python}
+import argparse
+
+import matplotlib
+import vcf
+
+matplotlib.use('Agg')
+
+from pomegranate import *
+
+#main method for loading references into local variables
+
+def load_reference(paths):
+    paths = vars(paths)
+    input = paths['input']
+    opened_vcf_file = vcf.Reader(open(input, 'r'))
+    name3 = input + "finalscores.txt"
+    # orig_stdout = sys.stdout
+    # f = file(name3 + '.txt', 'w')
+    # sys.stdout = f
+    return opened_vcf_file
+
+#method for getting functional annotation scores
+
+def get_scores(record):
+    list_of_important_mutations = [record.INFO['SIFT_score'], record.INFO['LRT_score'],
+                                   record.INFO['MutationAssessor_score'],
+                                   record.INFO['Polyphen2_HVAR_score'], record.INFO['FATHMM_score']]
+    if 'NN_prediction' in record.INFO:
+        NN_prediction = record.INFO['NN_prediction'][0]
+    else:
+        NN_prediction = -1
+    list_of_important_mutations = map(lambda x: x[0], list_of_important_mutations)
+    list_of_important_mutations = map(lambda x: None if x == None else float(x), list_of_important_mutations)
+    return NN_prediction, list_of_important_mutations
+
+#main method that controls I/O - it gets the input, applies the main function and then prepares the output
+
+def main(paths):
+    vcf_object = load_reference(paths)
+    full_list_of_scores = analyse_main(vcf_object)
+    prepare_output(full_list_of_scores)
+
+#this method controls the processes applied to the vcf file - for each record, it extract the list of scores,
+# normalises it, compute probabilities, sorts it and then return output
+
+def analyse_main(vcf_object):
+    full_list_of_scores = extract_list_of_scores(vcf_object)
+    apply_feature_wise_normalisation(full_list_of_scores)
+    compute_network_and_probabilities(full_list_of_scores)
+    full_list_of_scores.sort(key=lambda x: x[4], reverse=True)
+    return full_list_of_scores
+
+# since print is redirected to stdoutput, print function is used to store output
+
+def prepare_output(full_list_of_scores):
+    for item in full_list_of_scores:
+        print item[2], item, item[2].INFO['Gene.refGene']
+
+# wrapper function used to create bayesian network for all records
+
+def compute_network_and_probabilities(full_list_of_scores):
+    for record in full_list_of_scores:
+        network = create_network_and_compute_probabilities(record)
+        compute_record(network, record)
+
+# this function applies a featurewise normalisation of all features to a range of 0-1, and flip scores
+# for certain features
+
+def apply_feature_wise_normalisation(full_list_of_scores):
+    for i in range(6):
+        min_num = 1000000
+        max_num = -1000000
+        for item in full_list_of_scores:
+            if item[1][i] != None:
+                min_num = min(min_num, item[1][i])
+                max_num = max(max_num, item[1][i])
+        for item in full_list_of_scores:
+            if item[1][i] != None:
+                value = ((item[1][i] - min_num) / (max_num - min_num) + 0.2) / 1.3
+                item[1][i] = value
+            else:
+                item[1][i] = 0.5
+        if i == 0 or i == 5:
+            for item in full_list_of_scores:
+                if item[1][i] != None:
+                    item[1][i] = -item[1][i]
+
+# extract list of of scores from each record, including all functional annotations, clinvar scores and dbsnp
+
+def extract_list_of_scores(vcf_object):
+    count = 0
+    full_list_of_scores = []
+    for record in vcf_object:
+        count += 1
+        nn_prediction, list_of_scores = get_scores(record)
+        if not list(filter(lambda x: x != None, list_of_scores)):
+            continue
+        get_clinvar_scores(list_of_scores, record)
+        snp_present = get_db_snp_scores(record)
+        full_list_of_scores.append([float(nn_prediction), list_of_scores, record, snp_present])
+    return full_list_of_scores
+
+# Compute the Bayesian Network by assuming observations and attaching mapped probabilities (0,1) to P(X=True | Y=True)
+
+def compute_record(network, record):
+    beliefs = network.predict_proba({'Real Gene': 'True', 'ClinVar': 'True', 'PolyPhen': 'True', 'LRT': 'True',
+                                     'MutationAssessor': 'True', 'SIFT': 'True',
+                                     'FATHMM_gene': 'True', 'rs_gene': 'True'})
+    # print "\n".join("{}\t{}".format(state.name, belief) for state, belief in zip(network.states, beliefs))
+    # get the probability that the gene is important
+    prob_gene_important = beliefs[2].values()[1]
+    beliefs = map(str, beliefs)
+    record.append(prob_gene_important)
+    record.append(record[2].INFO['snp138'])
+    record.append(record[3])
+
+# If snp is present in db-snp, attach probability of importance to 0.3, else 0.7
+
+def get_db_snp_scores(record):
+    snp_present = 0.7
+    if record.INFO['snp138'][0] != None:
+        snp_present = 0.3
+    return snp_present
+
+# If snp is present in clinvar, attach probability of importance to 0.7, else 0.3
+
+def get_clinvar_scores(list_of_scores, record):
+    if record.INFO['clinvar_20150629'][0] != None:
+        list_of_scores.append(0.7)
+    else:
+        list_of_scores.append(0.3)
+
+# wrapper method to create the bayesian network and compute probabilities
+
+def create_network_and_compute_probabilities(record):
+    ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene, SIFT_gene, functional_gene, importgene, real_gene, rs_gene = initialise_distributions(
+        record)
+    # set up states
+    s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9 = generate_states(ClinVar_gene, FATHMM_gene, LRT_gene,
+                                                                   MutationAssessor_gene, MutationTaster_gene,
+                                                                   PolyPhen2_gene, SIFT_gene, functional_gene,
+                                                                   importgene, real_gene, rs_gene)
+    # set up network
+    network = add_edges_bake_network(s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9)
+    return network
+
+#  method to create the edges in the network
+
+def add_edges_bake_network(s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9):
+    network = BayesianNetwork("Gene Prediction")
+    network.add_states(s1, s2, s3, s4, s5, s6, s8, s9, s10, s11)
+    network.add_edge(s1, s3)
+    network.add_edge(s2, s3)
+    network.add_edge(s4, s2)
+    network.add_edge(s5, s2)
+    network.add_edge(s6, s2)
+    network.add_edge(s7, s2)
+    network.add_edge(s8, s2)
+    network.add_edge(s9, s2)
+    network.add_edge(s10, s2)
+    network.add_edge(s11, s3)
+    network.bake()
+    return network
+
+# method that generates the nodes in the bayesian network
+
+def generate_states(ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene,
+                    SIFT_gene, functional_gene, importgene, real_gene, rs_gene):
+    s1 = State(real_gene, name="Real Gene")
+    s2 = State(functional_gene, name="Functional Gene")
+    s3 = State(importgene, name="Important Gene")
+    s4 = State(ClinVar_gene, name="ClinVar")
+    s5 = State(PolyPhen2_gene, name="PolyPhen")
+    s6 = State(LRT_gene, name="LRT")
+    s7 = State(MutationTaster_gene, name="MutationTaster")
+    s8 = State(MutationAssessor_gene, name="MutationAssessor")
+    s9 = State(SIFT_gene, name="SIFT")
+    s10 = State(FATHMM_gene, name="FATHMM_gene")
+    s11 = State(rs_gene, name="rs_gene")
+    return s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9
+
+#methods to initialise prior distributions in bayesian network
+
+def initialise_distributions(record):
+    ClinVar_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    PolyPhen2_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    LRT_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    MutationTaster_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    MutationAssessor_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    SIFT_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    FATHMM_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    rs_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    import_cdp = get_cdp(3, [(record[0] + 0.2) / 1.3, record[3], 0.8])
+    functional_cdp = get_cdp(6, record[1])
+    functional_gene = ConditionalProbabilityTable(functional_cdp, [ClinVar_gene, PolyPhen2_gene, LRT_gene,
+                                                                   MutationAssessor_gene,
+                                                                   SIFT_gene, FATHMM_gene])
+    real_gene = DiscreteDistribution({'True': 0.5, 'False': 0.5})
+    importgene = ConditionalProbabilityTable(import_cdp, [real_gene, rs_gene, functional_gene])
+    return ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene, SIFT_gene, functional_gene, importgene, real_gene, rs_gene
+
+
+# method that builds the cdp table. n is the number of input variables, probability list gives the probability
+# that the i-th X variable is true P(Xi=True).
+
+def get_cdp(n, prob_list):
+    temp_list = create_true_false_matrix(n)
+    calculate_probabilities(n, prob_list, temp_list)
+    return temp_list
+
+
+# Generates a True False matrix using binary counting logic, critical for input in bayesian network
+
+def create_true_false_matrix(n):
+    temp_list = []
+    for i in range(0, 2 ** n):
+        temp_row = []
+        for j in range(n):
+            number_2 = i // (2 ** (n - j - 1))
+            number_1 = number_2 % 2
+            if number_1 == 0:
+                temp_row.append('False')
+            else:
+                temp_row.append('True')
+        temp_list.insert(0, temp_row + ['False'])
+        temp_list.insert(0, temp_row + ['True'])
+    return temp_list
+
+
+# calculates the probabilities, taking in the true list as well as a list of probabilities. The key here is
+# the probability that the mutation is true is related to the scores given by mutation taster etc..
+# ie P(X is impt | X is Clinvar) = P(X is Clinvar)
+
+def calculate_probabilities(n, prob_list, temp_list):
+    for i in range(0, 2 ** (n + 1), 2):
+        true_row = temp_list[i]
+        true_probability = 1
+        false_probability = 1
+        for k in range(0, n, 1):
+            if true_row[k] == 'True':
+                true_probability *= prob_list[k]
+                false_probability *= 1 - prob_list[k]  # probability that mutation is false is 1 minus mutation is true
+            else:
+                true_probability *= 1 - prob_list[k]
+                false_probability *= prob_list[k]
+        final_true_probability = true_probability / (true_probability + false_probability)
+        final_false_probability = false_probability / (true_probability + false_probability)
+        temp_list[i].append(final_true_probability)
+        temp_list[i + 1].append(final_false_probability)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="train neural net")
+    parser.add_argument('-i', '--input', help="give directories with files")
+    paths = parser.parse_args()
+    main(paths)
+\end{minted}
 
 \end{document}
