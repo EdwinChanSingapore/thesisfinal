@@ -551,24 +551,24 @@ In doing so, it creates a more generalised representation of the sample class wi
 
 \end{list}
 
-\newpage
 \newgeometry{a4paper, margin=1in}
+\newpage
 \section{Relevant Code}
-5 code segments are provided to clarify the implementation of deep learning and bayesian networks. Other code segments not included are the NextFlow and Bash code used to simulate and process genomic data, Nextflow code used to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).
+3 code segments are provided to clarify the implementation of generating the matrixes for deep learning, deep learning networks and finally bayesian networks. Other code segments not shown include the code base for parsing vcf input into features, concordance generators, NextFlow and Bash code used to simulate and process genomic data as well as to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).
 \subsection{generate\_matrixes.py}
-This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.\\
-Input : a directory that contains all the vcf files for processing, as well as a truth file. \\
-Output : A set of matrixes to be used in deep learning training, as well as their accompanying truth labels. \\
-Notes : \\
-Vcf files should be labelled with vcf and truth file should be labelled with truth.\\
-No other file should be present in the folder\\
-Overall Strategy :\\
-Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers\\
-Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary\\
-Finally, pass the set of features with accompanying truth labels to the neural network \\
-The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times \\
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
+#This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.
+#Input : a directory that contains all the vcf files for processing, as well as a truth file. 
+#Output : np.arrays of features from generate_matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of relevant sample features for easy reference
+#Notes :
+#Vcf files should be labelled with vcf and truth file should be labelled with truth.
+#No other file should be present in the folder
+#Overall Strategy :
+#Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers
+#Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary
+#Finally, pass the set of features with accompanying truth labels to the neural network 
+#The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times 
 
 import os  
 import time
@@ -923,13 +923,17 @@ if __name__ == "__main__":
     load_and_save_data(paths)                              
 \end{minted}
 \subsection{train\_network.py}
-This script is called by the ANNgeneratematrixes.py script and contains the implementation of the neural network. It saves \\
-Input :
-Output :
-Overall Strategy : \\
 
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
+#This script is called by the generate_matrixes.py script and contains the implementation of the neural network.
+#Input : np.arrays of features from generate_matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of sample features 
+#Output : A VCF file containing all the filtered entries by the neural network, as well the list of accompanying scores 
+#Overall Strategy :
+#Perform SMOTE oversampling of the input features, and then use the features to train the neural network
+#After training, perform validation on test dataset, and subsequently prepare a vcf file with filtered entries
+
+
 #import all necessary components 
 import argparse
 import cPickle as pickle
@@ -1311,7 +1315,14 @@ if __name__ == "__main__":
 \subsection{compute\_bayesian.py}
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
-import argparse
+#This script takes in a VCF file with functional annotation already done, and computes the bayesian network using the annotations. It produces a sorted list of vcf entries in a text file, with accompanying annotation scores
+#Input : VCF file with functional annotation
+#Output : A sorted list of vcf entries with accompanying annotation scores, redirected from stdout to a file
+#Overall Strategy :
+#First extract all the features from the vcf files and then perform feature-wise normalisation. 
+#Subsequently, prepare the bayesian network by creating edges, nodes, preparing prior distritions
+#Finally use features to update the bayesian network to obtain final probabilities for importance
+#Report a list of sorted probabilites for easy ranking
 
 import matplotlib
 import vcf

@@ -1,4 +1,12 @@
 \begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}This script is called by the generate\PYGZus{}matrixes.py script and contains the implementation of the neural network.}
+\PYG{c+c1}{\PYGZsh{}Input : np.arrays of features from generate\PYGZus{}matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of sample features}
+\PYG{c+c1}{\PYGZsh{}Output : A VCF file containing all the filtered entries by the neural network, as well the list of accompanying scores}
+\PYG{c+c1}{\PYGZsh{}Overall Strategy :}
+\PYG{c+c1}{\PYGZsh{}Perform SMOTE oversampling of the input features, and then use the features to train the neural network}
+\PYG{c+c1}{\PYGZsh{}After training, perform validation on test dataset, and subsequently prepare a vcf file with filtered entries}
+
+
 \PYG{c+c1}{\PYGZsh{}import all necessary components}
 \PYG{k+kn}{import} \PYG{n+nn}{argparse}
 \PYG{k+kn}{import} \PYG{n+nn}{cPickle} \PYG{k+kn}{as} \PYG{n+nn}{pickle}
@@ -38,13 +46,9 @@
 \PYG{c+c1}{\PYGZsh{} The path should contain n caller vcf files and 1 truth file}
 \PYG{c+c1}{\PYGZsh{} vcf files should be labelled with vcf and truth file should be labelled with truth}
 \PYG{c+c1}{\PYGZsh{} no other file should be present in the folder}
-\PYG{k}{def} \PYG{n+nf}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,}
-                                          \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{save\PYGZus{}location}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{):}
-    \PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual} \PYG{o}{=} \PYG{n}{train\PYGZus{}neural\PYGZus{}net}\PYG{p}{(}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,}
-                                                                             \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,}
-                                                                             \PYG{n}{save\PYGZus{}location}\PYG{p}{,} \PYG{n}{array\PYGZus{}sizes}\PYG{p}{)}
-    \PYG{n}{get\PYGZus{}all\PYGZus{}relevant\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,}
-                            \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{save\PYGZus{}location}\PYG{p}{)}
+\PYG{k}{def} \PYG{n+nf}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{array\PYGZus{}sizes}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{save\PYGZus{}location}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{):}
+    \PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual} \PYG{o}{=} \PYG{n}{train\PYGZus{}neural\PYGZus{}net}\PYG{p}{(}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}sample}\PYG{p}{,} \PYG{n}{fullmatrix\PYGZus{}truth}\PYG{p}{,}                                                                             \PYG{n}{save\PYGZus{}location}\PYG{p}{,} \PYG{n}{array\PYGZus{}sizes}\PYG{p}{)}
+    \PYG{n}{get\PYGZus{}all\PYGZus{}relevant\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{save\PYGZus{}location}\PYG{p}{)}
 
 \PYG{c+c1}{\PYGZsh{} This method counts the number of false negatives inside the input sample}
 
@@ -63,19 +67,14 @@
                             \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}\PYG{p}{,} \PYG{n}{outputpath}\PYG{p}{):}
     \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}Here are some predictions\PYGZdq{}}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{[:}\PYG{l+m+mi}{100}\PYG{p}{]}
     \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}here are some truths\PYGZdq{}}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{[:}\PYG{l+m+mi}{100}\PYG{p}{]}
-    \PYG{n}{f1\PYGZus{}score\PYGZus{}left} \PYG{o}{=} \PYG{n}{get\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,}
-                               \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,}
-                               \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{)}
-    \PYG{n}{guess\PYGZus{}f1\PYGZus{}final\PYGZus{}score}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final} \PYG{o}{=} \PYG{n}{recursive\PYGZus{}best\PYGZus{}f1\PYGZus{}score}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,}
-                                                                   \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,}
-                                                                   \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{f1\PYGZus{}score\PYGZus{}left}\PYG{p}{,} \PYG{l+m+mf}{0.2}\PYG{p}{)}
-    \PYG{n}{get\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,}
-               \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{VERBOSE}\PYG{p}{)}
-    \PYG{n}{promise\PYGZus{}vcf\PYGZus{}file}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}\PYG{p}{,} \PYG{n}{outputpath}\PYG{p}{)}
+    \PYG{n}{f1\PYGZus{}score\PYGZus{}left} \PYG{o}{=} \PYG{n}{get\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{)}
+    \PYG{n}{guess\PYGZus{}f1\PYGZus{}final\PYGZus{}score}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final} \PYG{o}{=} \PYG{n}{recursive\PYGZus{}best\PYGZus{}f1\PYGZus{}score}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,}   \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{f1\PYGZus{}score\PYGZus{}left}\PYG{p}{,} \PYG{l+m+mf}{0.2}\PYG{p}{)}
+    \PYG{n}{get\PYGZus{}scores}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{calculated\PYGZus{}truth\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{dict\PYGZus{}of\PYGZus{}truth\PYGZus{}input}\PYG{p}{,} \PYG{n}{VERBOSE}\PYG{p}{)}
+    \PYG{n}{produce\PYGZus{}vcf\PYGZus{}file}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}\PYG{p}{,} \PYG{n}{outputpath}\PYG{p}{)}
 
 \PYG{c+c1}{\PYGZsh{} This method produces the vcf file through filtering with the neural network threshold calls}
 
-\PYG{k}{def} \PYG{n+nf}{promise\PYGZus{}vcf\PYGZus{}file}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}\PYG{p}{,} \PYG{n}{outputpath}\PYG{p}{):}
+\PYG{k}{def} \PYG{n+nf}{produce\PYGZus{}vcf\PYGZus{}file}\PYG{p}{(}\PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{,} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples\PYGZus{}input}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}\PYG{p}{,} \PYG{n}{outputpath}\PYG{p}{):}
     \PYG{n}{prediction} \PYG{o}{=} \PYG{p}{[]}
     \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{calculated\PYGZus{}prediction\PYGZus{}actual}\PYG{p}{:}
         \PYG{k}{if} \PYG{n}{item} \PYG{o}{\PYGZgt{}} \PYG{n}{guess\PYGZus{}f1\PYGZus{}final}\PYG{p}{:}
@@ -153,10 +152,8 @@
         \PYG{k}{else}\PYG{p}{:}
             \PYG{n}{prediction}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
     \PYG{n}{false\PYGZus{}negatives} \PYG{o}{=} \PYG{n}{count\PYGZus{}false\PYGZus{}negative}\PYG{p}{(}\PYG{n}{actual\PYGZus{}predictions}\PYG{p}{,} \PYG{n}{actual\PYGZus{}truth}\PYG{p}{)}
-    \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers} \PYG{o}{=} \PYG{n}{add\PYGZus{}negative\PYGZus{}data}\PYG{p}{(}\PYG{n}{sample\PYGZus{}list}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,}
-                                                                  \PYG{n}{prediction}\PYG{p}{,} \PYG{n}{temp\PYGZus{}actual\PYGZus{}truth}\PYG{p}{)}
-    \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers} \PYG{o}{=} \PYG{n}{remove\PYGZus{}duplicated\PYGZus{}false\PYGZus{}negative}\PYG{p}{(}\PYG{n}{finalpredictionnumbers}\PYG{p}{,}
-                                                                                 \PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{false\PYGZus{}negatives}\PYG{p}{)}
+    \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers} \PYG{o}{=} \PYG{n}{add\PYGZus{}negative\PYGZus{}data}\PYG{p}{(}\PYG{n}{sample\PYGZus{}list}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{,} \PYG{n}{temp\PYGZus{}actual\PYGZus{}truth}\PYG{p}{)}
+    \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers} \PYG{o}{=} \PYG{n}{remove\PYGZus{}duplicated\PYGZus{}false\PYGZus{}negative}\PYG{p}{(}\PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{false\PYGZus{}negatives}\PYG{p}{)}
     \PYG{n}{final\PYGZus{}f1\PYGZus{}score} \PYG{o}{=} \PYG{n}{f1\PYGZus{}score}\PYG{p}{(}\PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{)}
     \PYG{k}{if} \PYG{n}{verbose}\PYG{p}{:}
         \PYG{n}{print\PYGZus{}scores}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{final\PYGZus{}f1\PYGZus{}score}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}

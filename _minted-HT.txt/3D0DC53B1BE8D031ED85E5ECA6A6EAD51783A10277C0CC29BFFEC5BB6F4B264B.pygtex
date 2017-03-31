@@ -1,5 +1,12 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{argparse}
+\PYG{c+c1}{\PYGZsh{}This script takes in a VCF file with functional annotation already done, and computes the bayesian network using the annotations. It produces a sorted list of vcf entries in a text file, with accompanying annotation scores}
+\PYG{c+c1}{\PYGZsh{}Input : VCF file with functional annotation}
+\PYG{c+c1}{\PYGZsh{}Output : A sorted list of vcf entries with accompanying annotation scores, redirected from stdout to a file}
+\PYG{c+c1}{\PYGZsh{}Overall Strategy :}
+\PYG{c+c1}{\PYGZsh{}First extract all the features from the vcf files and then perform feature\PYGZhy{}wise normalisation.}
+\PYG{c+c1}{\PYGZsh{}Subsequently, prepare the bayesian network by creating edges, nodes, preparing prior distritions}
+\PYG{c+c1}{\PYGZsh{}Finally use features to update the bayesian network to obtain final probabilities for importance}
+\PYG{c+c1}{\PYGZsh{}Report a list of sorted probabilites for easy ranking}
 
 \PYG{k+kn}{import} \PYG{n+nn}{matplotlib}
 \PYG{k+kn}{import} \PYG{n+nn}{vcf}

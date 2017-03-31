@@ -1,4 +1,16 @@
 \begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.}
+\PYG{c+c1}{\PYGZsh{}Input : a directory that contains all the vcf files for processing, as well as a truth file.}
+\PYG{c+c1}{\PYGZsh{}Output : np.arrays of features from generate\PYGZus{}matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of relevant sample features for easy reference}
+\PYG{c+c1}{\PYGZsh{}Notes :}
+\PYG{c+c1}{\PYGZsh{}Vcf files should be labelled with vcf and truth file should be labelled with truth.}
+\PYG{c+c1}{\PYGZsh{}No other file should be present in the folder}
+\PYG{c+c1}{\PYGZsh{}Overall Strategy :}
+\PYG{c+c1}{\PYGZsh{}Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers}
+\PYG{c+c1}{\PYGZsh{}Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary}
+\PYG{c+c1}{\PYGZsh{}Finally, pass the set of features with accompanying truth labels to the neural network}
+\PYG{c+c1}{\PYGZsh{}The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times}
+
 \PYG{k+kn}{import} \PYG{n+nn}{os}
 \PYG{k+kn}{import} \PYG{n+nn}{time}
 \PYG{k+kn}{from} \PYG{n+nn}{ANNgenerateresults} \PYG{k+kn}{import} \PYG{o}{*}  \PYG{c+c1}{\PYGZsh{}this file contains all the main methods for actual neural network training}
@@ -35,14 +47,12 @@
     \PYG{n}{sys}\PYG{o}{.}\PYG{n}{stdout} \PYG{o}{=} \PYG{n}{f}
     \PYG{n}{main\PYGZus{}gather\PYGZus{}input\PYGZus{}execute\PYGZus{}prep\PYGZus{}output}\PYG{p}{(}\PYG{n}{length\PYGZus{}of\PYGZus{}caller\PYGZus{}outputs}\PYG{p}{,} \PYG{n}{truth\PYGZus{}dictionary}\PYG{p}{,} \PYG{n}{my\PYGZus{}x\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{my\PYGZus{}y\PYGZus{}dataset}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}samples}\PYG{p}{,} \PYG{n}{output\PYGZus{}location}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}record\PYGZus{}list}\PYG{p}{)}
 
-
 \PYG{c+c1}{\PYGZsh{} This method first prepares a dictionary of truth to be checked against. It then initialises}
 \PYG{c+c1}{\PYGZsh{} a dictionary of samples with all the keys, each key being a variant call, and then fills it up each key with data from each caller}
 \PYG{c+c1}{\PYGZsh{} subsequently, it removes dictionary entries that are the wrong size, and then checks whether}
 \PYG{c+c1}{\PYGZsh{} each entry in the dictionary is true or not by looking up the truth dictionary}
 \PYG{c+c1}{\PYGZsh{} subsequently it performs array balancing, and converts the data to np.array, as well as the dictionary of truth}
 \PYG{c+c1}{\PYGZsh{} and list of called samples}
-
 
 \PYG{k}{def} \PYG{n+nf}{main\PYGZus{}analyse\PYGZus{}samples\PYGZus{}and\PYGZus{}truth}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{referencepath}\PYG{p}{):}
     \PYG{n}{os}\PYG{o}{.}\PYG{n}{chdir}\PYG{p}{(}\PYG{n}{path}\PYG{p}{)}
@@ -55,7 +65,6 @@
     \PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{float64}\PYG{p}{)}
     \PYG{n}{clean\PYGZus{}truth\PYGZus{}array} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{clean\PYGZus{}truth\PYGZus{}array}\PYG{p}{)}
     \PYG{k}{return} \PYG{n}{cleaned\PYGZus{}sample\PYGZus{}array}\PYG{p}{,} \PYG{n}{clean\PYGZus{}truth\PYGZus{}array}\PYG{p}{,} \PYG{n}{list\PYGZus{}of\PYGZus{}called\PYGZus{}samples}\PYG{p}{,} \PYG{n}{truthdict}\PYG{p}{,} \PYG{n}{callerlengths}\PYG{p}{,} \PYG{n}{vcf\PYGZus{}list}
-
 
 \PYG{c+c1}{\PYGZsh{} This method generates the truth dictionary, by iterating through the vcf file, parsing all the vcf entries and appending them all as keys in the dictionary}
 
@@ -90,7 +99,6 @@
         \PYG{n}{vcf\PYGZus{}reader} \PYG{o}{=} \PYG{n}{vcf}\PYG{o}{.}\PYG{n}{Reader}\PYG{p}{(}\PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}file}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{))}
         \PYG{n}{sample\PYGZus{}dictionary} \PYG{o}{=} \PYG{n}{create\PYGZus{}dictionary\PYGZus{}keys}\PYG{p}{(}\PYG{n}{vcf\PYGZus{}reader}\PYG{p}{,} \PYG{n}{sample\PYGZus{}dictionary}\PYG{p}{)}
     \PYG{k}{return} \PYG{n}{sample\PYGZus{}dictionary}
-
 
 \PYG{c+c1}{\PYGZsh{}This method ensures the feature vector is in the right order \PYGZhy{} the entries must always be in the order fb, hc, ug, pindel and st.}
 

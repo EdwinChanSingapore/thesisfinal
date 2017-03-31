@@ -551,24 +551,24 @@ In doing so, it creates a more generalised representation of the sample class wi
 
 \end{list}
 
-\newpage
 \newgeometry{a4paper, margin=1in}
+\newpage
 \section{Relevant Code}
-5 code segments are provided to clarify the implementation of deep learning and bayesian networks. Other code segments not included are the NextFlow and Bash code used to simulate and process genomic data, Nextflow code used to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).
+3 code segments are provided to clarify the implementation of generating the matrixes for deep learning, deep learning networks and finally bayesian networks. Other code segments not shown include the code base for parsing vcf input into features, concordance generators, NextFlow and Bash code used to simulate and process genomic data as well as to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).
 \subsection{generate\_matrixes.py}
-This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.\\
-Input : a directory that contains all the vcf files for processing, as well as a truth file. \\
-Output : A set of matrixes to be used in deep learning training, as well as their accompanying truth labels. \\
-Notes : \\
-Vcf files should be labelled with vcf and truth file should be labelled with truth.\\
-No other file should be present in the folder\\
-Overall Strategy :\\
-Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers\\
-Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary\\
-Finally, pass the set of features with accompanying truth labels to the neural network \\
-The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times \\
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
+#This python script generates the set of matrixes to be used in deep learning, and then calls the main method that trains the deep learning network.
+#Input : a directory that contains all the vcf files for processing, as well as a truth file. 
+#Output : np.arrays of features from generate_matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of relevant sample features for easy reference
+#Notes :
+#Vcf files should be labelled with vcf and truth file should be labelled with truth.
+#No other file should be present in the folder
+#Overall Strategy :
+#Generate a dictionary of lists, where the keys are mutations, and the value is contains a matrix containing information of all five callers
+#Secondly, for each mutation label, check if it is inside the truth file or not. The truth is preloaded into a dictionary
+#Finally, pass the set of features with accompanying truth labels to the neural network 
+#The main datastructure used are python dictionaries, which allows O(1) dictionary lookup times 
 
 import os  
 import time
@@ -606,14 +606,12 @@ def load_and_save_data(user_input):
     sys.stdout = f
     main_gather_input_execute_prep_output(length_of_caller_outputs, truth_dictionary, my_x_dataset, my_y_dataset, list_of_samples, output_location, vcf_record_list) 
 
-
 # This method first prepares a dictionary of truth to be checked against. It then initialises
 # a dictionary of samples with all the keys, each key being a variant call, and then fills it up each key with data from each caller
 # subsequently, it removes dictionary entries that are the wrong size, and then checks whether
 # each entry in the dictionary is true or not by looking up the truth dictionary
 # subsequently it performs array balancing, and converts the data to np.array, as well as the dictionary of truth
 # and list of called samples
-
 
 def main_analyse_samples_and_truth(path, referencepath):
     os.chdir(path)
@@ -627,7 +625,6 @@ def main_analyse_samples_and_truth(path, referencepath):
     clean_truth_array = np.array(clean_truth_array)
     return cleaned_sample_array, clean_truth_array, list_of_called_samples, truthdict, callerlengths, vcf_list
 
-	
 # This method generates the truth dictionary, by iterating through the vcf file, parsing all the vcf entries and appending them all as keys in the dictionary 
 
 def create_truth_dictionary(generated_truth_dictionary, truth_file):
@@ -661,7 +658,6 @@ def get_dictionary_keys(path):
         vcf_reader = vcf.Reader(open(vcf_file, 'r'))
         sample_dictionary = create_dictionary_keys(vcf_reader, sample_dictionary)
     return sample_dictionary
-
 
 #This method ensures the feature vector is in the right order - the entries must always be in the order fb, hc, ug, pindel and st.
 
@@ -923,13 +919,17 @@ if __name__ == "__main__":
     load_and_save_data(paths)                              
 \end{minted}
 \subsection{train\_network.py}
-This script is called by the ANNgeneratematrixes.py script and contains the implementation of the neural network. It saves \\
-Input :
-Output :
-Overall Strategy : \\
 
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
+#This script is called by the generate_matrixes.py script and contains the implementation of the neural network.
+#Input : np.arrays of features from generate_matrixes with accompanying truth labels, feature set lengths, a dictionary of vcf object records, as well as the list of sample features 
+#Output : A VCF file containing all the filtered entries by the neural network, as well the list of accompanying scores 
+#Overall Strategy :
+#Perform SMOTE oversampling of the input features, and then use the features to train the neural network
+#After training, perform validation on test dataset, and subsequently prepare a vcf file with filtered entries
+
+
 #import all necessary components 
 import argparse
 import cPickle as pickle
@@ -969,13 +969,9 @@ original_vcf_reader = "/data/backup/metacaller/stage/data/version6.3a/hc.vcf.nor
 # The path should contain n caller vcf files and 1 truth file
 # vcf files should be labelled with vcf and truth file should be labelled with truth
 # no other file should be present in the folder
-def main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth,
-                                          list_of_samples_input, save_location, vcf_dictionary):
-    calculated_prediction_actual, calculated_truth_actual = train_neural_net(20, 10, fullmatrix_sample,
-                                                                             fullmatrix_truth,
-                                                                             save_location, array_sizes)
-    get_all_relevant_scores(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input,
-                            list_of_samples_input, vcf_dictionary, save_location)
+def main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth, list_of_samples_input, save_location, vcf_dictionary):
+    calculated_prediction_actual, calculated_truth_actual = train_neural_net(20, 10, fullmatrix_sample, fullmatrix_truth,                                                                             save_location, array_sizes)
+    get_all_relevant_scores(calculated_prediction_actual, calculated_truth_actual, dict_of_truth_input, list_of_samples_input, vcf_dictionary, save_location)
 
 # This method counts the number of false negatives inside the input sample
 
@@ -994,19 +990,14 @@ def get_all_relevant_scores(calculated_prediction_actual, calculated_truth_actua
                             list_of_samples_input, vcf_list, outputpath):
     print "Here are some predictions", calculated_prediction_actual[:100]
     print "here are some truths", calculated_prediction_actual[:100]
-    f1_score_left = get_scores(calculated_prediction_actual, calculated_truth_actual, 0.0,
-                               list_of_samples_input,
-                               dict_of_truth_input)
-    guess_f1_final_score, guess_f1_final = recursive_best_f1_score(calculated_prediction_actual,
-                                                                   calculated_truth_actual, dict_of_truth_input,
-                                                                   list_of_samples_input, 0.0, f1_score_left, 0.2)
-    get_scores(calculated_prediction_actual, calculated_truth_actual, guess_f1_final, list_of_samples_input,
-               dict_of_truth_input, VERBOSE)
-    promise_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath)
+    f1_score_left = get_scores(calculated_prediction_actual, calculated_truth_actual, 0.0, list_of_samples_input, dict_of_truth_input)
+    guess_f1_final_score, guess_f1_final = recursive_best_f1_score(calculated_prediction_actual,   calculated_truth_actual, dict_of_truth_input, list_of_samples_input, 0.0, f1_score_left, 0.2)
+    get_scores(calculated_prediction_actual, calculated_truth_actual, guess_f1_final, list_of_samples_input, dict_of_truth_input, VERBOSE)
+    produce_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath)
 
 # This method produces the vcf file through filtering with the neural network threshold calls
 
-def promise_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath):
+def produce_vcf_file(calculated_prediction_actual, guess_f1_final, list_of_samples_input, vcf_list, outputpath):
     prediction = []
     for item in calculated_prediction_actual:
         if item > guess_f1_final:
@@ -1084,10 +1075,8 @@ def get_scores(actual_predictions, actual_truth, value, sample_list, truth_dicti
         else:
             prediction.append(0)
     false_negatives = count_false_negative(actual_predictions, actual_truth)
-    finalpredictionnumbers, finaltruthnumbers = add_negative_data(sample_list, truth_dictionary,
-                                                                  prediction, temp_actual_truth)
-    finalpredictionnumbers, finaltruthnumbers = remove_duplicated_false_negative(finalpredictionnumbers,
-                                                                                 finaltruthnumbers, false_negatives)
+    finalpredictionnumbers, finaltruthnumbers = add_negative_data(sample_list, truth_dictionary, prediction, temp_actual_truth)
+    finalpredictionnumbers, finaltruthnumbers = remove_duplicated_false_negative(finalpredictionnumbers, finaltruthnumbers, false_negatives)
     final_f1_score = f1_score(finaltruthnumbers, finalpredictionnumbers)
     if verbose:
         print_scores(actual_truth, final_f1_score, finalpredictionnumbers, finaltruthnumbers, prediction, value)
@@ -1304,14 +1293,20 @@ if __name__ == "__main__":
     input_path = parser.parse_args()
     array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth, \
     list_of_samples_input, paths, vcf_dictionary = load_references(input_path)
-    main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth,
-                                          list_of_samples_input, paths, vcf_dictionary)
+    main_gather_input_execute_prep_output(array_sizes, dict_of_truth_input, fullmatrix_sample, fullmatrix_truth, list_of_samples_input, paths, vcf_dictionary)
 \end{minted}
 
 \subsection{compute\_bayesian.py}
 \begin{minted}[linenos=true,numberblanklines=true,showspaces=false,breaklines=true,
 fontsize=\footnotesize,breakautoindent=true]{python}
-import argparse
+#This script takes in a VCF file with functional annotation already done, and computes the bayesian network using the annotations. It produces a sorted list of vcf entries in a text file, with accompanying annotation scores
+#Input : VCF file with functional annotation
+#Output : A sorted list of vcf entries with accompanying annotation scores, redirected from stdout to a file
+#Overall Strategy :
+#First extract all the features from the vcf files and then perform feature-wise normalisation. 
+#Subsequently, prepare the bayesian network by creating edges, nodes, preparing prior distritions
+#Finally use features to update the bayesian network to obtain final probabilities for importance
+#Report a list of sorted probabilites for easy ranking
 
 import matplotlib
 import vcf
@@ -1416,9 +1411,7 @@ def extract_list_of_scores(vcf_object):
 # Compute the Bayesian Network by assuming observations and attaching mapped probabilities (0,1) to P(X=True | Y=True)
 
 def compute_record(network, record):
-    beliefs = network.predict_proba({'Real Gene': 'True', 'ClinVar': 'True', 'PolyPhen': 'True', 'LRT': 'True',
-                                     'MutationAssessor': 'True', 'SIFT': 'True',
-                                     'FATHMM_gene': 'True', 'rs_gene': 'True'})
+    beliefs = network.predict_proba({'Real Gene': 'True', 'ClinVar': 'True', 'PolyPhen': 'True', 'LRT': 'True','MutationAssessor': 'True', 'SIFT': 'True', 'FATHMM_gene': 'True', 'rs_gene': 'True'})
     # print "\n".join("{}\t{}".format(state.name, belief) for state, belief in zip(network.states, beliefs))
     # get the probability that the gene is important
     prob_gene_important = beliefs[2].values()[1]
@@ -1449,10 +1442,7 @@ def create_network_and_compute_probabilities(record):
     ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene, SIFT_gene, functional_gene, importgene, real_gene, rs_gene = initialise_distributions(
         record)
     # set up states
-    s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9 = generate_states(ClinVar_gene, FATHMM_gene, LRT_gene,
-                                                                   MutationAssessor_gene, MutationTaster_gene,
-                                                                   PolyPhen2_gene, SIFT_gene, functional_gene,
-                                                                   importgene, real_gene, rs_gene)
+    s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9 = generate_states(ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene, SIFT_gene, functional_gene, importgene, real_gene, rs_gene)
     # set up network
     network = add_edges_bake_network(s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9)
     return network
