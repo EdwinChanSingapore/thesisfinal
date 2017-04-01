@@ -89,7 +89,6 @@ Chan Khai Ern Edwin\\
 \pagenumbering{arabic} 
 \section{Introduction}
 \subsection{Next Generation Sequencing in Personal Genomics Pipelines}
-
 Identification of functionally important mutations is a critical step in enabling personal genomic pipelines. Recently, there has been great interest in using a person's genome to help doctors treat and diagnose disease (Rehm, 2017; Angrist, 2016). The fundamental intuition is that sequencing the person's genome can help doctors and clinicians narrow down important disease subtypes and progression. This enables doctors to better diagnose the disease, as well as prepare targeted medication to treat the specific disease (Janitz, 2011). This is of particular interest now, especially since it is possible to sequence an exome for about \$1,000 - a price similar to most other clinical procedures. This process taps upon advances in Next-Generation Sequencing(NGS), where a sample of the patient's genome is sequenced in parallel to rapidly determine whole-exome sequence (Metzker, 2010; Mardis, 2008). \\\\
 However, there are still two critical steps that prevent this data from being used in a clinical setting. Firstly, it is difficult to obtain high-confidence mutations from this sequencing data, and secondly, there needs to be a systematic method to prioritise these mutations for clinicians and doctors. For the first problem, we have to be able to find out mutations in the person's genome that are different from a reference genome. This step is termed in literature as variant calling as it involves the discovery (calling) of genes (variants) that differ from a reference genome. However, current variant callers still tend to have low concordances for variants called (O'Rawe et al., 2013; Cornish and Guda, 2015), primarily due to differences in variant calling algorithms and assumptions. Figure 1 shows how the performance of single variant callers differs depending on the type of sequencing machine used.
 \begin{figure}[H]
@@ -1218,9 +1217,9 @@ def train_neural_net(mybatch_size, mynb_epoch, myX_train, myy_train, location, a
     final_model.add(Dense(1, activation='linear'))
     final_model.add(Activation('sigmoid'))
     print (final_model.summary())
-    rmsprop = RMSprop(lr=0.0001, rho=0.9, epsilon=1e-08, decay=0.0)
+    adam = Adam(lr=0.00001, rho=0.9, epsilon=1e-08, decay=0.0)
     final_model.compile(loss='binary_crossentropy',
-                        optimizer=rmsprop,
+                        optimizer=adam,
                         metrics=['accuracy'])
 
     filepath = location + "/best_weights.hdf5"
