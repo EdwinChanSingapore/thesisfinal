@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  1 APR 2017 08:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  1 APR 2017 08:52
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -1739,7 +1739,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 423--429
 [37 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.png
 >] [38 <c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>
 ]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=191
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=192
 , 462.528pt x 246.9225pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png Gr
 aphic file (type png)
@@ -1826,7 +1826,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 462--480
  []
 
 [42] [43] [44]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=211
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=212
 , 382.42876pt x 172.2435pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png Gr
 aphic file (type png)
@@ -1838,7 +1838,7 @@ fusionmatrix.png used on input line 485.
 
 [45 <c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jpg, i
-d=215, 659.3433pt x 337.9827pt>
+d=216, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg Graphic file (type jpg)
 
@@ -1850,7 +1850,7 @@ iancecapturedbypc.jpg used on input line 505.
  [46 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg, id=2
-19, 351.714pt x 158.994pt>
+20, 351.714pt x 158.994pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg 
 Graphic file (type jpg)
 
@@ -2171,9 +2171,9 @@ ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Fi
 les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on HT.txt.pdf (83 pages, 3616681 bytes).
+Output written on HT.txt.pdf (83 pages, 3617202 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
+ 381 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  178 words of extra memory for PDF output out of 10000 (max. 10000000)
 
