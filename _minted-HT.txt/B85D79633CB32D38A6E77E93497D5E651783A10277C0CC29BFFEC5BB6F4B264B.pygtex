@@ -162,15 +162,9 @@
 \PYG{c+c1}{\PYGZsh{} default method for printing all relevant scores}
 
 \PYG{k}{def} \PYG{n+nf}{print\PYGZus{}scores}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{final\PYGZus{}f1\PYGZus{}score}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{,} \PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
-    \PYG{n}{false\PYGZus{}positive\PYGZus{}before\PYGZus{}adjust}\PYG{p}{,} \PYG{n}{true\PYGZus{}negative\PYGZus{}before\PYGZus{}adjust} \PYG{o}{=} \PYG{n}{perf\PYGZus{}measure}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{)}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}false positive is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{false\PYGZus{}positive\PYGZus{}before\PYGZus{}adjust}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}true negative is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{true\PYGZus{}negative\PYGZus{}before\PYGZus{}adjust}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}precision score is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{precision\PYGZus{}score}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{)}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}recall score is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{recall\PYGZus{}score}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{)}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}F1 score is : \PYGZdq{}}\PYG{p}{,} \PYG{n}{f1\PYGZus{}score}\PYG{p}{(}\PYG{n}{actual\PYGZus{}truth}\PYG{p}{,} \PYG{n}{prediction}\PYG{p}{)}
     \PYG{n}{final\PYGZus{}false\PYGZus{}positive}\PYG{p}{,} \PYG{n}{final\PYGZus{}true\PYGZus{}negative} \PYG{o}{=} \PYG{n}{perf\PYGZus{}measure}\PYG{p}{(}\PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{)}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final false positive is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{final\PYGZus{}false\PYGZus{}positive}
-    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final true negative is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{final\PYGZus{}true\PYGZus{}negative}
+    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final false positive rate is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{final\PYGZus{}false\PYGZus{}positive}
+    \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final true negative rate is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{final\PYGZus{}true\PYGZus{}negative}
     \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final precision score is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{precision\PYGZus{}score}\PYG{p}{(}\PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{)}
     \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}final recall score is :\PYGZdq{}}\PYG{p}{,} \PYG{n}{recall\PYGZus{}score}\PYG{p}{(}\PYG{n}{finaltruthnumbers}\PYG{p}{,} \PYG{n}{finalpredictionnumbers}\PYG{p}{)}
     \PYG{k}{print} \PYG{l+s+s2}{\PYGZdq{}threshold is\PYGZdq{}}\PYG{p}{,} \PYG{n}{value}

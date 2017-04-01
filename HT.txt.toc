@@ -17,17 +17,26 @@
 \contentsline {subsection}{\numberline {3.3}Variant Callers}{17}
 \contentsline {subsection}{\numberline {3.4}Network Architecture}{18}
 \contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{21}
+\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{21}
+\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{23}
+\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{25}
 \contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Datasets}{26}
-\contentsline {subsection}{\numberline {3.7}Benchmarking of Network with NA Datasets}{27}
-\contentsline {subsection}{\numberline {3.8}Analysis of gene importance using Bayesian Ranking systems}{29}
-\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{30}
-\contentsline {section}{\numberline {4}Discussion}{34}
-\contentsline {section}{\numberline {5}Appendixes}{37}
-\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{37}
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{41}
-\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{45}
-\contentsline {section}{\numberline {6}Bibilography}{48}
-\contentsline {section}{\numberline {7}Relevant Code}{53}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{53}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{62}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{71}
+\contentsline {subsection}{\numberline {3.7}Benchmarking of Network with NA Datasets}{28}
+\contentsline {subsection}{\numberline {3.8}Analysis of gene importance using Bayesian Ranking systems}{30}
+\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{31}
+\contentsline {section}{\numberline {4}Discussion}{35}
+\contentsline {section}{\numberline {5}Appendixes}{38}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{38}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{42}
+\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{42}
+\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{43}
+\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{44}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{46}
+\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{46}
+\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{47}
+\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{48}
+\contentsline {section}{\numberline {6}Bibilography}{49}
+\contentsline {section}{\numberline {7}Relevant Code}{54}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{54}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{63}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{72}

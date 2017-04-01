@@ -268,7 +268,7 @@ Initially, with the flat network, the precision rate was very low at 0.059 with 
 
 \subsection{Network Tuning and Optimisation}
 Next, we systematically optimised and tuned the deep learning neural network to maximise its predictive ability. In tuning our network, we also sought to study how the various hyperparameters as well as the data structure affected our network's ability to learn from the data. In particular, we focused on four issues - the number of layers, optimiser choice, learning rate choice and finally sample balancing. These four issues are known to be critical in deep learning networks (Ruder et al., 2016; LeCun, Bengio \& Hinton, 2015; Yan et al., 2015;  Sutskever et al., 2013) and would likely be critical to the success of a neural network.\\\\
-\textbf{A. Number of Layers} \\
+\subsubsection{Number of Layers}
 Firstly, we studied how many layers should be in the neural network. The number of layers is critical as it determines what kind of information and the representation of data that can be captured by the neural network. Choosing the number of layers is important as sufficient layers are needed to obtain the complex data representation needed for learning, but too many layers might result in the vanishing gradient problem. We started off with a neural network architecture as shown below, and began to vary the number of layers in at each point.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{neuralnetworkarchitecturefinal.png}
@@ -282,20 +282,20 @@ For all layers, the LeakyReLU activation function was used. The LeakyReLU is a r
 \caption{Analysis of Different Number of Layers On Training Accuracy}
 \end{figure}
 From analysing the accuracies of the different layers, we find that 8 layers seem the best at learning from the input data. We note that all the layers follow the same rough trend of accuracy, indicating they are all able to learn from the dataset. We decided on the 8 layer network as it seemed best able to learn from the input dataset, with a final accuracy of 0.964 that is about 0.001 higher than other layers. A final design feature used was to add two dropout filters at the last two layers before merging in order to prevent overfitting in data. Dropout filters have been shown to be an effective in preventing overfitting of data (Srivastava et al., 2014). Another active step taken to prevent overfitting was to ensure random separation of test, validation and training datasets.\\\\
-\textbf{B. Optimiser and Learning Rates}\\
+\subsubsection{Optimiser and Learning Rates}
 Next, we sought to choose the best optimiser and learning rate for our dataset. Both optimisers and learning rates have been well studied and known to be important in neural network training (Ruder et al., 2016; Sutskever et al., 2013). Optimiser choice is critical as the optimisers determine how the weights and gradients are updated in the network, thus playing an integral part in learning. We studied 3 well-known optimisers for use in our network, ADAM, RMSprop and Stochastic Gradient Descent (SGD). ADAM is an adaptive learning rate optimiser that is known to be well suited in large dataset and parameter problems(Kingma \& Ba, 2014). RMSprop is another adaptive learning rate optimiser that unpublished, but has been shown to work well for real experimental datasets (Tieleman \& Hinton, 2012). SGD is the simplest learning model with no adaptive learning rate but is a useful model because it is the easiest to understand mathematically and has also been shown to solve deep learning problems (Kingma \& Ba, 2014). For more information on the mathematical foundations of optimisation and backpropagation, please see Appendix 5.1. For the three optimisers, we ran tests to study the accuracy of the neural network running on each optimiser to predict true variants (Figure 11).
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{optimiserlearning.jpg}
 \centering
 \caption{Optimiser accuracies for training at each epoch. Due to the noise in accuracies, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.}
 \end{figure}
-The adaptive rate optimisers, Adam and RMSprop obtained the highest accuracies of 0.9670 and 0.9660 while SGD reached a maximum accuracy of 0.9569, very close to that of RMSprop. Interestingly adaptive rate optimisers seemed to have complex learning trajectories, while SGD has a very stable learning rate. This makes sense as adaptive learning rates allow greater gradient descents when the error is high, and decreasing the learning rate at smaller errors. This allows Adam and RMSprop to learn at variable rates based on the current gradients. For SGD, it appears that while it takes a while to learn the true minima, it eventually still reaches about the same minima as RMSprop. Ultimately, we chose Adam as our optimiser as the final accuracy discovered by Adam was noted to be higher than RMSprop and SGD, and we note a stable learning curve for Adam, indicating it is able to learn and update the gradients in the neural network to learn from input data at all epochs. Subsequently, we also looked at various initial learning rate for Adam (Figure 12) and found that the most stable learning could be found at a learning rate of $10^{-5}$. This initial learning rate is critical as it determines the first few gradient descents which enable stable adaptive learning throughout the epochs (Sutskever et al., 2013). At any larger learning rates ($10^{-4}$ and below), a very high amount of noise was observed, indicating that the learning rate was too high resulting in minima finding errors. At smaller learning rates ($10^{-6}$ and above), the final accuracy after 100 epochs (0.9639 for $10^{-6}$) was lower than the learning rate at $10^{-5}$ (0.9672). Thus, we chose $10^{-5}$ to be our learning rate.
+The adaptive rate optimisers, Adam and RMSprop obtained the highest accuracies of 0.9670 and 0.9660 while SGD reached a maximum accuracy of 0.9569, very close to that of RMSprop. Interestingly adaptive rate optimisers seemed to have complex learning trajectories, while SGD has a very stable learning rate. This makes sense as adaptive learning rates allow greater gradient descents when the error is high, and decreasing the learning rate at smaller errors (Kingma and Ba, 2014; Zeiler, 2012). This allows Adam and RMSprop to learn at variable rates based on the current gradients. For SGD, it appears that while it takes a while to learn the true minima, it eventually still reaches about the same minima as RMSprop. Ultimately, we chose Adam as our optimiser as the final accuracy discovered by Adam was noted to be higher than RMSprop and SGD, and we note a stable learning curve for Adam, indicating it is able to learn and update the gradients in the neural network to learn from input data at all epochs. Subsequently, we also looked at various initial learning rate for Adam (Figure 12) and found that the most stable learning could be found at a learning rate of $10^{-5}$. This initial learning rate is critical as it determines the first few gradient descents which enable stable adaptive learning throughout the epochs (Sutskever et al., 2013). At any larger learning rates ($10^{-4}$ and below), a very high amount of noise was observed, indicating that the learning rate was too high resulting in minima finding errors. At smaller learning rates ($10^{-6}$ and above), the final accuracy after 100 epochs (0.9639 for $10^{-6}$) was lower than the learning rate at $10^{-5}$ (0.9672). Thus, we chose $10^{-5}$ to be our learning rate.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{learningrates.jpg}
 \centering
 \caption{Training Accuracies over Each Epoch for Different Learning Rates}
 \end{figure}
-\textbf{C. Sample Balancing}\\
+\subsubsection{Sample Balancing}
 Our final concern was sample balancing - the simulated dataset contained an imbalance of positive training examples versus negative training examples. In total, there were 286569 positive training examples and 4547919 negative training examples, which is a 15-fold difference. Such a sample imbalance has been known to affect learning adversely (Yan et al., 2015; López et al., 2012). Thus, we sought to implement two methods of sample balancing, undersampling and oversampling. Undersampling was implemented by removing negative training examples until the number of negative training examples was equal to the number of positive training examples. In oversampling, the Synthetic Minority Oversampling Technique(SMOTE) was done, which uses nearest neighbours to create more data points for the positive training example. Specifically, SMOTE looks at two nearby positive class examples, and creates a new synthetic example in the middle of these two examples (see Appendix 5.3 for more details). Figure 13 shows the metrics for each sampling technique.
 \begin{figure}[H]
 \centering
@@ -409,6 +409,7 @@ Thus, in this paper, we have shown the use of deep learning neural networks to s
 \section{Appendixes}
 
 \subsection{Neural Network Learning}
+\subsubsection{Feedforward and Backpropagation}
 Machine learning is underpinned by two key phases, the feed-forward phase and the backpropagation phase. The feedforward phase describes the computation of a prediction, and during this phase, the input features are used to compute the final output prediction. For a simple network below:
 
 \begin{figure}[H]
@@ -435,16 +436,20 @@ Here, each $\beta$ term indicates a gradient, $\alpha$ is a constant for the lea
 \begin{equation}
 E(\beta) = - \frac{1}{n}\sum_{i=1}^{n}{\sum_{j=1}^{2}y_{ij}log(p_{ij})}
 \end{equation} 
-where $y_{ij}$ indicates the empirical observed probabilities of each class label while $log(p_{ij}$ is the theoretical probabilities of each class label. From this term, we see that if the neural network predicts something with a high probability ($y_{ij}$ is high) and it is false ($p_{ij}$ is low) so then $log(p_{ij}$ is a big negative number, and so the cost function will very high. On the other hand, if $y_{ij}$ and $p_{ij}$ is high then the entropy will be close to zero, indicating a correct prediction. Since each of the prediction terms can be rewritten in terms of the gradient(rewrite z in terms $\beta y_i $ and so on, we can theoretically compute the contribution of each gradient to the cost function to see how the cost function changes as the gradient changes. Thus, this is what gradient descent does - it tries to see how the cost function changes as each gradient changes, then attempts to move the gradient in the direction that minimises the error term. This is best seen in the graph below  where the gradient, or specifically the partial differentiation of the cost function with regards to each gradient is used to move the gradient to a new position so as to minimise the error term. Thus, machine learning is in essence a minimisation problem - we want to find a set of weights that minimises the cost function, and because the cost function describes how many predictions we made correctly, this is also training our network to accurately predict outputs from inputs.
+where $y_{ij}$ indicates the empirical observed probabilities of each class label while $log(p_{ij}$ is the theoretical probabilities of each class label. From this term, we see that if the neural network predicts something with a high probability ($y_{ij}$ is high) and it is false ($p_{ij}$ is low) so then $log(p_{ij}$ is a big negative number, and so the cost function will very high. On the other hand, if $y_{ij}$ and $p_{ij}$ is high then the entropy will be close to zero, indicating a correct prediction. Since each of the prediction terms can be rewritten in terms of the gradient(rewrite z in terms $\beta y_i $ and so on, we can theoretically compute the contribution of each gradient to the cost function to see how the cost function changes as the gradient changes. Thus, this is what gradient descent does - it tries to see how the cost function changes as each gradient changes, then attempts to move the gradient in the direction that minimises the error term.
+
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{gradientdescent.png}
 \caption{Gradient Descent}
 \centering
 \end{figure}
+ This is best seen in the graph above, where the gradient, or specifically the partial differentiation of the cost function with regards to each gradient is used to move the gradient to a new position so as to minimise the error term. Thus, machine learning is in essence a minimisation problem - we want to find a set of weights that minimises the cost function, and because the cost function describes how many predictions we made correctly, this is also training our network to accurately predict outputs from inputs.
+\subsubsection{Adaptive Rate Learning}
+
 \newpage
 \subsection{Feature Engineering}
 We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. \underline{Base information} tells us base specific properties, including information contained in the base as well as the quality of sequenced bases in the samples. \underline{Sequencing error and bias} features attempt to tease out potential biases in sequencing, including features such as GC content, longest homopolymer run and as well as allele balances and counts. Finally, \underline{calling and mapping quality} provides information on the mapping and calling confidence of the variant callers, and includes features such as genotype confidence and mapping quality. In all, these sets of information provide information on the key aspects of variant calling - specifically the properties of the bases in the samples, the characteristics of the sequencing process and finally the variant calling and mapping algorithms.\\\\
-\textbf{Base Information} \\\\
+\subsubsection{Base Information}
 \underline{Shannon Entropy}\\
 Shannon Entropy captures the amount of information contained in the allele sequences. It is calculated using the equation :
 \begin{equation}
@@ -461,14 +466,14 @@ where $Q(x_i)$ is the prior probability of finding each base at each position ba
 Base quality refers to the Phred score probability that the called allele is wrong. It is given by the equation :
 \[ \scalebox{1.2}{$P=10^{\frac{-Q}{10}}$} \]
 Where P is the Base Quality and Q is the probability that the allele called is wrong. This is a number computed by the sequencing machine based on the quality of the base samples provided, and tells us how much confidence the sequencing machine has in calling that base.\\\\
-\textbf{Sequencing Biases and Errors} \\\\
+\subsubsection{Sequencing Biases and Errors}
 \underline{GC content}\\
 This feature computes the calculated GC content of reference genome, which may affect sequencing results and accuracy as regions with a GC content are known to be more difficult to sequence. This is because of the greater strength of GC bonds, resulting in errors and biases in sequencing (Benjamini \& Speed, 2012).\\\\ 
 \underline{Longest homozygous run}\\
 Homopolymer runs (AAAAAAAA) are known to cause sequencer errors (Quail et al.,2012), and might be a factor in determining whether a variant is true. This because long homopolymers provide the same type of signal to the sequencing machine, resulting in a difficult in estimating the magnitude of the signal or rather how many bases are in that homopolymer, resulting in errors and wrongly called variants. The reference sequence region including the allele was checked for homopolymer runs. \\\\
 \underline{Allele Count and Allele Balance}\\
 Allele count gives the total number of alleles in called phenotypes, while allele balance gives the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). Both these features give us information of possible biases in the sequencing machine.\\\\
-\textbf{Calling and Mapping Qualities} \\\\
+\subsubsection{Calling and Mapping Qualities}
 \underline{Genotype Likelihood}\\
 The genotype likelihood provides the Phred-scaled likelihood scores of how confident the caller is in determining that it is a homozygous or heterozygous call, and for the homozygous calls whether it is a more likely to be a bi-allelic mutation or no mutation at all. This feature thus gives us the confidence of the caller in determining if one or two alleles have mutated. \\\\ 
 \underline{Read Depth}\\
@@ -479,7 +484,7 @@ Quality by Depth is computed by dividing the quality score against allele depth,
 Mapping quality is originally a score provided by the alignment method and gives the probability that a read is placed accurately. The variant callers compute a overall mapping quality of the reads that provide evidence for a variant call which is given in this feature. A low mapping quality means that there are multiple positions where the reads contributing to this variant call could have gone, and thus providing evidence that this might not be an accurate call due to poor mapping.\\\\
 \newpage
 \subsection{Mathematical and Statistical Tools}
-\textbf{A. Derivation of F1 Score}\\
+\subsubsection{Derivation of F1 Score}
 The F1 score is a useful measure as it can measure both the precision as well as the recall of a predictor. For a binary predictor with a binary truth class(Figure 26), we can obtain 4 types of results - true positives, true negatives, false positives and false negatives. 
 \begin{figure}[H]
 \includegraphics[width=0.8\textwidth]{confusionmatrix.png}
@@ -498,7 +503,7 @@ Precision tells us how likely a positive prediction made will be true, while rec
 {F1} \ Score \ \ \  \ \ = \frac{2*Precision*Recall}{Precision + Recall} 
 \end{equation}
 \\
-\textbf{B. Principal Components Analysis (PCA)}\\
+\subsubsection{Principal Components Analysis (PCA)}
 Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduction. It was first proposed by Pearson in 1901 (Pearson, 1901) and has been commonplace in many data analytics and signal processing methodologies (Jolliffe, 2002). PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs are able to capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector is able to represent. Ultimately, we select n eigenvectors that is able to represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they are able to capture the variance in the dataset. For our analysis, we decided to use 8 principal components - we took the limit as the last principal components that was able to represent at least 0.5\% of variance in the dataset.
  
 \begin{figure}[H]
@@ -508,8 +513,7 @@ Principal Components Analysis (PCA) is a commonly used tool for dimensionality r
 \end{figure}
 
 To carry out PCA, we used the preprocessing step SciPy to normalise all the input vectors to mean 0 and standard deviation 1. Subsequently, we perform principal components decomposition to obtain the eigenvector transformed representation of the dataset and their corresponding eigenvalues. We then fit 8 of the principal components that explained the largest amount of variance into the neural network to study if it can learn from the compressed representation of the input features. 
-
-\textbf{C. Synthetic Minority Overrepresentation Technique (SMOTE)}    \\
+\subsubsection{Synthetic Minority Overrepresentation Technique (SMOTE)}
 SMOTE is a statistical technique described in by Chawla et al. (2002) to overcome problems with imbalanced datasets that are common in machine learning. SMOTE oversamples the training class with fewer variables in a way that tries not to replicate data points (that makes certain data points over-represented) without creating new invalid training examples. It does this by taking the intersection of two nearest data points of the same training class. This can be seen in Figure 28. 
 
 \begin{figure}[H]
@@ -1068,15 +1072,9 @@ def get_scores(actual_predictions, actual_truth, value, sample_list, truth_dicti
 # default method for printing all relevant scores
 	
 def print_scores(actual_truth, final_f1_score, finalpredictionnumbers, finaltruthnumbers, prediction, value):
-    false_positive_before_adjust, true_negative_before_adjust = perf_measure(actual_truth, prediction)
-    print "false positive is :", false_positive_before_adjust
-    print "true negative is :", true_negative_before_adjust
-    print "precision score is :", precision_score(actual_truth, prediction)
-    print "recall score is :", recall_score(actual_truth, prediction)
-    print "F1 score is : ", f1_score(actual_truth, prediction)
     final_false_positive, final_true_negative = perf_measure(finaltruthnumbers, finalpredictionnumbers)
-    print "final false positive is :", final_false_positive
-    print "final true negative is :", final_true_negative
+    print "final false positive rate is :", final_false_positive
+    print "final true negative rate is :", final_true_negative
     print "final precision score is :", precision_score(finaltruthnumbers, finalpredictionnumbers)
     print "final recall score is :", recall_score(finaltruthnumbers, finalpredictionnumbers)
     print "threshold is", value
