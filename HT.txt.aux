@@ -3,22 +3,22 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Next Generation Sequencing in Personal Genomics Pipelines}{1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Validation of Variant Calling tools with real patient data on two different Illumina sequencing platforms (HiSeq and NextSeq) using prior known mutations. The F1 score indicates how well a caller can predict true positives (See Appendix 5.3 for more details), and it can be seen that the F1 score for the same variant calling tool can differ greatly. Figure adapted from Sandmann et al. (2017)\relax }}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variant Calling in Personal Genomics Pipelines}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Variant Calling Methodology}{3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Variant Calling Pileup - Due to noise and errors in sequencing and variant mapping, it is sometimes difficult properly call variants. Figure adapted from CLC Genomics Workbench 9.5, Figure 29.8.\relax }}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Deep Learning in Variant Calling Methodology}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Neural Network with one input layer, three hidden layers and one output layer. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers. At each node, linking functions can be defined to apply a mathematical transform to connect the input and output.\relax }}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Bayesian Networks in Gene Prioritisation}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Deep Learning in Variant Calling}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A Neural Network with one input layer, three hidden layers and one output layer. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers.\relax }}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Gene Prioritisation and Bayesian Networks }{6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A Sample Bayesian Network for Rain Prediction.\relax }}{7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Aims and Research Structure}{7}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Materials and Methods}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Overall Analysis Structure}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Overall Analytical Pipelines - Pipelines were implemented using the Groovy Domain Specific Language, NextFlow.\relax }}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Programming and Pipelining tools}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Artificial Datasets}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Pipeline for simulation of artificial genome for analysis\relax }}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Feature Engineering}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Overall Analytical Pipelines - Pipelines were implemented using the Groovy Domain Specific Language, NextFlow.\relax }}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Programming and Pipelining tools}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Artificial Datasets}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Pipeline for simulation of artificial genome for analysis\relax }}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Feature Engineering}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{14}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{15}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Generation of Artificial Datasets}{15}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Number of ground truth mutations (variants) created in each chromosome \relax }}{15}}
@@ -31,21 +31,21 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Network Architecture}{18}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Different Designs for Neural Network Architecture\relax }}{19}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Analysis of Different Neural Network Architecture\relax }}{20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{20}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Basic Merge Network Structure\relax }}{22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Analysis of Different Number of Layers On Training Accuracy\relax }}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Basic Merge Network Structure\relax }}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Analysis of Different Number of Layers On Training Accuracy\relax }}{22}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{23}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Optimiser accuracies for training at each epoch. Due to the noise in accuracies, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.\relax }}{24}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Training Accuracies over Each Epoch for Different Learning Rates\relax }}{25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Optimiser accuracies for training at each epoch. Due to the noise in accuracies, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.\relax }}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Training Accuracies over Each Epoch for Different Learning Rates\relax }}{24}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{25}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Effect of Sample Balancing on Prediction Ability \relax }}{26}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Datasets}{26}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Overall Comparison of Variant Callers\relax }}{27}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of Best Variant Callers in terms of Precision, Recall and F1 Score\relax }}{28}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Benchmarking of Network with NA Datasets}{28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Comparison of Variant Callers\relax }}{29}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Analysis of gene importance using Bayesian Ranking systems}{30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Effect of Sample Balancing on Prediction Ability \relax }}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Overall Comparison of Variant Callers\relax }}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of Best Variant Callers in terms of Precision, Recall and F1 Score\relax }}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Comparison of Variant Callers\relax }}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{30}}
 \@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Final Bayesian Network used in Analysis\relax }}{30}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Table of Functional Annotations obtained from ANNOVAR\relax }}{31}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{31}}
