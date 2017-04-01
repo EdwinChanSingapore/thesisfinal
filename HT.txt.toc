@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {subsection}{\numberline {1.1}Next Generation Sequencing in Personal Genomics Pipelines}{1}
-\contentsline {subsection}{\numberline {1.2}Variant Calling in Personal Genomics Pipelines}{3}
+\contentsline {subsection}{\numberline {1.2}Variant Calling in Personal Genomics Pipelines}{2}
 \contentsline {subsection}{\numberline {1.3}Deep Learning in Variant Calling Methodology}{4}
 \contentsline {subsection}{\numberline {1.4}Bayesian Networks in Gene Prioritisation}{6}
 \contentsline {subsection}{\numberline {1.5}Aims and Research Structure}{7}
