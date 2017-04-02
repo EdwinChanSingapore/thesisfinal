@@ -24,22 +24,22 @@
 \contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{27}
 \contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{30}
 \contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{31}
-\contentsline {section}{\numberline {4}Discussion}{35}
-\contentsline {subsection}{\numberline {4.1}Comparison of Deep Learning with other Integration Methods}{35}
-\contentsline {subsection}{\numberline {4.2}Analysis of Bayesian Network}{37}
-\contentsline {subsection}{\numberline {4.3}Future Directions}{37}
-\contentsline {section}{\numberline {5}Appendixes}{39}
-\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{39}
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{43}
-\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{43}
-\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{44}
-\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{45}
-\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{47}
-\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{47}
-\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{48}
-\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{49}
-\contentsline {section}{\numberline {6}Bibilography}{50}
-\contentsline {section}{\numberline {7}Relevant Code}{55}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{55}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{64}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{73}
+\contentsline {section}{\numberline {4}Discussion}{36}
+\contentsline {subsection}{\numberline {4.1}Comparison of Deep Learning with other Integration Methods}{36}
+\contentsline {subsection}{\numberline {4.2}Analysis of Bayesian Network}{38}
+\contentsline {subsection}{\numberline {4.3}Future Directions}{38}
+\contentsline {section}{\numberline {5}Appendixes}{40}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{40}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{44}
+\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{44}
+\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{45}
+\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{46}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{48}
+\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{48}
+\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{49}
+\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{50}
+\contentsline {section}{\numberline {6}Bibilography}{51}
+\contentsline {section}{\numberline {7}Relevant Code}{56}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{56}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{65}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{74}
