@@ -1,52 +1,52 @@
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {subsection}{\numberline {1.1}Next Generation Sequencing in Personal Genomics Pipelines}{1}
-\contentsline {subsection}{\numberline {1.2}Variant Calling Methodology}{3}
-\contentsline {subsection}{\numberline {1.3}Deep Learning in Variant Calling}{5}
-\contentsline {subsection}{\numberline {1.4}Gene Prioritisation and Bayesian Networks }{6}
-\contentsline {subsection}{\numberline {1.5}Aims and Research Structure}{8}
-\contentsline {section}{\numberline {2}Materials and Methods}{9}
-\contentsline {subsection}{\numberline {2.1}Overall Analysis Structure}{9}
-\contentsline {subsection}{\numberline {2.2}Programming and Pipelining tools}{10}
-\contentsline {subsubsection}{\numberline {2.2.1}General Programming Language}{10}
-\contentsline {subsubsection}{\numberline {2.2.2}Pipelining}{11}
-\contentsline {subsubsection}{\numberline {2.2.3}Deep Learning}{11}
-\contentsline {subsubsection}{\numberline {2.2.4}Gene Ranking}{11}
-\contentsline {subsection}{\numberline {2.3}Artificial Datasets}{11}
-\contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling}{12}
-\contentsline {subsection}{\numberline {2.5}Feature Engineering}{12}
-\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{14}
-\contentsline {section}{\numberline {3}Results}{16}
-\contentsline {subsection}{\numberline {3.1}Generation of Artificial Datasets}{16}
-\contentsline {subsection}{\numberline {3.2}Feature Engineering}{17}
-\contentsline {subsection}{\numberline {3.3}Variant Callers}{18}
-\contentsline {subsection}{\numberline {3.4}Network Architecture}{19}
-\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{22}
-\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{22}
-\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{24}
-\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{26}
-\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{27}
-\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{29}
-\contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{31}
-\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{32}
-\contentsline {section}{\numberline {4}Discussion}{37}
-\contentsline {subsection}{\numberline {4.1}Comparison of Deep Learning with other Integration Methods}{37}
-\contentsline {subsection}{\numberline {4.2}Analysis of Bayesian Network}{39}
-\contentsline {subsection}{\numberline {4.3}Future Directions}{39}
-\contentsline {section}{\numberline {5}Appendixes}{41}
-\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{41}
-\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{41}
-\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{42}
-\contentsline {subsubsection}{\numberline {5.1.3}Cost Function and Backpropagation}{43}
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{45}
-\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{45}
-\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{46}
-\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{47}
-\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{49}
-\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{49}
-\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{50}
-\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{51}
-\contentsline {section}{\numberline {6}Bibilography}{52}
-\contentsline {section}{\numberline {7}Relevant Code}{57}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{57}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{66}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{75}
+\contentsline {subsection}{\numberline {1.2}Variant Calling Methodology}{2}
+\contentsline {subsection}{\numberline {1.3}Deep Learning in Variant Calling}{4}
+\contentsline {subsection}{\numberline {1.4}Gene Prioritisation and Bayesian Networks }{5}
+\contentsline {subsection}{\numberline {1.5}Aims and Research Structure}{7}
+\contentsline {section}{\numberline {2}Materials and Methods}{8}
+\contentsline {subsection}{\numberline {2.1}Overall Analysis Structure}{8}
+\contentsline {subsection}{\numberline {2.2}Programming and Pipelining tools}{9}
+\contentsline {subsubsection}{\numberline {2.2.1}General Programming Language}{9}
+\contentsline {subsubsection}{\numberline {2.2.2}Pipelining}{9}
+\contentsline {subsubsection}{\numberline {2.2.3}Deep Learning}{10}
+\contentsline {subsubsection}{\numberline {2.2.4}Gene Ranking}{10}
+\contentsline {subsection}{\numberline {2.3}Artificial Datasets}{10}
+\contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling}{11}
+\contentsline {subsection}{\numberline {2.5}Feature Engineering}{11}
+\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{13}
+\contentsline {section}{\numberline {3}Results}{14}
+\contentsline {subsection}{\numberline {3.1}Generation of Artificial Datasets}{14}
+\contentsline {subsection}{\numberline {3.2}Feature Engineering}{15}
+\contentsline {subsection}{\numberline {3.3}Variant Callers}{15}
+\contentsline {subsection}{\numberline {3.4}Network Architecture}{17}
+\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{19}
+\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{20}
+\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{21}
+\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{23}
+\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{24}
+\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{26}
+\contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{28}
+\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{29}
+\contentsline {section}{\numberline {4}Discussion}{33}
+\contentsline {subsection}{\numberline {4.1}Comparison of Deep Learning with other Integration Methods}{33}
+\contentsline {subsection}{\numberline {4.2}Analysis of Bayesian Network}{34}
+\contentsline {subsection}{\numberline {4.3}Future Directions}{35}
+\contentsline {section}{\numberline {5}Appendixes}{36}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{36}
+\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{36}
+\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{37}
+\contentsline {subsubsection}{\numberline {5.1.3}Cost Function and Backpropagation}{37}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{39}
+\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{39}
+\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{40}
+\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{41}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{42}
+\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{42}
+\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{43}
+\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{44}
+\contentsline {section}{\numberline {6}Bibilography}{45}
+\contentsline {section}{\numberline {7}Relevant Code}{50}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{50}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{59}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{68}
