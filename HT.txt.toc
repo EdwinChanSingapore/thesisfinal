@@ -47,7 +47,7 @@
 \contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{44}
 \contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{45}
 \contentsline {section}{\numberline {6}Bibilography}{46}
-\contentsline {section}{\numberline {7}Relevant Code}{51}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{51}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{60}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{69}
+\contentsline {section}{\numberline {7}Relevant Code}{56}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{56}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{65}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{74}
