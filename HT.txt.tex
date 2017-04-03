@@ -1483,8 +1483,7 @@ def add_edges_bake_network(s1, s10, s11, s2, s3, s4, s5, s6, s7, s8, s9):
 
 # method that generates the nodes in the bayesian network
 
-def generate_states(ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene,
-                    SIFT_gene, functional_gene, importgene, real_gene, rs_gene):
+def generate_states(ClinVar_gene, FATHMM_gene, LRT_gene, MutationAssessor_gene, MutationTaster_gene, PolyPhen2_gene, SIFT_gene, functional_gene, importgene, real_gene, rs_gene):
     s1 = State(real_gene, name="Real Gene")
     s2 = State(functional_gene, name="Functional Gene")
     s3 = State(importgene, name="Important Gene")

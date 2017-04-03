@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 09:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 09:44
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -2324,9 +2324,17 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 B.pygtex [69] [70] [71] [72] [73] [74] [75] [76] [77])
 \openout3 = `HT.txt.pyg'.
 
+runsystem(pygmentize -l python -f latex -P commandprefix=PYG -F tokenmerge -o _
+minted-HT.txt/3D596E6C6A31D9F769636E4181287DE91783A10277C0CC29BFFEC5BB6F4B264B.
+pygtex HT.txt.pyg)...executed.
 
-(_minted-HT.txt/4997910BF66F97E9C5DC9311827F542B1783A10277C0CC29BFFEC5BB6F4B264
-B.pygtex [78] [79] [80] [81] [82] [83] [84]) [85] (HT.txt.aux)
+
+(_minted-HT.txt/3D596E6C6A31D9F769636E4181287DE91783A10277C0CC29BFFEC5BB6F4B264
+B.pygtex [78] [79] [80] [81] [82] [83] [84])
+runsystem(del _minted-HT.txt\4997910BF66F97E9C5DC9311827F542B1783A10277C0CC29BF
+FEC5BB6F4B264B.pygtex)...executed.
+
+ [85] (HT.txt.aux)
 runsystem(del HT.txt.pyg)...executed.
 
  )
@@ -2336,8 +2344,8 @@ runsystem(del HT.txt.pyg)...executed.
 ### semi simple group (level 1) entered at line 70 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 19132 strings out of 493334
- 370384 string characters out of 3136675
+ 19133 strings out of 493334
+ 370448 string characters out of 3136675
  549900 words of memory out of 3000000
  22252 multiletter control sequences out of 15000+200000
  9512 words of font info for 36 fonts, out of 3000000 for 9000
@@ -2361,7 +2369,7 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on HT.txt.pdf (90 pages, 3720103 bytes).
+Output written on HT.txt.pdf (90 pages, 3720079 bytes).
 PDF statistics:
  410 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

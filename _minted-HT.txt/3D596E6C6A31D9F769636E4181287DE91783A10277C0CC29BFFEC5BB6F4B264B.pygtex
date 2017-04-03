@@ -167,8 +167,7 @@
 
 \PYG{c+c1}{\PYGZsh{} method that generates the nodes in the bayesian network}
 
-\PYG{k}{def} \PYG{n+nf}{generate\PYGZus{}states}\PYG{p}{(}\PYG{n}{ClinVar\PYGZus{}gene}\PYG{p}{,} \PYG{n}{FATHMM\PYGZus{}gene}\PYG{p}{,} \PYG{n}{LRT\PYGZus{}gene}\PYG{p}{,} \PYG{n}{MutationAssessor\PYGZus{}gene}\PYG{p}{,} \PYG{n}{MutationTaster\PYGZus{}gene}\PYG{p}{,} \PYG{n}{PolyPhen2\PYGZus{}gene}\PYG{p}{,}
-                    \PYG{n}{SIFT\PYGZus{}gene}\PYG{p}{,} \PYG{n}{functional\PYGZus{}gene}\PYG{p}{,} \PYG{n}{importgene}\PYG{p}{,} \PYG{n}{real\PYGZus{}gene}\PYG{p}{,} \PYG{n}{rs\PYGZus{}gene}\PYG{p}{):}
+\PYG{k}{def} \PYG{n+nf}{generate\PYGZus{}states}\PYG{p}{(}\PYG{n}{ClinVar\PYGZus{}gene}\PYG{p}{,} \PYG{n}{FATHMM\PYGZus{}gene}\PYG{p}{,} \PYG{n}{LRT\PYGZus{}gene}\PYG{p}{,} \PYG{n}{MutationAssessor\PYGZus{}gene}\PYG{p}{,} \PYG{n}{MutationTaster\PYGZus{}gene}\PYG{p}{,} \PYG{n}{PolyPhen2\PYGZus{}gene}\PYG{p}{,} \PYG{n}{SIFT\PYGZus{}gene}\PYG{p}{,} \PYG{n}{functional\PYGZus{}gene}\PYG{p}{,} \PYG{n}{importgene}\PYG{p}{,} \PYG{n}{real\PYGZus{}gene}\PYG{p}{,} \PYG{n}{rs\PYGZus{}gene}\PYG{p}{):}
     \PYG{n}{s1} \PYG{o}{=} \PYG{n}{State}\PYG{p}{(}\PYG{n}{real\PYGZus{}gene}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Real Gene\PYGZdq{}}\PYG{p}{)}
     \PYG{n}{s2} \PYG{o}{=} \PYG{n}{State}\PYG{p}{(}\PYG{n}{functional\PYGZus{}gene}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Functional Gene\PYGZdq{}}\PYG{p}{)}
     \PYG{n}{s3} \PYG{o}{=} \PYG{n}{State}\PYG{p}{(}\PYG{n}{importgene}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Important Gene\PYGZdq{}}\PYG{p}{)}
