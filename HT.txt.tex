@@ -167,13 +167,13 @@ For our deep learning networks, we used the Keras library (v1.1.1) with a Tensor
 \subsubsection{Gene Ranking}
 Finally, ANNOVAR (v2015Jun17) was used to generate the functional annotations for the Bayesian probabilistic model (Wang, Li, \& Hakonarson, 2010). The protocols used were snp138, clinvar\_20150629 and ljb26\_all. Pomegranate (v0.6.1), a Python library, was used to generate and compute the probabilistic model and ranking system for our Bayesian Network. For the probabilistic model, preprocessing was done using Python scripts and subsequently used as input in Pomegranate. The code used to generate the Bayesian network can be found in Relevant Code -- Section 7.3.
 
-\subsection{Artificial Datasets}
-Artificial genomes enable the simulation of NGS data with ground truths to test and validate a neural network. For our simulator, we used Mason, a genome mutation software written in C++ (v2.3.1) to mutate the hg19 reference genome from UCSC (Karolchik et al., 2014). We used indel rates of 0.00002 and SNP rates of 0.00008 to generate sufficient truth variants for analysis, which comprise 229253 SNPs and 57257 indels.\\\\
+\subsection{Simulated Datasets}
+Simulated genomes enable the simulation of NGS data with ground truths to test and validate a neural network. For our simulator, we used Mason, a genome mutation software written in C++ (v2.3.1) to mutate the hg19 reference genome from UCSC (Karolchik et al., 2014). We used indel rates of 0.00002 and SNP rates of 0.00008 to generate sufficient truth variants for analysis, which comprise 229253 SNPs and 57257 indels.\\\\
 After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants (Figure 7). For error rates, we used published data from Schirmer et al. (2016) as the input to Mason -- the general substitution error rate used was 0.0004 per base in the genome, and the insertion and deletion error rate per base were $5*10^{-6}$.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{readsimulation.png}
-\caption{\textbf{Pipeline for Simulation of Artificial Genomes for Analysis}}
+\caption{\textbf{Pipeline for Simulation of Genomes for Analysis}}
 \centering
 \end{figure}
 
@@ -181,7 +181,7 @@ After generating a ground truth model, we simulated sequence reads with error ra
 To perform alignment of simulated and real sequences, the Burrows-Wheeler Aligner (Li, 2013), version 0.7.13, was used. Default settings were used, with the mem option which is known to work well with longer sequences. After alignment, variant calling was performed. Variant callers used were FreeBayes (v1.0.2-16), GATK Haplotype Caller (v3.7-0) and Unified Genotyper (v3.7-0), Samtools (v1.3.1) and finally Pindel (v2.3.0)(Garrison \& Marth, 2012; McKenna et al. 2010, DePristo et al. 2011; Li H, et al., 2009; Ye et al., 2009). All callers were used at their default settings.
 
 \subsection{Feature Engineering}
-In order to train a neural network, features in the form of numerical vectors must be used as an input. We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Here we describe the computation of the features -- please see Appendix 5.2 for a more in-depth explanation on their usage and interpretation.\\\\
+In order to train a neural network, features in the form of numerical vectors must be used as an input. We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Here we describe the computation of the key features -- please see Appendix 5.2 for a more in-depth explanation on their usage and interpretation.\\\\
 \textbf{Base Information} \\*[0.3\baselineskip]
 \underline{Shannon Entropy}\\*
 Shannon Entropy captures the amount of information contained inside the allele sequences. It is calculated using the equation:
@@ -223,7 +223,7 @@ Mapping quality is a score provided by the alignment method and gives the probab
 \newpage
 \section{Results}
 \subsection{Generation of Simulated Datasets}
-As a first step towards developing a deep learning network, we generated a mutated genome using the hg19 genome from UCSC (Karolchik et al., 2014) as a reference. The mutated genome contains over 300,000 random mutations spread over the chromosomes as can be seen below in Figures 8 and 9. Artificial genomes are a good method to analyse deep learning networks on as the ground truth, which are the truth variants inside the genome, are already known. This allows accurate verification of prediction schemes and is a commonly used method to test next generation sequencing related software (Escalona, Rocha \& Posada, 2016). This is primarily because it is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called via Sanger sequencing. Thus, artificial genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform.
+As a first step towards developing a deep learning network, we generated a simulated genome with mutations using the hg19 genome from UCSC (Karolchik et al., 2014) as a reference. The simulated genome contains over 300,000 random mutations spread over the chromosomes as can be seen below in Figures 8 and 9. Simulated genomes are a suitable method to analyse deep learning networks with, as the ground truth, which are the truth variants inside the genome, are already known. This allows accurate verification of prediction schemes and is a commonly used method to test next generation sequencing related software (Escalona, Rocha \& Posada, 2016). This is primarily because it is difficult to obtain complete truth datasets for real genomes as due to the inhibitory cost of checking every variant called via Sanger sequencing. Thus, simulated genomes present a simple way to simulate NGS data with perfectly known ground truth variants to test our validation platform.
 
 \begin{figure}[H]
 \centering
@@ -238,21 +238,21 @@ As a first step towards developing a deep learning network, we generated a mutat
 \end{figure}
 
 \subsection{Feature Engineering}
-Deep learning requires features to be vectorised and normalised to be used as input data. We engineered a set of 19 features to use as input data for our deep learning network, using data obtained from the variant callers themselves as well as engineering other features from the dataset. A summary of the features used in training can be found in Table 1, and a description of the full list of features can be found in Appendix 5.2. Features were engineered based on obtaining information on the main aspects of variant calling, which includes the information contained in the sample bases (Base Quality, Entropy, Kullback–Leibler divergence, etc.), the confidence we have in the calling and alignment (Read Depth, Mapping Quality etc) and finally possible biases in the sequencing machine (Allele Balance, Allele Count, GC content).
+Deep learning requires features to be vectorised and normalised to be used as input data. We engineered a set of 20 features to use as input data for our deep learning network, using data obtained from the variant callers themselves as well as engineering other features from the dataset. A summary of the features used in training can be found in Table 1, and a description of the full list of features can be found in Appendix 5.2. Features were engineered based on obtaining information on the main aspects of variant calling, which includes the information contained in the sample bases (Base Quality, Entropy, Kullback–Leibler divergence, etc.), the confidence we have in the calling and alignment (Read Depth, Mapping Quality etc) and finally possible biases in the sequencing machine (Allele Balance, Allele Count, GC content).
 
 \begin{table}[H]
-\caption{\textbf{Feature Engineering Table}}
+\caption{\textbf{Key Features Engineered from each Caller.}}
 \includegraphics[width=\textwidth]{featureengineering.png}
 \centering
 \end{table}
 \subsection{Variant Callers}
 Variant callers were chosen for our deep learning neural network based on their orthogonal calling and reference methodologies -- we wanted to optimise the information that the neural network receives (See Table 2). We used two haplotype-based callers, FreeBayes (Garrison \& Marth, 2012) and GATK Haplotype Caller (McKenna et al. 2010, DePristo et al. 2011), two position based callers GATK Unified Genotyper and Samtools (Li H, et al., 2009) and finally Pindel, a pattern growth based caller (Ye et al., 2009). When we analysed the concordance rates of the callers on the simulated dataset, we found a high amount call discordance (Figure 10).
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{callconcordances.png}
+\includegraphics[width=\textwidth]{venndiagram.jpg}
 \centering
 \caption{\textbf{Concordance of Callers on Simulated Dataset}}
 \end{figure} 
-Of all the callers, Pindel was the most discordant caller, with over 1.6 million\ (55.6\%) unique calls that are different from other calls. Samtools was also very discordant, with over 800 thousand unique calls (27.1\%) that were unique from the other callers, followed by FreeBayes at 80,000 calls. Interestingly, a high amount of calls (about 100,000) also exists in the intersection of only two callers. Discordance in the variant callers can be explained by the different methodologies that they use to call variants (Table 2). Due to implementation and design choices, as well as statistical methods, each variant caller has a different calling profile. Discordance in the callers provides a strong argument using deep learning to integrate the information from all the callers in a sophisticated manner.\\
+Of all the callers, Pindel was the most discordant caller, with over 1.6 million\ (55.6\%) unique calls that are different from other calls. Samtools was also discordant, with over 800 thousand unique calls (27.1\%) that were unique from the other callers, followed by FreeBayes at 80,000 calls. Interestingly, a high amount of calls (about 100,000) was called by exactly two callers. Discordance in the variant callers can be explained by the different methodologies that they use to call variants (Table 2). Due to implementation and design choices, as well as statistical methods, each variant caller has a different calling profile. Discordance in the callers provides a strong argument using deep learning to integrate the information from all the callers in a sophisticated manner.\\
 
 \begin{table}[H]
 \caption{\textbf{Comparison of Different Methods and Features of Variant Callers.}}
@@ -261,7 +261,7 @@ Of all the callers, Pindel was the most discordant caller, with over 1.6 million
 \end{table}
 
 \subsection{Network Architecture}
-Next, we tested out various neural network architectures to see which architecture would perform the best for our set of input features. We first explored the flat architecture (Figure 11), which contains stacks of fully connected layers with multiple nodes (initially seven layers, with 80 nodes per layer). This is the simplest architecture, where all the features are loaded onto a single vector, and this entire vector is used as an input to train the neural network. We next explored the PCA + flat architecture which had the same neural network architecture but before the input data was fed into the network, a Principal Components Analysis was done to reduce the dataset to 8 principal components which were then used as input data for the neural network (please see Appendix 5.3 for more details of the PCA analysis). Principal components analysis is a dimensionality reduction technique that enables a compressed representation of data. Each principal component is a linear summation of the original features ($X$) in the form 
+Next, we tested out various neural network architectures to see which architecture would perform the best for our set of input features. We first explored the flat architecture (Figure 11), which contains stacks of fully connected layers with multiple nodes (initially seven layers, with 80 nodes per layer). This is the simplest architecture, where all the features are loaded onto a single vector, and this entire vector is used as an input to train the neural network. We next explored the PCA + flat architecture which had the same neural network architecture but before the input data was fed into the network, a Principal Components Analysis was done to reduce the dataset to 8 principal components which were then used as input data for the neural network (please see Appendix 5.3.1 for more details of the PCA analysis). Principal components analysis is a dimensionality reduction technique that enables a compressed representation of data. Each principal component is a linear summation of the original features ($X$) in the form 
 \begin{align*}
 &PC_1 = \beta_{1,1}*X_{1} + \beta_{2,1} X_{2} +... + \beta_{n,1} X_n \\
 &... \\
@@ -396,7 +396,7 @@ Studying the top 5 genes, we found that four of these five genes have been impli
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{sprr1adataset.png}
+\includegraphics[width=0.5\textwidth]{sprr1adataset.jpg}
 \caption{ \textbf{5 Year Survival Curve of Patients with SPRR1A+ and SPRR1A-  DLBCL.} Source : Zhang et al. (2014), Figure 2.}
 \end{figure}
 
@@ -490,17 +490,29 @@ Where P is the Base Quality, and Q is the probability that the allele called is 
 This feature computes the calculated GC content of reference genome, which may affect sequencing results and accuracy as regions with a GC content are known to be more difficult to sequence. This is because of the greater strength of GC bonds, resulting in errors and biases in sequencing (Benjamini \& Speed, 2012).\\\\ 
 \underline{Longest homozygous run}\\*
 Homopolymer runs (AAAAAAAA) are known to cause sequencer errors (Quail et al.,2012), and might be a factor in determining whether a variant is true. This because long homopolymers provide the same type of signal to the sequencing machine, resulting in a difficult in estimating the magnitude of the signal or rather how many bases are in that homopolymer, resulting in errors and wrongly called variants. The reference sequence region including the allele was checked for homopolymer runs. \\\\
-\underline{Allele Count and Allele Balance}\\
-Allele count gives the total number of alleles in called phenotypes, while allele balance gives the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). Both these features give us information of possible biases in the sequencing machine.\\\\
+\underline{Allele Count}\\
+Allele count gives the total number of alleles in called phenotypes. This feature provides information of possible biases in the sequencing machine.\\\\
+\underline{Allele Balance}\\
+Allele Balance describes the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). This feature give us information of possible biases in the sequencing machine. \\\\
+\underline{Allele Frequency}\\
+Allele Frequency describes the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). This feature give us information of possible biases in the sequencing machine. \\\\
 \subsubsection{Calling and Mapping Qualities}
 \underline{Genotype Likelihood}\\
 The genotype likelihood provides the Phred-scaled likelihood scores of how confident the caller is in determining that it is a homozygous or heterozygous call, and for the homozygous calls whether it is a more likely to be a bi-allelic mutation or no mutation at all. This feature thus gives us the confidence of the caller in determining if one or two alleles have mutated. \\\\ 
 \underline{Read Depth}\\
 Mapped read depth refers to the number of bases sequenced and aligned at a given reference base position. The read depth tells us how many reads contributed to a specific call, and thus provides information on how much evidence there is for the variant call\\\\
+\underline{Read Depth, 4 Variables}\\
+This feature is a refinement of Read Depth, and provides 4 variables for the number of forward reference alleles, the number of reverse reference alleles, the number of  forward non-ref alleles and finally the number of reverse non-reference alleles.\\\\
+\underline{Allele Depth}\\
+This feature is a refinement of Read Depth, and describes the number of alleles supporting the variant call.\\\\
 \underline{Quality by Depth}\\*
 Quality by Depth is computed by dividing the quality score against allele depth, to obtain an average score of allele quality. This composite feature provides information on the information provided by each read supporting the call\\\\
 \underline{Mapping Quality}\\
 Mapping quality is originally a score provided by the alignment method and gives the probability that a read is placed accurately. The variant callers compute an overall mapping quality of the reads that provide evidence for a variant call which is given in this feature. A low mapping quality means that there are multiple positions where the reads contributing to this variant call could have gone, and thus providing evidence that this might not be an accurate call due to poor mapping.\\\\
+\underline{Mapping Quality of Observed Reference Alleles}\\
+This feature is a refinement of Mapping Quality, and describes the mapping quality of observed reference alleles.\\\\
+\underline{Mapping Quality of Observed Alternate Alleles}\\
+This feature is a refinement of Mapping Quality, and describes the mapping quality of observed alternate alleles.\\\\
 \newpage
 \subsection{Mathematical and Statistical Tools}
 \subsubsection{Derivation of F1 Score}
@@ -523,7 +535,7 @@ Precision tells us how likely a positive prediction made will be true, while rec
 \end{equation}
 \\
 \subsubsection{Principal Components Analysis (PCA)}
-Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduction. It was first proposed by Pearson in 1901 (Pearson, 1901) and has been commonplace in many data analytics and signal processing methodologies (Jolliffe, 2002). PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs can capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector can represent. Ultimately, we select n eigenvectors that can represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they can capture the variance in the dataset. For our analysis, we decided to use eight principal components -- we took the limit as the last principal component that was able to represent at least 0.5\% of the variance in the dataset (Figure 29).
+Principal Components Analysis (PCA) is a commonly used tool for dimensionality reduction. It was first proposed by Pearson in 1901 (Pearson, 1901) and has been commonplace in many data analytics and signal processing methodologies (Jolliffe, 2002). PCA works by attempting to discover orthogonal principal components (PCs) that are able to represent the original data. Specifically, this means that the PCs can capture variance in the datasets. This is done by finding the Eigenvalues and Eigenvectors of the dataset, with the eigenvectors representing a linear combination of all input variables and the eigenvalues representing the amount of variance that that eigenvector can represent. Ultimately, we select n eigenvectors that can represent a percentage of variance in our dataset. Because each eigenvector is orthogonal, they can capture the variance in the dataset.\\\\ For our analysis, we decided to use eight principal components -- we took the limit as the last principal component that was able to represent at least 0.5\% of the variance in the dataset (Figure 29).
  
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{variancecapturedbypc.jpg}

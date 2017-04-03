@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Pipelining}{12}
 \contentsline {subsubsection}{\numberline {2.2.3}Deep Learning}{12}
 \contentsline {subsubsection}{\numberline {2.2.4}Gene Ranking}{12}
-\contentsline {subsection}{\numberline {2.3}Artificial Datasets}{12}
+\contentsline {subsection}{\numberline {2.3}Simulated Datasets}{12}
 \contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling}{13}
 \contentsline {subsection}{\numberline {2.5}Feature Engineering}{13}
 \contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{15}
