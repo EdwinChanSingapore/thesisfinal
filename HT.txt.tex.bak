@@ -2,7 +2,7 @@
 \usepackage{listings}
 \usepackage{minted}
 \usepackage{lipsum}
-\usepackage[a4paper, bindingoffset=0.4in,left=1in,right=1in,top=1.4in,bottom=1.4in]{geometry}
+\usepackage[a4paper, bindingoffset=0.2in,margin=1.2in]{geometry}
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hanging}
@@ -450,7 +450,7 @@ This is the backpropagation step, which involves backpropagating the error terms
 \beta^n_{yi} = \beta^{n-1}_{yi} - \alpha \frac{\partial{E_n}(\beta)}{\partial{\beta_i}}
 \end{equation}
 Here, each $\beta$ term indicates a gradient, $\alpha$ is a constant for the learning rate and $\frac{\partial{E_n}(\beta)}{\partial{\beta_i}}$ is the term used to modify the weight of the gradient based on the cost function ${E_n}(\beta)$. The idea used in all backpropagation functions is gradient descent, where the contribution of the gradient term to the error is computed, and the gradient is changed by an amount in order to reduce the future contribution of the gradient to that error. 
-\subsubsection{Cost Function and Backpropagation}
+\subsubsection{Cost Function in Gradient Descent}
 Here it is useful to consider what the cost function ${E_n}(\beta)$ is. It is essentially the error rate when a set of gradients is used to perform predictions, as it measures how many accurate predictions were made and how many wrong predictions were made. For a binary class predictor (which is what we are using, only true and false), this is given by the equation
 \begin{equation}
 E(\beta) = - \frac{1}{n}\sum_{i=1}^{n}{\sum_{j=1}^{2}y_{ij}log(p_{ij})}
@@ -462,7 +462,7 @@ where $y_{ij}$ indicates the empirically observed probabilities of each class la
 \caption{\textbf{Graphical Illustration of Gradient Descent.} Gradient descent attempts to find the gradient at which the cost function is minimised (since the cost function depends on the gradient).}
 \centering
 \end{figure}
- This is best seen in Figure 27 above, where the gradient or specifically the partial differentiation of the cost function with regards to each gradient is used to move the gradient to a new position so as to minimise the error term. Thus, machine learning is, in essence, a minimisation problem -- we want to find a set of weights that minimises the cost function, and because the cost function describes how many predictions we made correctly, this is also training our network to accurately predict outputs from inputs.
+ This is best seen in Figure 27 above, where the gradient or specifically the partial differentiation of the cost function with regards to each gradient is used to move the gradient to a new position so as to minimise the error term. Thus, machine learning is, in essence, a minimisation problem -- we want to find a set of weights that minimises the cost function. Because the cost function describes how many predictions we made correctly, gradient descent essentially trains our network to accurately predict outputs from inputs.
 
 \newpage
 \subsection{Feature Engineering}
@@ -474,7 +474,7 @@ Shannon Entropy captures the amount of information contained in the allele seque
 H(X) = -\sum_{i=1}^{n}P(x_i)\log_{2}P(x_i)
 \end{equation}
 where $P(x_i)$ is the probability of finding each base at each position. Thus, we calculate the entropy by summing up the probabilities/log(probabilities) at each position. This prior probability is calculated in two ways, and both are used as features -- firstly, the overall genome base probabilities are calculated over the entire genome, and thus the entropy is related to the probability of finding a base at any position in the genome. The second way prior probability is calculated is to take a region of space around the allele (10 bases plus the length of the allele in our calculations) and use those probabilities to calculate the entropy of the allelic sequence. Intuitively, it attempts to find out the amount of information contained within the allelic sequence, and hopefully, the neural network can use the information to determine the validity of a mutation.\\\\
-\underline{Kullback Leibler Divergence}\\
+\underline{Kullback Leibler Divergence}\\*
 The Kullback-Leibler Divergence feature is similar to Shannon entropy, but instead, we use this to measure the informational change converting from the reference to the allele sequence. The Kullback-Leibler Divergence is calculated as follows:
 \begin{equation}
 D_{KL}(P||Q) = -\sum_{i=1}^{n}P(x_i)\log_{2}{\frac{P(x_i)}{Q(x_i)}}
@@ -487,7 +487,7 @@ Where P is the Base Quality, and Q is the probability that the allele called is 
 \subsubsection{Sequencing Biases and Errors}
 \underline{GC content}\\
 This feature computes the calculated GC content of reference genome, which may affect sequencing results and accuracy as regions with a GC content are known to be more difficult to sequence. This is because of the greater strength of GC bonds, resulting in errors and biases in sequencing (Benjamini \& Speed, 2012).\\\\ 
-\underline{Longest homozygous run}\\
+\underline{Longest homozygous run}\\*
 Homopolymer runs (AAAAAAAA) are known to cause sequencer errors (Quail et al.,2012), and might be a factor in determining whether a variant is true. This because long homopolymers provide the same type of signal to the sequencing machine, resulting in a difficult in estimating the magnitude of the signal or rather how many bases are in that homopolymer, resulting in errors and wrongly called variants. The reference sequence region including the allele was checked for homopolymer runs. \\\\
 \underline{Allele Count and Allele Balance}\\
 Allele count gives the total number of alleles in called phenotypes, while allele balance gives the ratio of final allele called over all other alleles called(reference allele for heterozygous calls, or other alleles for homozygous calls). Both these features give us information of possible biases in the sequencing machine.\\\\
@@ -556,7 +556,7 @@ In doing so, it creates a more generalised representation of the sample class wi
 
 \end{list}
 
-\newgeometry{a4paper, margin=1in}
+\newgeometry{a4paper,bindingoffset=0.2in, margin=1in}
 \newpage
 \section{Relevant Code}
 3 code segments are provided to clarify the implementation of generating the matrixes for deep learning, deep learning networks and finally bayesian networks. Other code segments not shown include the code base for parsing vcf input into features, concordance generators, NextFlow and Bash code used to simulate and process genomic data as well as to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).

@@ -2,7 +2,7 @@
 \usepackage{listings}
 \usepackage{minted}
 \usepackage{lipsum}
-\usepackage[a4paper, bindingoffset=0.4in,left=1in,right=1in,top=1.4in,bottom=1.4in]{geometry}
+\usepackage[a4paper, bindingoffset=0.2in,margin=1.2in]{geometry}
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hanging}
@@ -556,7 +556,7 @@ In doing so, it creates a more generalised representation of the sample class wi
 
 \end{list}
 
-\newgeometry{a4paper, margin=1in}
+\newgeometry{a4paper,bindingoffset=0.2in, margin=1in}
 \newpage
 \section{Relevant Code}
 3 code segments are provided to clarify the implementation of generating the matrixes for deep learning, deep learning networks and finally bayesian networks. Other code segments not shown include the code base for parsing vcf input into features, concordance generators, NextFlow and Bash code used to simulate and process genomic data as well as to control deep learning and analytic pipelines, and other python helper scripts (e.g. comparing two VCF files, analysis with pre-trained network).

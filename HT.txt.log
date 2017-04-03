@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 09:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 09:42
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -1158,17 +1158,17 @@ LaTeX Font Info:    ... okay on input line 23.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* bindingoffset: 28.90755pt
+* bindingoffset: 14.45377pt
 * modes: 
-* h-part:(L,W,R)=(72.26999pt, 424.06035pt, 72.26999pt)
-* v-part:(T,H,B)=(101.17755pt, 642.69174pt, 101.17755pt)
+* h-part:(L,W,R)=(86.72377pt, 409.60657pt, 86.72377pt)
+* v-part:(T,H,B)=(86.72377pt, 671.5993pt, 86.72377pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=424.06035pt
-* \textheight=642.69174pt
+* \textwidth=409.60657pt
+* \textheight=671.5993pt
 * \oddsidemargin=28.90755pt
-* \evensidemargin=0.0pt
-* \topmargin=-8.09244pt
+* \evensidemargin=14.45378pt
+* \topmargin=-22.54622pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -1249,7 +1249,7 @@ ile (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/ngsreads.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/ngs
 reads.png used on input line 106.
-(pdftex.def)             Requested size: 424.06035pt x 248.68138pt.
+(pdftex.def)             Requested size: 409.60657pt x 240.20444pt.
  [2]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/f1scorerealdatasets.png, id
 =34, 328.8285pt x 218.61674pt>
@@ -1260,7 +1260,7 @@ g Graphic file (type png)
 >
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/f1s
 corerealdatasets.png used on input line 113.
-(pdftex.def)             Requested size: 339.24957pt x 225.55469pt.
+(pdftex.def)             Requested size: 327.6865pt x 217.86563pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 110--116
 
@@ -1286,7 +1286,7 @@ e (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuron.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ron.png used on input line 123.
-(pdftex.def)             Requested size: 339.24957pt x 348.76996pt.
+(pdftex.def)             Requested size: 327.6865pt x 336.88412pt.
  [5]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png, id=47, 562.1
 pt x 280.04625pt>
@@ -1296,7 +1296,7 @@ file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnet.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnet.png used on input line 132.
-(pdftex.def)             Requested size: 424.06035pt x 211.27336pt.
+(pdftex.def)             Requested size: 409.60657pt x 204.0731pt.
  [6 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuron.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/samplebayesiannetwork.png, 
 id=52, 363.759pt x 163.812pt>
@@ -1329,7 +1329,7 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/trainingpathway.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/tra
 iningpathway.png used on input line 154.
-(pdftex.def)             Requested size: 339.24957pt x 428.57082pt.
+(pdftex.def)             Requested size: 327.6865pt x 413.95792pt.
 
 [10] [11 <c:/Users/User/Documents/thesis/Thesis/thesisimages/trainingpathway.pn
 g>]
@@ -1346,7 +1346,7 @@ phic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/readsimulation.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/rea
 dsimulation.png used on input line 174.
-(pdftex.def)             Requested size: 424.06035pt x 115.50668pt.
+(pdftex.def)             Requested size: 409.60657pt x 111.5709pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 183--187
 
@@ -1367,15 +1367,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--217
 
  []
 
-[14]
-Overfull \hbox (2.70909pt too wide) in paragraph at lines 219--219
-[]\OT1/cmr/bx/n/12 Patient De-rived Xenograft Mouse Model De-vel-op-ment and Se
--quenc-
- []
-
-[15] [16]
+[14] [15]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationInSimulatedGenome.j
-pg, id=99, 659.3433pt x 337.9827pt>
+pg, id=96, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationInSimulatedGen
 ome.jpg Graphic file (type jpg)
 
@@ -1383,10 +1377,10 @@ ome.jpg Graphic file (type jpg)
 me.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/Mut
 ationInSimulatedGenome.jpg used on input line 229.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationRateInSimulatedGeno
-me.jpg, id=100, 659.3433pt x 337.9827pt>
+me.jpg, id=97, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationRateInSimulate
 dGenome.jpg Graphic file (type jpg)
 
@@ -1394,39 +1388,39 @@ dGenome.jpg Graphic file (type jpg)
 Genome.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/Mut
 ationRateInSimulatedGenome.jpg used on input line 235.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [17 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationInSimulatedGen
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [16 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationInSimulatedGen
 ome.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png, id=
-104, 807.015pt x 205.9695pt>
+101, 807.015pt x 205.9695pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png
  Graphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineering.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/fea
 tureengineering.png used on input line 244.
-(pdftex.def)             Requested size: 424.06035pt x 108.22987pt.
+(pdftex.def)             Requested size: 409.60657pt x 104.54019pt.
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/callconcordances.png, id=10
-5, 328.8285pt x 303.534pt>
+2, 328.8285pt x 303.534pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/callconcordances.png G
 raphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/callconcordances.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/cal
 lconcordances.png used on input line 250.
-(pdftex.def)             Requested size: 424.06035pt x 391.45395pt.
+(pdftex.def)             Requested size: 409.60657pt x 378.11508pt.
 
-[18 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationRateInSimulated
+[17 <c:/Users/User/Documents/thesis/Thesis/thesisimages/MutationRateInSimulated
 Genome.jpg> <c:/Users/User/Documents/thesis/Thesis/thesisimages/featureengineer
 ing.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 254--255
 
  []
 
-[19 <c:/Users/User/Documents/thesis/Thesis/thesisimages/callconcordances.png>]
+[18 <c:/Users/User/Documents/thesis/Thesis/thesisimages/callconcordances.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcallers.pn
-g, id=112, 800.9925pt x 424.58624pt>
+g, id=109, 800.9925pt x 424.58624pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcalle
 rs.png Graphic file (type png)
 
@@ -1434,11 +1428,11 @@ rs.png Graphic file (type png)
 s.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/ana
 lysisofvariantcallers.png used on input line 258.
-(pdftex.def)             Requested size: 424.06035pt x 224.78992pt.
- [20 <c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcalle
+(pdftex.def)             Requested size: 409.60657pt x 217.12567pt.
+ [19 <c:/Users/User/Documents/thesis/Thesis/thesisimages/analysisofvariantcalle
 rs.png>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure.png,
- id=117, 515.526pt x 321.6015pt>
+ id=113, 515.526pt x 321.6015pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
 .png Graphic file (type png)
 
@@ -1446,10 +1440,10 @@ File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
 png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnetworkstructure.png used on input line 273.
-(pdftex.def)             Requested size: 424.06035pt x 264.55406pt.
+(pdftex.def)             Requested size: 409.60657pt x 255.53456pt.
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructureresul
-ts.jpg, id=118, 659.3433pt x 337.9827pt>
+ts.jpg, id=114, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
 results.jpg Graphic file (type jpg)
 
@@ -1457,8 +1451,8 @@ results.jpg Graphic file (type jpg)
 esults.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnetworkstructureresults.jpg used on input line 279.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [21 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [20 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructure
 .png>]
 Underfull \hbox (badness 10000) in paragraph at lines 286--287
 
@@ -1469,10 +1463,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 286--287
 
  []
 
-[22 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructurer
+[21 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkstructurer
 esults.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitecturefi
-nal.png, id=125, 489.027pt x 331.2375pt>
+nal.png, id=122, 489.027pt x 331.2375pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitect
 urefinal.png Graphic file (type png)
 
@@ -1480,10 +1474,10 @@ urefinal.png Graphic file (type png)
 refinal.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnetworkarchitecturefinal.png used on input line 290.
-(pdftex.def)             Requested size: 424.06035pt x 287.2443pt.
- [23]
+(pdftex.def)             Requested size: 409.60657pt x 277.45418pt.
+
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructuredataset.jpg
-, id=129, 659.3433pt x 337.9827pt>
+, id=123, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructuredatase
 t.jpg Graphic file (type jpg)
 
@@ -1491,8 +1485,8 @@ t.jpg Graphic file (type jpg)
 .jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/net
 workstructuredataset.jpg used on input line 296.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [24 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitect
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [22 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworkarchitect
 urefinal.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
@@ -1505,18 +1499,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg, id=1
-33, 659.3433pt x 337.9827pt>
+27, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg 
 Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/opt
 imiserlearning.jpg used on input line 304.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
 
-[25 <c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructuredataset
+[23 <c:/Users/User/Documents/thesis/Thesis/thesisimages/networkstructuredataset
 .jpg>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg, id=137, 
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg, id=131, 
 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg Grap
 hic file (type jpg)
@@ -1524,12 +1518,12 @@ hic file (type jpg)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/lea
 rningrates.jpg used on input line 310.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
 
-[26 <c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg>]
+[24 <c:/Users/User/Documents/thesis/Thesis/thesisimages/optimiserlearning.jpg>]
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingmethod
-s.jpg, id=142, 266.9172pt x 119.4864pt>
+s.jpg, id=135, 266.9172pt x 119.4864pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingm
 ethods.jpg Graphic file (type jpg)
 
@@ -1537,10 +1531,10 @@ ethods.jpg Graphic file (type jpg)
 thods.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/com
 parisonofbalancingmethods.jpg used on input line 318.
-(pdftex.def)             Requested size: 424.06035pt x 189.83842pt.
- [27 <c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg>]
+(pdftex.def)             Requested size: 409.60657pt x 183.36783pt.
+ [25 <c:/Users/User/Documents/thesis/Thesis/thesisimages/learningrates.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results_all.
-jpg, id=146, 659.3433pt x 337.9827pt>
+jpg, id=139, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
 _all.jpg Graphic file (type jpg)
 
@@ -1548,11 +1542,11 @@ _all.jpg Graphic file (type jpg)
 all.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/fin
 al_f1scores_results_all.jpg used on input line 325.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [28 <c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingm
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [26 <c:/Users/User/Documents/thesis/Thesis/thesisimages/comparisonofbalancingm
 ethods.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison.jpg,
- id=150, 659.3433pt x 337.9827pt>
+ id=144, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison
 .jpg Graphic file (type jpg)
 
@@ -1560,11 +1554,11 @@ File: c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison
 jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/mas
 onheadsupcomparison.jpg used on input line 331.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [29 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [27 <c:/Users/User/Documents/thesis/Thesis/thesisimages/final_f1scores_results
 _all.jpg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jpg, id
-=154, 659.3433pt x 337.9827pt>
+=148, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparison.jp
 g Graphic file (type jpg)
 
@@ -1572,16 +1566,16 @@ g Graphic file (type jpg)
 >
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/nah
 eadsupcomparison.jpg used on input line 339.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 337--342
 
  []
 
-[30 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison.
-jpg>] [31 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparis
+[28 <c:/Users/User/Documents/thesis/Thesis/thesisimages/masonheadsupcomparison.
+jpg>] [29 <c:/Users/User/Documents/thesis/Thesis/thesisimages/naheadsupcomparis
 on.jpg>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png, id=161
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png, id=155
 , 449.2785pt x 225.84375pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png Gr
 aphic file (type png)
@@ -1589,9 +1583,9 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bay
 esiannetwork.png used on input line 350.
-(pdftex.def)             Requested size: 424.06035pt x 213.17879pt.
+(pdftex.def)             Requested size: 409.60657pt x 205.91098pt.
 
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png, id=162
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png, id=156
 , 622.7265pt x 291.489pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png Gr
 aphic file (type png)
@@ -1599,9 +1593,9 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/ann
 ovarfeatures.png used on input line 359.
-(pdftex.def)             Requested size: 424.06035pt x 198.49455pt.
+(pdftex.def)             Requested size: 409.60657pt x 191.7295pt.
 
-[32 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>]
+[30 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesiannetwork.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 363--364
 
  []
@@ -1611,8 +1605,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 368--374
 
  []
 
-[33 <c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png, id=172, 
+[31 <c:/Users/User/Documents/thesis/Thesis/thesisimages/annovarfeatures.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png, id=165, 
 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png Grap
 hic file (type png)
@@ -1620,19 +1614,19 @@ hic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bay
 esianranks.png used on input line 382.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png, id=
-173, 604.659pt x 327.624pt>
+166, 604.659pt x 327.624pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png
  Graphic file (type png)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/top
 5importantgenes.png used on input line 392.
-(pdftex.def)             Requested size: 424.06035pt x 229.77014pt.
-[34 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png, id=178, 
+(pdftex.def)             Requested size: 409.60657pt x 221.93651pt.
+[32 <c:/Users/User/Documents/thesis/Thesis/thesisimages/bayesianranks.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png, id=172, 
 339.669pt x 353.52075pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png Grap
 hic file (type png)
@@ -1640,9 +1634,9 @@ hic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/spr
 r1adataset.png used on input line 398.
-(pdftex.def)             Requested size: 212.03017pt x 220.6802pt.
+(pdftex.def)             Requested size: 204.80328pt x 213.16057pt.
 
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png, id=179, 361
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png, id=173, 361
 .95226pt x 358.33875pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png Graphic
  file (type png)
@@ -1650,12 +1644,11 @@ File: c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png Graphic
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/cir
 cosplot.png used on input line 406.
-(pdftex.def)             Requested size: 424.06035pt x 419.8397pt.
+(pdftex.def)             Requested size: 409.60657pt x 405.53047pt.
 
-[35 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
+[33 <c:/Users/User/Documents/thesis/Thesis/thesisimages/top5importantgenes.png>
  <c:/Users/User/Documents/thesis/Thesis/thesisimages/sprr1adataset.png>]
-[36 <c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>]
-[37]
+[34 <c:/Users/User/Documents/thesis/Thesis/thesisimages/circosplot.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 417--418
 
  []
@@ -1665,14 +1658,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 417--418
 
  []
 
-[38] [39]
+[35] [36]
 Underfull \hbox (badness 10000) in paragraph at lines 421--422
 
  []
 
-[40]
+[37]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.png, id
-=200, 316.7835pt x 189.1065pt>
+=190, 316.7835pt x 189.1065pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
 g Graphic file (type png)
 
@@ -1681,9 +1674,9 @@ g Graphic file (type png)
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnetworksample.png used on input line 432.
 (pdftex.def)             Requested size: 316.78271pt x 189.10603pt.
- [41 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
+ [38 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
 g>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png, id=205
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png, id=196
 , 490.2315pt x 342.078pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png Gr
 aphic file (type png)
@@ -1691,10 +1684,10 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bac
 kpropagation.png used on input line 445.
-(pdftex.def)             Requested size: 339.24957pt x 236.72827pt.
+(pdftex.def)             Requested size: 327.6865pt x 228.65865pt.
 
-[42 <c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=209
+[39 <c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=200
 , 462.528pt x 246.9225pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png Gr
 aphic file (type png)
@@ -1702,10 +1695,10 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/gra
 dientdescent.png used on input line 461.
-(pdftex.def)             Requested size: 424.06035pt x 226.39905pt.
+(pdftex.def)             Requested size: 409.60657pt x 218.68274pt.
 
-[43] [44 <c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.pn
-g>]
+[40 <c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png>]
+[41]
 Underfull \hbox (badness 10000) in paragraph at lines 469--470
 
  []
@@ -1720,7 +1713,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 475--479
 
  []
 
-[45]
+[42]
 Underfull \hbox (badness 10000) in paragraph at lines 481--485
 
  []
@@ -1755,7 +1748,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 488--494
 
  []
 
-[46]
+[43]
 Underfull \hbox (badness 10000) in paragraph at lines 495--503
 
  []
@@ -1780,8 +1773,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 495--503
 
  []
 
-[47] [48]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=229
+[44] [45]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=220
 , 382.42876pt x 172.2435pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png Gr
 aphic file (type png)
@@ -1789,16 +1782,16 @@ aphic file (type png)
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/con
 fusionmatrix.png used on input line 508.
-(pdftex.def)             Requested size: 339.24957pt x 152.80211pt.
+(pdftex.def)             Requested size: 327.6865pt x 147.59561pt.
 
-[49 <c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>]
+[46 <c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 522--524
 
  []
 
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jpg, i
-d=233, 659.3433pt x 337.9827pt>
+d=224, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg Graphic file (type jpg)
 
@@ -1806,21 +1799,167 @@ pg Graphic file (type jpg)
 g>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/var
 iancecapturedbypc.jpg used on input line 528.
-(pdftex.def)             Requested size: 424.06035pt x 217.38087pt.
- [50 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
+(pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
+ [47 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg, id=2
-38, 351.714pt x 158.994pt>
+28, 351.714pt x 158.994pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg 
 Graphic file (type jpg)
 
 <use c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/smo
 teoversampling.jpg used on input line 538.
-(pdftex.def)             Requested size: 424.06035pt x 191.7113pt.
+(pdftex.def)             Requested size: 409.60657pt x 185.17795pt.
 
-[51 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
+[48 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
 
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+[50]
+Overfull \hbox (3.6628pt too wide) in paragraph at lines 554--554
+[]\OT1/cmr/m/n/10 Emara, M., Turner, A. R., & Allalunis-Turner, J. (2014). Adul
+t, em-bry-onic and fe-tal hemoglobin
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 554--554
+
+ []
+
+[51]
 Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
@@ -1955,11 +2094,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
 [54]
 Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
@@ -2000,12 +2134,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
 
-
+[55]
 Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
 
-[55]
+
 Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
@@ -2116,142 +2250,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--554
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-[58]
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-[59]
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-[60]
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 554--554
-
- []
-
-
-Overfull \hbox (14.0887pt too wide) in paragraph at lines 554--554
+Overfull \hbox (28.54248pt too wide) in paragraph at lines 554--554
 []\OT1/cmr/m/n/10 Zeiler, M. D. (2012). ADADELTA: an adap-tive learn-ing rate m
 ethod. arXiv preprint arXiv:1212.5701. 
  []
@@ -2261,7 +2260,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
 
-[61]
+
 Underfull \hbox (badness 10000) in paragraph at lines 554--554
 
  []
@@ -2271,7 +2270,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--555
 
  []
 
-[62]
+[58] [59]
 
 Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 
@@ -2280,14 +2279,15 @@ Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
+* bindingoffset: 14.45377pt
 * modes: 
-* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
+* h-part:(L,W,R)=(72.26999pt, 438.51413pt, 72.26999pt)
 * v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=452.9679pt
+* \textwidth=438.51413pt
 * \textheight=700.50687pt
-* \oddsidemargin=0.0pt
+* \oddsidemargin=14.45377pt
 * \evensidemargin=0.0pt
 * \topmargin=-37.0pt
 * \headheight=12.0pt
@@ -2314,19 +2314,19 @@ Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 B.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 14.
- [63
+ [60
 
-] [64] [65] [66] [67] [68] [69] [70] [71])
+] [61] [62] [63] [64] [65] [66] [67] [68])
 \openout3 = `HT.txt.pyg'.
 
 
 (_minted-HT.txt/B85D79633CB32D38A6E77E93497D5E651783A10277C0CC29BFFEC5BB6F4B264
-B.pygtex [72] [73] [74] [75] [76] [77] [78] [79] [80])
+B.pygtex [69] [70] [71] [72] [73] [74] [75] [76] [77])
 \openout3 = `HT.txt.pyg'.
 
 
 (_minted-HT.txt/4997910BF66F97E9C5DC9311827F542B1783A10277C0CC29BFFEC5BB6F4B264
-B.pygtex [81] [82] [83] [84] [85] [86]) [87] (HT.txt.aux)
+B.pygtex [78] [79] [80] [81] [82] [83] [84]) [85] (HT.txt.aux)
 runsystem(del HT.txt.pyg)...executed.
 
  )
@@ -2338,11 +2338,11 @@ runsystem(del HT.txt.pyg)...executed.
 Here is how much of TeX's memory you used:
  19132 strings out of 493334
  370384 string characters out of 3136675
- 548904 words of memory out of 3000000
+ 549900 words of memory out of 3000000
  22252 multiletter control sequences out of 15000+200000
  9512 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,15n,54p,17500b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,15n,54p,17500b,727s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
@@ -2361,9 +2361,9 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on HT.txt.pdf (92 pages, 3721355 bytes).
+Output written on HT.txt.pdf (90 pages, 3720103 bytes).
 PDF statistics:
- 417 PDF objects out of 1000 (max. 8388607)
+ 410 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  183 words of extra memory for PDF output out of 10000 (max. 10000000)
 
