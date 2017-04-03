@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 10:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.12.5)  3 APR 2017 16:40
 entering extended mode
 **./HT.txt.tex
 (HT.txt.tex
@@ -1658,14 +1658,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 418--419
 
  []
 
-[35] [36]
+
+Underfull \hbox (badness 10000) in paragraph at lines 418--419
+
+ []
+
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 420--421
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 420--421
+
+ []
+
+[36]
 Underfull \hbox (badness 10000) in paragraph at lines 422--423
 
  []
 
-[37]
+[37] [38]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.png, id
-=194, 316.7835pt x 189.1065pt>
+=197, 316.7835pt x 189.1065pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
 g Graphic file (type png)
 
@@ -1674,9 +1689,9 @@ g Graphic file (type png)
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/neu
 ralnetworksample.png used on input line 433.
 (pdftex.def)             Requested size: 316.78271pt x 189.10603pt.
- [38 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
+ [39 <c:/Users/User/Documents/thesis/Thesis/thesisimages/neuralnetworksample.pn
 g>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png, id=199
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png, id=202
 , 490.2315pt x 342.078pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png Gr
 aphic file (type png)
@@ -1686,8 +1701,8 @@ Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/bac
 kpropagation.png used on input line 446.
 (pdftex.def)             Requested size: 327.6865pt x 228.65865pt.
 
-[39 <c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=203
+[40 <c:/Users/User/Documents/thesis/Thesis/thesisimages/backpropagation.png>]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png, id=206
 , 462.528pt x 246.9225pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png Gr
 aphic file (type png)
@@ -1697,8 +1712,8 @@ Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/gra
 dientdescent.png used on input line 462.
 (pdftex.def)             Requested size: 409.60657pt x 218.68274pt.
 
-[40 <c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png>]
-[41]
+[41 <c:/Users/User/Documents/thesis/Thesis/thesisimages/gradientdescent.png>]
+[42]
 Underfull \hbox (badness 10000) in paragraph at lines 470--471
 
  []
@@ -1713,7 +1728,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 476--480
 
  []
 
-[42]
+[43]
 Underfull \hbox (badness 10000) in paragraph at lines 482--486
 
  []
@@ -1748,7 +1763,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 489--495
 
  []
 
-[43]
+[44]
 Underfull \hbox (badness 10000) in paragraph at lines 496--504
 
  []
@@ -1773,8 +1788,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 496--504
 
  []
 
-[44] [45]
-<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=223
+[45] [46]
+<c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png, id=226
 , 382.42876pt x 172.2435pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png Gr
 aphic file (type png)
@@ -1784,14 +1799,14 @@ Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/con
 fusionmatrix.png used on input line 509.
 (pdftex.def)             Requested size: 327.6865pt x 147.59561pt.
 
-[46 <c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>]
+[47 <c:/Users/User/Documents/thesis/Thesis/thesisimages/confusionmatrix.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 523--525
 
  []
 
 
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.jpg, i
-d=227, 659.3433pt x 337.9827pt>
+d=230, 659.3433pt x 337.9827pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg Graphic file (type jpg)
 
@@ -1800,10 +1815,10 @@ g>
 Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/var
 iancecapturedbypc.jpg used on input line 529.
 (pdftex.def)             Requested size: 409.60657pt x 209.97514pt.
- [47 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
+ [48 <c:/Users/User/Documents/thesis/Thesis/thesisimages/variancecapturedbypc.j
 pg>]
 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg, id=2
-31, 351.714pt x 158.994pt>
+34, 351.714pt x 158.994pt>
 File: c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg 
 Graphic file (type jpg)
 
@@ -1812,53 +1827,8 @@ Package pdftex.def Info: c:/Users/User/Documents/thesis/Thesis/thesisimages/smo
 teoversampling.jpg used on input line 539.
 (pdftex.def)             Requested size: 409.60657pt x 185.17795pt.
 
-[48 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
+[49 <c:/Users/User/Documents/thesis/Thesis/thesisimages/smoteoversampling.jpg>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-[49]
 Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
@@ -1904,17 +1874,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--555
  []
 
 [50]
-Overfull \hbox (3.6628pt too wide) in paragraph at lines 555--555
-[]\OT1/cmr/m/n/10 Emara, M., Turner, A. R., & Allalunis-Turner, J. (2014). Adul
-t, em-bry-onic and fe-tal hemoglobin
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 555--555
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
@@ -1960,6 +1919,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--555
  []
 
 [51]
+Overfull \hbox (3.6628pt too wide) in paragraph at lines 555--555
+[]\OT1/cmr/m/n/10 Emara, M., Turner, A. R., & Allalunis-Turner, J. (2014). Adul
+t, em-bry-onic and fe-tal hemoglobin
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
@@ -2134,12 +2104,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
 
-[55]
+
 Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
 
-
+[55]
 Underfull \hbox (badness 10000) in paragraph at lines 555--555
 
  []
@@ -2250,6 +2220,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--555
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+[58]
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
+
+ []
+
+
 Overfull \hbox (28.54248pt too wide) in paragraph at lines 555--555
 []\OT1/cmr/m/n/10 Zeiler, M. D. (2012). ADADELTA: an adap-tive learn-ing rate m
 ethod. arXiv preprint arXiv:1212.5701. 
@@ -2270,7 +2285,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--556
 
  []
 
-[58] [59]
+[59] [60]
 
 Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 
@@ -2314,19 +2329,19 @@ Package geometry Warning: `a4paper': not available in `\newgeometry'; skipped.
 B.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 14.
- [60
+ [61
 
-] [61] [62] [63] [64] [65] [66] [67] [68])
+] [62] [63] [64] [65] [66] [67] [68] [69])
 \openout3 = `HT.txt.pyg'.
 
 
 (_minted-HT.txt/B85D79633CB32D38A6E77E93497D5E651783A10277C0CC29BFFEC5BB6F4B264
-B.pygtex [69] [70] [71] [72] [73] [74] [75] [76] [77])
+B.pygtex [70] [71] [72] [73] [74] [75] [76] [77] [78])
 \openout3 = `HT.txt.pyg'.
 
 
 (_minted-HT.txt/3D596E6C6A31D9F769636E4181287DE91783A10277C0CC29BFFEC5BB6F4B264
-B.pygtex [78] [79] [80] [81] [82] [83] [84]) [85] (HT.txt.aux)
+B.pygtex [79] [80] [81] [82] [83] [84] [85]) [86] (HT.txt.aux)
 runsystem(del HT.txt.pyg)...executed.
 
  )
@@ -2338,7 +2353,7 @@ runsystem(del HT.txt.pyg)...executed.
 Here is how much of TeX's memory you used:
  19132 strings out of 493334
  370384 string characters out of 3136675
- 549900 words of memory out of 3000000
+ 548900 words of memory out of 3000000
  22252 multiletter control sequences out of 15000+200000
  9512 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2361,9 +2376,9 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on HT.txt.pdf (91 pages, 3720547 bytes).
+Output written on HT.txt.pdf (92 pages, 3722640 bytes).
 PDF statistics:
- 414 PDF objects out of 1000 (max. 8388607)
+ 417 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  183 words of extra memory for PDF output out of 10000 (max. 10000000)
 
