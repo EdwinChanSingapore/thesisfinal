@@ -6,7 +6,7 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{hanging}
-\usepackage{xcolor}
+%\usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -174,22 +174,15 @@ The overall goal of this project is to address the two major issues limiting the
 \section{Materials and Methods}
 
 \subsection{Overall Experimental Approach}
-
-
-As a first step in the development of deep learning networks for variant calling, we  built two main computational pipelines: (i) a training pipeline for training and the optimisation of the neural network, and (ii) an analysis pipeline that uses a trained neural network to perform variant prediction and validation (Figure 6). 
-
-In the training pipeline, training datasets from simulated and real sequencing data, were used for  performing the processing steps of alignment, variant calling and training of the deep learning network. Briefly, FASTQ sequence reads were first mapped to the reference genome before variant calling was performed using an ensemble of callers. The different variant calls were used to generate the feature vectors used for the inputs to the deep learning network. The predictions by the neural network were compared to the ground truth variant calls in order for adjustments to be made to the weights of the connections
-
- In the analysis pipeline, the trained optimized network from the training pipeline is then used to predict high confidence variant calls in naive samples without ground truth variant calls. In brief, the FASTQ sequence reads are aligned and variant calling performed in a similar fashion as in the training pipeline. The feature vectors from the ensemble of callers is used to predict high confidence calls using the trained optimized deep learning network.
- 
- Finally, we applied the Bayesian network analysis to rank the functionally important variants/mutations from the high confidence calls identified from naive samples in the analysis pipeline.
- 
+As a first step in the development of deep learning networks for variant calling, we  built two main computational pipelines: (i) a training pipeline for training and the optimisation of the neural network, and (ii) an analysis pipeline that uses a trained neural network to perform variant prediction and validation (Figure 6). \\\\
+In the training pipeline, training datasets from simulated and real sequencing data, were used for  performing the processing steps of alignment, variant calling and training of the deep learning network. Briefly, FASTQ sequence reads were first mapped to the reference genome before variant calling was performed using an ensemble of callers. The different variant calls were used to generate the feature vectors used for the inputs to the deep learning network. The predictions by the neural network were compared to the ground truth variant calls in order for adjustments to be made to the weights of the connections.\\\\
+ In the analysis pipeline, the trained optimized network from the training pipeline is then used to predict high confidence variant calls in naive samples without ground truth variant calls. In brief, the FASTQ sequence reads are aligned and variant calling performed in a similar fashion as in the training pipeline. The feature vectors from the ensemble of callers is used to predict high confidence calls using the trained optimized deep learning network.\\\\
+ Finally, we applied the Bayesian network analysis to rank the functionally important variants/mutations from the high confidence calls identified from naive samples in the analysis pipeline.\\\\
 \begin{figure}[H]
 \includegraphics[width=0.8\textwidth]{trainingpathway.png}
 \centering
 \caption{\textbf{Overall Structure of Computational Pipelines.} The pipelines were implemented using NextFlow, a domain-specific language for workflows}
 \end{figure}
-
 \subsection{Implementation of Computational Pipelines}
 \subsubsection{Workflow Management of Pipelines}
 The workflows in the training and analysis pipelines were managed using NextFlow,(v0.21.3.3990) a Groovy based Domain Specific Language (DSL) that provides easy management of parallel pipelines consisting of dependent tasks organized as a directed acyclic graph (Tommaso et al., 2014). Nextflow was used to manage and coordinate the different steps in the pipelines to ensure reproducibility and scalability.
@@ -199,30 +192,11 @@ The preprocessing and analytical components were implemented using Python (v2.7)
 Deep learning networks were implemented using the Keras library (v1.1.1) with a TensorFlow backend (v0.11.0). TensorFlow, from Google (Abadi et al., 2015), was used for better network training performance due to its distributed computation and queue management system. The code used to generate the feature vectors and train the neural network can be found in Relevant Code -- Section 7.1 and 7.2 respectively. For details on the algorithms used in deep learning are detailed in  Appendix 5.1.
 \subsubsection{Bayesian Network Ranking of Mutations}
 For the Bayesian ranking of mutations, the high confidence calls from the deep learning network were annotated using ANNOVAR (v2015Jun17) (Wang, Li, \& Hakonarson, 2010). The annotated features for each variant were used as inputs to the Bayesian network, which was implemented using Pomegranate (v0.6.1), a Python library for Bayesian analysis. The code for the  the Bayesian network can be found in Relevant Code -- Section 7.3.
-
-\subsection{Generation of Synthetic Dataset}
-Synthetic datasets were used for the initial training and optimization of the deep learning network. Variants based on the hg19 human reference genome were first simulated  using Mason (v2.3.1) with an indel rate of 0.00002 and a SNP rate of 0.00008, resulting in 229253 SNPs and 57257 indels.
-The sequence reads were next simulated with Mason using the ground truth variants and sequencing error rates (Figure 7). For  error rates, we used published data from Schirmer et al. (2016) -- the general substitution error rate used was 0.0004 per base in the genome, and the insertion and deletion error rate per base was $5*10^{-6}$.
-
-<<<<<<< HEAD
 \subsection{Simulated Datasets}
 Simulated genomes enable the simulation of NGS data with ground truths to test and validate a neural network. For our simulator, we used Mason, a genome mutation software written in C++ (v2.3.1) to mutate the hg19 reference genome from UCSC (Karolchik et al., 2014). We used indel rates of 0.00002 and SNP rates of 0.00008 to generate sufficient truth variants for analysis, which comprise 229253 SNPs and 57257 indels.\\\\
 After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants (Figure 7). For error rates, we used published data from Schirmer et al. (2016) as the input to Mason -- the general substitution error rate used was 0.0004 per base in the genome, and the insertion and deletion error rate per base were $5*10^{-6}$.
-=======
 \subsection{Alignment and Variant Calling of Sequence Reads} 
 The sequence reads (FASTQ) from simulated or real datasets were first aligned to the hg19 human reference genome using BWA (0.7.13) (Li, 2013) using the default settings. Following alignment, the alignment files (BAM) were used for variant calling with the following callers with their default settings: FreeBayes (v1.0.2-16); GATK Haplotype Caller (v3.7-0) and Unified Genotyper (v3.7-0); Samtools (v1.3.1); Pindel (v2.3.0) (Garrison \& Marth, 2012; McKenna et al. 2010, DePristo et al. 2011; Li H, et al., 2009; Ye et al., 2009). The overall process is shown in Figure 7.
->>>>>>> b6d3c19837f77aef347739cb834beff81a3de066
-
-\begin{figure}[H]
-\includegraphics[width=\textwidth]{readsimulation.png}
-\caption{\textbf{Pipeline for Simulation of Genomes for Analysis}}
-\centering
-\end{figure}
-
-\subsection{Feature Engineering for Deep Learning}
-The output of the variant callers was used to generate features in the form of numerical vectors for the input layer of the deep learning network. These features can be broadly categorized into 3 sets: (i) base-specific information; (ii) sequencing error and bias information; and (iii) calling and mapping quality. 
-
-<<<<<<< HEAD
 \subsection{Feature Engineering}
 In order to train a neural network, features in the form of numerical vectors must be used as an input. We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Here we describe the computation of the key features -- please see Appendix 5.2 for a more in-depth explanation on their usage and interpretation.\\\\
 =======
