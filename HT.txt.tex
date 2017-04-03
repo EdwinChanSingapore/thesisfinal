@@ -144,7 +144,7 @@ Deep learning networks can be trained by providing labeled data, where features 
 
 Because deep learning networks contain multiple layers, they are able to learn different features in a hierarchical manner. This allows the network to solve  complex non-linear decision boundary problems, including drug molecule solubility (Lusci et al., 2013), facial recognition (Sun et al., 2014) and even predicting the best move in the Japanese board game, Go (Silver et al., 2016). Given this ability to learn from complex features, deep learning networks provide a possible approach to improve the prediction high confidence variant calls from an ensemble of different variant calling algorithms.
  
-\subsection{Prioritisation of Variants with Bayesian Networks }
+\subsection{Prioritisation of Variants with Bayesian Networks}
 Once high-confidence variant calls can be established, there remains the second problem of identifying the functional importance of each variant/mutation, given that there are multiple variants in a typical genome (Shen et al., 2013). The ability to systematically prioritise and rank clinically significant variants and mutations would allow clinicians to focus their attention on relevant candidate mutations that can guide decision-making on diagnosis and treatment.
 
  The problem of prioritisation of genetic variants and mutations arises from the multiplicity and complexity of data sources that can be utilised to determine the clinical and functional relevance of a variant or mutation in a gene (Moreau \& Tranchevent, 2012). Several approaches have been used, including characterizing variants and their phenotypes in clinical cases, and determining if a variant/mutation will alter protein function based on amino acid changes in conserved regions. Although these functional annotations of variants and mutations can be performed with tools such as ANNOVAR (Wang, Li, \& Hakonarson, 2010), the fundamental problem of integrating the information in a systematic manner remains. 
@@ -302,7 +302,7 @@ which enables a few principal components to capture a high amount of variance in
 
 By performing this procedure, we reduced the features to 8 principal components that we used for the inputs to the neural network. However, this reduction in features did not result in appreciable learning in the network, as evidenced by the poor precision and F1 scores (Figure 12).
 
-We reasoned that the architecture was not able to learn because of the multimodal nature of the features from each variant caller. To accommodate the multimodal data, we used a merged network architecture consisting of smaller subnets (five layers, 24 nodes per layer) for each variant caller, prior to merging the outputs in a common network produces the final prediction of a high confidence variant call (Figure 10). This architecture proved to be capable of integrating the various complex features, resulting in significantly high precision, recall, and F1 scores. 
+We reasoned that the architecture was not able to learn because of the multimodal nature of the features from each variant caller. To accommodate the multimodal data, we used a merged network architecture consisting of smaller subnets (five layers, 24 nodes per layer) for each variant caller, prior to merging the outputs in a common network produces the final prediction of a high confidence variant call (Figure 10). Merged networks have previously been shown to be able to successfully integrate information from multi-modal datasets (Eitel, 2015; Suk, Lee \& Shen, 2014). This architecture proved to be capable of integrating the various complex features, resulting in significantly high precision, recall, and F1 scores. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{neuralnetworkstructureresults.jpg}
@@ -310,7 +310,7 @@ We reasoned that the architecture was not able to learn because of the multimoda
 \caption{\textbf{Analysis of Different Neural Network Architecture}}
 \end{figure}
 
-In summary, we were able identify a network architecture that could predict high confidence variant calls from a synthetic dataset by addressing the multimodal nature of the data. The two other networks were not able to learn resulting in poor precision an dF1 scores. Interestingly, the recall scores for all three architectures were around the same ($\pm 0.01$), indicating the main difference for the merged network architecture was in its ability to remove false positive calls.
+In summary, we were able identify a network architecture that could predict high confidence variant calls from a synthetic dataset by addressing the multimodal nature of the data. The two other networks were not able to learn resulting in poor precision and F1 scores. Interestingly, the recall scores for all three architectures were around the same ($\pm 0.01$), indicating the main difference for the merged network architecture was in its ability to remove false positive calls.
 
 \subsection{Network Tuning and Optimisation}
 Next, we systematically optimised and tuned the deep learning neural network to maximise its predictive ability. To do this we focused on 4 parameters that are known to be critical in deep learning networks (Ruder et al., 2016; LeCun, Bengio \& Hinton, 2015; Yan et al., 2015;  Sutskever et al., 2013), specifically the (i) number of layers; (ii) optimiser choice, (iii) learning rate and (iv) balancing of positive and negative training samples.\\\\
@@ -358,7 +358,7 @@ We considered whether the imbalance in samples would affect the performance of t
 Interestingly, we note that overall, undersampling, oversampling and no sampling at all had very small effects on precision, recall and the final F1 score (Figure 17). Specifically, all three metrics were within a range of 0.003 for the different different sampling techniques. We suspect that sample balancing did not significantly improve the performance because the synthetic dataset may have clearly separable positive and negative examples that would not benefit from any sampling.
 However, we noted that oversampling techniques resulted in a marginally higher F1 score (0.001 higher than undersampling and no sampling), and balanced datasets can minimized further bias in downstream analyses (Chawla, 2005), we used SMOTE oversampling to balance the training samples for all the network analysis.
 \subsection{Benchmarking of Optimised Network with Mason Dataset}
-Following optimisation steps, we finalised the network architecture as similar to that in Figure 9, but with 8 layers before the merge layer. We chose the Adam optimizer with a learning rate of$10^{-5}$. With this network configuration, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant caller is defined as the set of calls that any n callers agree upon -- so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers.
+Following optimisation steps, we finalised the network architecture as similar to that in Figure 9, but with 8 layers before the merge layer. We chose the Adam optimizer with a learning rate of $10^{-5}$. With this network configuration, we benchmarked the neural network against the single variant callers, as well as concordance callers, which are an integration of the outputs of the 5 variant callers. Specifically, the n-concordance variant caller is defined as the set of calls that any n callers agree upon -- so 1-concordance includes all the calls made by all callers and 4-concordance includes all the calls made by any 4 callers.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{final_f1scores_results_all.jpg}
 \caption{\textbf{Overall Comparison of Variant Callers}}
@@ -374,61 +374,55 @@ Using the overall F1 score as the performance metric (Figure 18), we found that 
 Closer examination of the performance metrics revealed the neural network had the highest precision of 0.995 compared to only 0.917 for 4-concordance call. This represents  a 20 fold decrease in the number of false positives or about 23,000 more false positive calls in the 4 concordance network compared to the neural network. Interestingly, the recall of all the callers was high in the range of 0.90 to 0.95, indicating that while all were able to pick out most of the truth variant calls, the majority of the errors came from a high number of false positives.\\\\ 
 In summary, the neural network had an F1 score that was 11\% above the best single caller and 6\% above the best concordance caller. Thus, this provides strong evidence that the neural network is able to sieve out false positives within the dataset and stably predict whether a mutation is true.
 \subsection{Benchmarking of Optimised Network with NA Dataset}
-After validation of the optimised neural network on the synthetic dataset, we next tested the performance of the neural network on a real dataset. To do this, we used the NA12878 Genome In a Bottle dataset (Zook et al., 2014), which has been used in other variant calling validation pipelines (Talwalkar et al., 2014; Linderman et al., 2014) and contains a set of high-confidence variant calls which we can use as ground truth for training and validation. This set of high-confidence variant calls is obtained from multiple iterations of orthogonal sequencing methods (using Solid, Illumina platforms, Roche 454 sequencing and Ion Torrent technologies). The usage of multiple platforms enables an intersection of variants that can be considered as the ground truth. We then sought to see if our neural network can predict the ground truth better than single or concordance based variant callers. \\\\We applied the same methodology to the sequences as with the simulated data and then used our neural network to predict the true variants. Validation was done with 47971 high-confidence variant calls in total.
+After validation of the optimised neural network on the synthetic dataset, we next tested the performance of the neural network on a real dataset. To do this, we used the NA12878 Genome In a Bottle dataset (Zook et al., 2014), which is a reference genome that has been used in other variant calling validation pipelines (Talwalkar et al., 2014; Linderman et al., 2014). It is a real genome that contains a set of high-confidence variant calls obtained from multiple iterations of sequencing with orthogonal platforms. These platforms include SOLiD, Illumina, Roche 454 and Ion Torrent sequencing technologies. Integrating the calls from multiple sequencing platforms minimises sequencing errors and generates a set of high-confidence calls that can be used for validation pipelines. \\\\ Subsequently, we benchmarked our neural network against the two best concordance callers and the best single variant caller, GATK's Haplotype Caller. 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{naheadsupcomparison.jpg}
 \caption{\textbf{Comparison of Variant Callers}}
 \centering
 \end{figure}
-As can be seen from Figure 20, the neural network was able to predict with the highest precision (0.859) when compared the best single caller, haplotype caller (0.752) and the 2 best concordance callers, 3-concordance (0.782) and 4-concordance (0.830). In terms of recall, the neural network had a higher recall (0.911) compared to the 4 concordance caller (0.856). Thus, we see that in the NA dataset, the neural network compared with the 4 concordance network is able to call 2650 true variants that were missed by 4 concordance and still had 1228 less false positives. This means the neural network was more aggressive in making calls, yet more of the calls were correct. Compared to the three concordance caller, the neural network had 4253 less false positives. Ultimately when we looked at the F1 score, the neural network was able to outperform concordance variant callers by at least 0.04 and single callers by 0.06. This validates our neural network pipeline in a real genomic dataset and indicates that network is able to learn from the input features.
+As can be seen from Figure 20, the neural network had the highest precision (0.859), followed by 4-concordance (0.830) callers, 3-concordance (0.782) and GATK Haplotype Caller (0.752). In terms of recall, the neural network had a higher recall (0.911) compared to the 4 concordance caller (0.856). The neural network also had the highest F1 score (0.882), followed by the 4-concordance caller (0.843). Interestingly, we note that the neural network was able to call 2650 more true variants and still had 1228 less false positives than the 4-concordance caller. This means the neural network was more aggressive in making calls, yet more of the calls were correct. This suggests that using 4-concordance caller is too stringent and it resulted in certain true variant calls that was be missed, and the neural network was able to pick up on these calls \\\\
+In summary, the neural network was able to outperform concordance variant callers by at least 4.5\% and single callers by 6\% in terms of F1 score. This validates our neural network approach in a real genomic dataset and indicates that network is to stably predict high-confidence variants from the input features.
 \newpage
-\subsection{Analysis of Gene Importance using Bayesian Ranking systems}
-After validation of high confidence calls using a deep learning network, we proceeded on to designing a Bayesian network for the clear and understandable ranking of genes. We first build a Bayesian network using known functional annotations from ANNOVAR (Figure 21). 
-
-
+\subsection{Analysis of Variant Importance using Bayesian Ranking systems}
+After validation of high confidence calls using a deep learning network, we proceeded on to design a Bayesian network for the clear and understandable ranking of variants. We first built a Bayesian network as follows (Figure 20). 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{bayesiannetwork.png}
 \caption{\textbf{Final Bayesian Network used in Analysis}}
 \centering
 \end{figure}
-
-This network structure was chosen as we wanted to use three different sets of information to update the probability of the gene being important. Firstly, the confidence of the call should matter in how important it is -- the more likely a gene is real, the more important it should be. Secondly, the rank should also be determined by how common the variation is, based on studying known SNP polymorphism rates. If it is a common SNP, then the ranking should be downgraded as it is less likely to be a driver mutation (Schork et al., 2009). Finally, we sought to predict the overall effect of mutations via an ensemble of mutation effect predictors. These predictors use different methods to predict the average effect of that mutation -- based on statistical methods like position-specific substitution matrixes and Hidden Markov Models to study the effect of a mutation on protein structure and function. We also used the ClinVar database, a curated repository of known Human variants and their resulting phenotypes (Landrum et al., 2014). These scores were then aggregated to update the probability of the mutation effect. To obtain these functional annotations, the informatics tool ANNOVAR (Wang, Li, \& Hakonarson, 2010) was used. Table 3 shows the functional annotations obtained from ANNOVAR and how they were computed.
-
+This network structure was chosen as we wanted to use three different sets of information to rank the importance of a variant, (i) the overall functional effect of the variant, (ii) the prevalence of the variant in the population and (iii) the confidence of the variant call.\\\\ Firstly, the functional effect of a variant should be key in determining its rank. This is important as the greater the functional effect, the more deleterious a variant will likely be. We used functional annotations from ANNOVAR (Wang, Li, \& Hakonarson, 2010) to predict the overall impact of variants via an ensemble of mutation effect predictors.  These predictors use different methods to predict the phenotypic effect of that variant, such as using position-specific substitution matrixes and Hidden Markov Models to predict the effect of an amino acid change on protein structure and function. Another functional annotation used was the ClinVar database, a curated repository of known human variants and their resulting phenotypes (Landrum et al., 2014). The output of these annotations are converted into probability scores and used to update the ranking of the variant (Table 3). 
 \begin{table}[H]
 \caption{\textbf{Functional Annotations obtained from ANNOVAR}}
 \includegraphics[width=\textwidth]{annovarfeatures.png}
 \centering
 \end{table}
-
-These were subsequently used to compute the Bayesian probability ranking, which is shown in the equation below. Based on scores provided, we report the update the conditional probabilities using the probabilities chain rule -- for the first level; this is given as \\
+Next, the prioritisation rank should also be determined by how common the variant is, which we can obtain by looking up known population single nucleotide polymorphisms (SNP). If the variant is labelled as an SNP, which is defined as a common polymorphism that is found in at least 1\% of the population, then its prioritisation should be lower. Evidence supporting this lower prioritisation for SNPs comes from population studies showing that common variants have lower odds ratios with diseases when compared to rare variants (Schork et al., 2009), and rare variants have been shown to be more important as drivers of disease than common variants (Cirulli \& Goldstein, 2010; Pritchard, 2001). Finally, the confidence of the variant call should factor into how important it is -- the more confidence we can have in a variant call, the more highly it should be prioritised. \\\\ Subsequently, we can use these probabilities to compute the final Bayesian probability ranking, which is shown in the equation below. Based on scores provided, we report the update the conditional probabilities using the probabilities chain rule -- for the first level; this is given as :\\
 \begin{equation}
 \begin{split}
-P(Impt | (Del  \ \cap \ Uncom  \cap High\ Conc)) =  \ \ P(&Impt \cap Del  \ \cap \ Uncom \cap High \ Conc ) \\ \ * \ & P(Del  \cap Uncom  \cap High \ Conc )
+P(Impt | (Func \ Eff  \ \cap \ Rare  \cap High\ Conf)) =  \frac{P(Impt \cap Func \ Eff  \ \cap \ Rare \cap High \ Conf )}{P(Func \ Eff  \cap Rare  \cap High \ Conf )}
 \end{split}
 \end{equation}
 \tiny
 \indent
 P(Impt) refers to the probability of the gene being important,\\
-\indent P(Del) refers to the probability of the gene being deleterious,\\ 
-\indent P(Uncom) refers to the probability of the gene being uncommon and\\  \indent P(High Conc) refers to the probability of the gene being a high confidence call.\\ \indent Further calculations can be found, and derivations can be found in Appendix A\\
-
+\indent P(Func Eff) refers to the probability of the gene having a functional effect,\\ 
+\indent P(Rare) refers to the probability of the gene being uncommon and\\  \indent P(High Conf) refers to the probability of the gene being a high confidence call.\\\\
 \normalsize
 \noindent
-To compute the final probabilities, the software library Pomegranate was used. This simplifies the node drawing and probabilistic updates of the final ranking scores (see Relevant Code -- Section 7.3).
+To compute the final probabilities, the software library Pomegranate was used. This simplifies the bayesian network drawing and probability computation of the final ranking scores (see Relevant Code -- Section 7.3).
 \subsection{Validation of Bayesian Network Ranking on PDX dataset}
-To study the effectiveness of our Bayesian network ranking system, we sequenced and analysed a patient-derived xenograft (PDX) tumour genome. This tumour genome was grafted onto the immunocompromised mouse from a patient with a known cancer subtype -- Diffuse Large B-Cell Lymphoma (DLBCL). We chose to analyse lymphoma as it is a well-known and studied disease model with a well-defined disease progression (Knudson et al., 2001; Alizadeh et al., 2000). The patient-derived xenograft model also allows \textit{in vivo} studies of the tumour in its environment and serves as a good model for sequencing and analysis (Tentler et al., 2012). After sequencing the PDX genome, we put it through our full analysis pipeline, which involves identifying high-confidence mutations using the neural networks and then ranking these genes using the Bayesian network ranking. Figure 22 shows the top 30 genes by probability. 
+To study the effectiveness of our Bayesian network ranking system, we sequenced and analysed a patient-derived xenograft (PDX) tumour genome. This tumour genome was grafted onto a immunocompromised mouse from a patient with a known cancer subtype -- Diffuse Large B-Cell Lymphoma (DLBCL). We chose to test our Bayesian ranking system on DLBCL as it is a well-characterised disease model (Knudson et al., 2001; Alizadeh et al., 2000). After sequencing the DLBCL tumour genome, we identified high-confidence variants using the deep learning neural network, and then ranked these variants using the Bayesian network ranking method. Figure 22 shows the genes associated with top 30 variants ranked by probability of importance. 
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{bayesianranks.png}
-\caption{\textbf{Top 30 genes from Bayesian Ranking Algorithm}}
+\caption{\textbf{Associated genes of top 30 Variants Ranked by Probability from Bayesian Ranking method}}
 \centering
 \end{figure}
 
-Studying the top 5 genes, we found that four of these five genes have been implicated in lymphomas or other cancers (Table 4). AHNAK is a known tumour suppressor and has been known to be downregulated in lines of Burkitt Lymphoma (Lee et al., 2014; Amagai et al., 2004; Shtivelman et al., 1992
-). BCL11A is a known proto-oncogene in DLBCL and has been found to be overexpressed in 75\% of primary mediastinal B-cell Lymphomas, a subset of DLBCL (Weniger et al., 2006; Satterwhite et al., 2001). SPRR1A, the fourth gene ranked in terms of importance, has been shown to be expressed in DLBCL (Zhang et al., 2014) and its expression has been shown to strongly correlate with 5-year survival rate (Figure 23). Finally, development of B-cell lymphoma has been noted in CRB2 related syndrome, which is a bi-allelic mutation of CRB2 (Slavotinek, 2016; Lamont et al., 2016). Interestingly, the last of the high ranked genes was noted to be a subunit of Hemoglobin. While there is no strong evidence for the role of Haemoglobin in DLBCL, it has been shown to be expressed in aggressive glioblastomas lines, indicating a possible previously unknown role in cancer (Emara et al., 2014). This gives us high confidence that the Bayesian ranking method can pick up important and relevant mutations. Without such a ranking system, we would have to look through over 70 thousand genes, without a way to systematically study their likelihood of being important. 
-
+Studying the top 5 genes, we found that four of these five genes have been implicated in lymphomas or other cancers (Table 4), which are AHNAK (Rank 1), BCL11A (Rank 2), SPRR1A (Rank 4) and CRB2 (Rank 5). \\\\  AHNAK is a known tumour suppressor and has been known to be downregulated in lines of Burkitt Lymphoma (Lee et al., 2014; Amagai et al., 2004; Shtivelman et al., 1992). BCL11A is a known proto-oncogene in DLBCL and has been found to be overexpressed in 75\% of primary mediastinal B-cell Lymphomas, a subset of DLBCL (Weniger et al., 2006; Satterwhite et al., 2001). SPRR1A, the fourth gene ranked in terms of importance, has been shown to be expressed in DLBCL (Zhang et al., 2014) and its expression has been shown to strongly correlate with 5-year survival rate (Figure 23). Finally, development of B-Cell lymphoma has been noted in CRB2 related syndrome, which is a bi-allelic mutation of CRB2 (Slavotinek, 2016; Lamont et al., 2016). Interestingly, the last highly ranked gene was the delta subunit of Hemoglobin (HBD). While there is no strong evidence for the role of Haemoglobin in DLBCL, it has been shown to be expressed in aggressive glioblastomas lines, which suggests a possible uncharacterised role for HBD in cancer (Emara et al., 2014). \\\\ In summary, the ability for the Bayesian network to prioritise four genes that are related to DLBCL and lymphomas gives us high confidence that the Bayesian ranking method can pick up important and relevant mutations. Without such a ranking system, we would have to look through over a multitude of genes, without a way to systematically compare their likelihood of importance. 
+ 
 \begin{table}[H]
-\caption{\textbf{Highest Ranked Genes from Bayesian Ranking}}
+\caption{\textbf{Top Ranked Genes from Bayesian Ranking}}
 \includegraphics[width=\textwidth]{top5importantgenes.png}
 \centering
 \end{table}
@@ -436,11 +430,11 @@ Studying the top 5 genes, we found that four of these five genes have been impli
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{sprr1adataset.jpg}
-\caption{ \textbf{5 Year Survival Curve of Patients with SPRR1A+ and SPRR1A-  DLBCL.} Source : Zhang et al. (2014), Figure 2.}
+\caption{ \textbf{5 Year Survival Curve of Patients with SPRR1A positive and SPRR1A negative DLBCL.} Patients that were SPRR1A positive were noted to have a significantly lower 5 year survival rate than patients that were SPRR1A negative. Source : Zhang et al. (2014), Figure 2.}
 \end{figure}
 
 
-To aggregate the data from our Bayesian Ranking system, we did a Circos plot for the top 300 genes picked up by our gene ranking system (Figure 24). A Circos enables easy visualisation and analysis of large genome datasets, enabling quick understanding and comprehension of results. 
+To aggregate the data from our Bayesian Ranking system, we designed a Circos plot to visualise the characteristics of the top 300 genes picked up by our gene ranking system (Figure 24).
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{circosplot.pdf}
@@ -448,7 +442,7 @@ To aggregate the data from our Bayesian Ranking system, we did a Circos plot for
 \centering
 \end{figure}
 
-From the Circos Plot (Figure 24), we find several interesting gene families that might also be relevant in B-Cell Lymphoma. These include several Toll-Like Receptors(TLRs), TLR3 (chr4,rank 26) and TLR1(chr4,rank 77) as well as interleukin receptors IL4R (chr16,rank 37) and IL1$\beta$ (chr2,rank 196). TLRs are of significant interest in cancer due to their involvement in the caspase pathway (Kelly et al., 2006), and have been implicated in B-Cell Lymphomas (Marron, Joyce, \& Cunningham-Rundles,2012). Interleukins are also important in cancer due to their importance in mediating inflammation and immune response (Balkwill \& Mantovani, 2001). Thus, we show that our Bayesian network can be used by clinicians to quickly interrogate the information from functional annotations and database lookups to report important genes. 
+From the Circos Plot (Figure 24), we find several interesting gene families that might be relevant in DLBCL. These include two Toll-like receptors(TLRs), TLR3 and TLR1 (Chromosome 4), as well as two interleukin receptors, IL4R and IL1$\beta$ (Chromsome 2 and 16). TLRs are of significant interest in DLBCL because to their interaction with MYD88 (Yu, Wang \& Chen, 2012), which is a well-characterised oncogene in DLBCL (Kraan et al., 2013; Ngo et al., 2010). Interleukin receptors are also important in DLBCL due to their importance in mediating inflammation and immune response (Balkwill \& Mantovani, 2001), which is known to be affected in DLBCL (Monti et al., 2005). Thus, we show that our Bayesian network can be used by clinicians to quickly interrogate the information from functional annotations and database lookups to report important genes.
 
 \newpage
 \section{Discussion}
@@ -1331,6 +1325,29 @@ def train_neural_net(mybatch_size, mynb_epoch, myX_train, myy_train, location, a
     save_model_details(final_model, final_prediction_array_probabilities, myy_train, location)
 
     return final_prediction_array_probabilities, myy_train
+
+# method to build 8 layer neural network stack
+
+def develop_first_layer_matrixes(neural_net_branch, branch_size):
+    neural_net_branch.add(BatchNormalization(input_shape=(branch_size,), axis=1))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dropout(0.2))
+    neural_net_branch.add(Dense(24, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
+    neural_net_branch.add(Dropout(0.2))
+    neural_net_branch.add(Dense(6, activation='linear'))
+    neural_net_branch.add(LeakyReLU(alpha=0.05))
 
 # Method to perform SMOTE oversampling
 
