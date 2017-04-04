@@ -198,6 +198,13 @@ Simulated genomes enable the simulation of NGS data with ground truths to test a
 After generating a ground truth model, we simulated sequence reads with error rates and ground truth variants (Figure 7). For error rates, we used published data from Schirmer et al. (2016) as the input to Mason -- the general substitution error rate used was 0.0004 per base in the genome, and the insertion and deletion error rate per base were $5*10^{-6}$.
 \subsection{Alignment and Variant Calling of Sequence Reads} 
 The sequence reads (FASTQ) from simulated or real datasets were first aligned to the hg19 human reference genome using BWA (0.7.13) (Li, 2013) using the default settings. Following alignment, the alignment files (BAM) were used for variant calling with the following callers with their default settings: FreeBayes (v1.0.2-16); GATK Haplotype Caller (v3.7-0) and Unified Genotyper (v3.7-0); Samtools (v1.3.1); Pindel (v2.3.0) (Garrison \& Marth, 2012; McKenna et al. 2010, DePristo et al. 2011; Li H, et al., 2009; Ye et al., 2009). The overall process is shown in Figure 7.
+
+\begin{figure}[H]
+\includegraphics[width=0.8\textwidth]{alignment_variant_calling.pdf}
+\centering
+\caption{\textbf{Workflow for the Alignment and Variant Calling of Sequence Reads}}
+\end{figure}
+
 \subsection{Feature Engineering}
 In order to train a neural network, features in the form of numerical vectors must be used as an input. We subset our features into three broad sets, which are base-specific information, sequencing error and bias information features, and calling and mapping quality. Here we describe the computation of the key features -- please see Appendix 5.2 for a more in-depth explanation on their usage and interpretation.\\\\
 The computation of the features were performed as described below. For an in-depth explanation of their usage and interpretation, see Appendix 5.2.\\\\
