@@ -16,13 +16,13 @@
 \contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling of Sequence Reads}{13}
 \contentsline {subsection}{\numberline {2.5}Feature Engineering}{13}
 \contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{15}
-\contentsline {section}{\numberline {3}Results}{17}
-\contentsline {subsection}{\numberline {3.1}Generation of Synthetic Datasets}{17}
-\contentsline {subsection}{\numberline {3.2}Feature Engineering}{18}
-\contentsline {subsection}{\numberline {3.3}Variant Calling and Concordance}{19}
-\contentsline {subsection}{\numberline {3.4}Network Architecture}{20}
+\contentsline {section}{\numberline {3}Results}{16}
+\contentsline {subsection}{\numberline {3.1}Generation of Synthetic Datasets}{16}
+\contentsline {subsection}{\numberline {3.2}Feature Engineering}{17}
+\contentsline {subsection}{\numberline {3.3}Variant Calling and Concordance}{18}
+\contentsline {subsection}{\numberline {3.4}Network Architecture}{19}
 \contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{22}
-\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{23}
+\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{22}
 \contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{24}
 \contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{26}
 \contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{27}
