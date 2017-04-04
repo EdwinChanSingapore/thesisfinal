@@ -27,29 +27,32 @@
 \contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{26}
 \contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{27}
 \contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{29}
-\contentsline {subsection}{\numberline {3.8}Analysis of Variant Importance using Bayesian Ranking systems}{31}
-\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{33}
-\contentsline {section}{\numberline {4}Discussion}{38}
-\contentsline {subsection}{\numberline {4.1}Adapting Deep Learning for Improving Variant Calling Accuracy}{38}
-\contentsline {subsection}{\numberline {4.2}Improving Performance of Deep Learning Approach}{39}
-\contentsline {subsection}{\numberline {4.3}Analysis of Bayesian Network}{40}
-\contentsline {subsection}{\numberline {4.4}Future Directions}{41}
-\contentsline {subsection}{\numberline {4.5}Conclusion}{41}
-\contentsline {section}{\numberline {5}Appendixes}{42}
-\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{42}
-\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{42}
-\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{43}
-\contentsline {subsubsection}{\numberline {5.1.3}Cost Function in Gradient Descent}{44}
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{46}
-\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{46}
-\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{47}
-\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{48}
-\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{50}
-\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{50}
-\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{51}
-\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{52}
-\contentsline {section}{\numberline {6}Bibilography}{53}
-\contentsline {section}{\numberline {7}Relevant Code}{64}
-\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{64}
-\contentsline {subsection}{\numberline {7.2}train\_network.py}{73}
-\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{83}
+\contentsline {subsection}{\numberline {3.8}Benchmarking of Optimised Network with the Synthetic Dataset}{29}
+\contentsline {subsection}{\numberline {3.9}Benchmarking of Optimised Network with NA12878 Reference Dataset}{31}
+\contentsline {subsection}{\numberline {3.10}Ranking of Functionally Important Mutations using a Bayesian Network}{33}
+\contentsline {subsection}{\numberline {3.11}Validation of Bayesian Network Ranking of Mutations in a Patient-Derived Xenograft Cancer Model}{34}
+\contentsline {section}{\numberline {4}Discussion}{39}
+\contentsline {subsection}{\numberline {4.1}Adapting Deep Learning for Improving Variant Calling Accuracy}{39}
+\contentsline {subsection}{\numberline {4.2}Improving Performance of Deep Learning Approach}{40}
+\contentsline {subsection}{\numberline {4.3}Improvements to Bayesian Network}{41}
+\contentsline {subsection}{\numberline {4.4}Clinical Usage of Bayesian Networks in Gene Prioritisation}{42}
+\contentsline {subsection}{\numberline {4.5}Future Directions}{42}
+\contentsline {subsection}{\numberline {4.6}Conclusion}{43}
+\contentsline {section}{\numberline {5}Appendixes}{44}
+\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{44}
+\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{44}
+\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{45}
+\contentsline {subsubsection}{\numberline {5.1.3}Cost Function in Gradient Descent}{46}
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{48}
+\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{48}
+\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{49}
+\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{50}
+\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{52}
+\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{52}
+\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{53}
+\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{54}
+\contentsline {section}{\numberline {6}Bibilography}{55}
+\contentsline {section}{\numberline {7}Relevant Code}{66}
+\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{66}
+\contentsline {subsection}{\numberline {7.2}train\_network.py}{75}
+\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{85}
