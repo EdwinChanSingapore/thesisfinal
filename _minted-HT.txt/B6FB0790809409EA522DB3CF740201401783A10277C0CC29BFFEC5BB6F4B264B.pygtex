@@ -328,6 +328,29 @@
 
     \PYG{k}{return} \PYG{n}{final\PYGZus{}prediction\PYGZus{}array\PYGZus{}probabilities}\PYG{p}{,} \PYG{n}{myy\PYGZus{}train}
 
+\PYG{c+c1}{\PYGZsh{} method to build 8 layer neural network stack}
+
+\PYG{k}{def} \PYG{n+nf}{develop\PYGZus{}first\PYGZus{}layer\PYGZus{}matrixes}\PYG{p}{(}\PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{p}{,} \PYG{n}{branch\PYGZus{}size}\PYG{p}{):}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{BatchNormalization}\PYG{p}{(}\PYG{n}{input\PYGZus{}shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{branch\PYGZus{}size}\PYG{p}{,),} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dropout}\PYG{p}{(}\PYG{l+m+mf}{0.2}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{))}
+    \PYG{n}{neural\PYGZus{}net\PYGZus{}branch}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{LeakyReLU}\PYG{p}{(}\PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{))}
+
 \PYG{c+c1}{\PYGZsh{} Method to perform SMOTE oversampling}
 
 \PYG{k}{def} \PYG{n+nf}{do\PYGZus{}smote\PYGZus{}resampling}\PYG{p}{(}\PYG{n}{myX\PYGZus{}train}\PYG{p}{,} \PYG{n}{myy\PYGZus{}train}\PYG{p}{):}

@@ -8,8 +8,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Ensemble Methods for Improving the Accuracy of Variant Calling}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Deep Learning for Improving the Accuracy of Variant Calling}{5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {Artificial Neurons as Building Blocks of Neural Networks}\relax }}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textbf  {Sample Neural Network with Five Layers, Including Three Hidden Layers}. This represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers.\relax }}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Prioritisation of Variants with Bayesian Networks }{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textbf  {Sample Neural Network with Five Layers, Including Three Hidden Layers}. This diagram represents a densely connected neural network, where each node is connected to every node of the preceding and subsequent layers.\relax }}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Prioritisation of Variants with Bayesian Networks}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textbf  {Sample Bayesian Network for Rain Prediction.}\relax }}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.6}Aims and Approach}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Materials and Methods}{10}}
@@ -20,76 +20,77 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Preprocessing and Analysis}{12}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Implementation of Deep Learning Networks}{12}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Bayesian Network Ranking of Mutations}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Simulated Datasets}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Simulated Datasets}{13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Alignment and Variant Calling of Sequence Reads}{13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Feature Engineering}{13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Patient Derived Xenograft Mouse Model Development and Sequencing}{15}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Generation of Simulated Datasets}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Generation of Synthetic Datasets}{16}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \textbf  {Number of Ground Truth Mutations (Variants) Created in Each Chromosome}\relax }}{16}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \textbf  {Mutation Rate per Base in Each Chromosome}\relax }}{17}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Feature Engineering}{17}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \textbf  {Key Features Engineered from each Caller.}\relax }}{17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Variant Callers}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \textbf  {Concordance of Callers on Simulated Dataset}\relax }}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Variant Calling and Concordance}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \textbf  {Concordance of Callers on Synthetic Dataset}\relax }}{18}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces \textbf  {Comparison of Different Methods and Features of Variant Callers.}\relax }}{19}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Network Architecture}{19}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces \textbf  {Different Designs for Neural Network Architecture}\relax }}{20}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces \textbf  {Analysis of Different Neural Network Architecture}\relax }}{21}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Network Tuning and Optimisation}{22}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \textbf  {Basic Merge Network Structure.} Each individual pre-merge layer takes in an input from a single caller. The information is then integrated in a set of merge layers to give a prediction.\relax }}{22}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \textbf  {Analysis of Different Number of Layers On Training Accuracy}\relax }}{23}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{23}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \textbf  {Optimiser Accuracies for Training at each Epoch.} Due to the noise in accuracies, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.\relax }}{24}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \textbf  {Training Accuracies over Each Epoch for Different Learning Rates}\relax }}{25}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{25}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textbf  {a)} \textbf  {Graphical Illustration of Sample Balancing.} \textbf  {b) Effect of Sample Balancing Techniques on Prediction Ability.}\relax }}{26}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{26}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \textbf  {Overall Comparison of Variant Callers}\relax }}{27}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \textbf  {Comparison of Best Variant Callers in terms of Precision, Recall and F1 Score}\relax }}{28}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \textbf  {Comparison of Variant Callers}\relax }}{29}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \textbf  {Final Bayesian Network used in Analysis}\relax }}{30}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces \textbf  {Functional Annotations obtained from ANNOVAR}\relax }}{31}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{31}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \textbf  {Top 30 genes from Bayesian Ranking Algorithm}\relax }}{32}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces \textbf  {Highest Ranked Genes from Bayesian Ranking}\relax }}{33}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces  \textbf  {5 Year Survival Curve of Patients with SPRR1A+ and SPRR1A- DLBCL.} Source : Zhang et al. (2014), Figure 2.\relax }}{33}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces \textbf  {Circos Plot of Top 300 Ranked Genes from Bayesian Network Ranking.} In this Circos plot, the outer track indicates the top ranked genes and their positions on the chromosome. The inner track describes the type of mutation that was observed -- most mutations were non-synonymous SNVs, with a few stop-gain mutations. The innermost track shows the relative probabilities of each ranked gene.\relax }}{34}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{35}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Comparison of Deep Learning with other Integration Methods}{35}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Improvements to Bayesian Network}{37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Clinical Usage of Bayesian Networks in Gene Prioritisation}{38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Future Directions}{38}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Appendixes}{40}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces \textbf  {Sample Neural Networks with Labelled Nodes and Weights.}\relax }}{40}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{41}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces \textbf  {Backpropagation of Error Terms}\relax }}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Cost Function in Gradient Descent}{42}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces \textbf  {Graphical Illustration of Gradient Descent.} Gradient descent attempts to find the gradient at which the cost function is minimised (since the cost function depends on the gradient).\relax }}{42}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Feature Engineering}{44}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{44}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{45}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{46}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{48}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{48}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces \textbf  {Confusion Matrix for a Binary Class Predictor.}\relax }}{48}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{49}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces \textbf  {Variance Captured by First 12 Principal Components}\relax }}{49}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{50}}
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces \textbf  {Illustration of SMOTE Oversampling Algorithm.} Note the use of 2 nearest neighbours to create a new synthetic example. Figure from Chawla et al., 2002\relax }}{50}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Bibilography}{51}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Relevant Code}{62}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{62}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}train\_network.py}{71}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{80}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \textbf  {Basic Merge Network Structure.} Each individual pre-merge layer takes in an input feature vector from a single caller. The information is then integrated in a set of merge layers to give a prediction.\relax }}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \textbf  {Analysis of Different Number of Layers On Training Accuracy}\relax }}{24}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \textbf  {Optimiser Accuracies for Training at each Epoch.} Due to the accuracy noise, the overall momentum of the dataset, calculated as a sliding window average is shown. The 95\% confidence interval is also shown.\relax }}{25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \textbf  {Training Accuracies over Each Epoch for Different Learning Rates}\relax }}{26}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textbf  {a)} \textbf  {Graphical Illustration of Sample Balancing.} \textbf  {b) Effect of Sample Balancing Techniques on Prediction Ability.}\relax }}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \textbf  {Overall Comparison of Variant Callers}\relax }}{28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \textbf  {Comparison of Best Variant Callers in terms of Precision, Recall and F1 Score}\relax }}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \textbf  {Comparison of Variant Callers}\relax }}{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Analysis of Variant Importance using Bayesian Ranking systems}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \textbf  {Final Bayesian Network used in Analysis}\relax }}{31}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces \textbf  {Functional Annotations obtained from ANNOVAR}\relax }}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \textbf  {Associated genes of top 30 Variants Ranked by Probability from Bayesian Ranking method}\relax }}{33}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces \textbf  {Top Ranked Genes from Bayesian Ranking}\relax }}{34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces  \textbf  {5 Year Survival Curve of Patients with SPRR1A positive and SPRR1A negative DLBCL.} Patients that were SPRR1A positive were noted to have a significantly lower 5 year survival rate than patients that were SPRR1A negative. Source : Zhang et al. (2014), Figure 2.\relax }}{35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces \textbf  {Circos Plot of Top 300 Ranked Genes from Bayesian Network Ranking.} In this Circos plot, the outer track indicates the top ranked genes and their positions on the chromosome. The inner track describes the type of mutation that was observed -- most mutations were non-synonymous SNVs, with a few stop-gain mutations. The innermost track shows the relative probabilities of each ranked gene.\relax }}{36}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Adapting Deep Learning for Improving Variant Calling Accuracy}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Improving Performance of Deep Learning Approach}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Analysis of Bayesian Network}{40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Future Directions}{41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Conclusion}{41}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Appendixes}{42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Neural Network Learning}{42}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Feedforward Phase}{42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces \textbf  {Sample Neural Networks with Labelled Nodes and Weights.}\relax }}{42}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Backpropagation Phase}{43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces \textbf  {Backpropagation of Error Terms}\relax }}{43}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Cost Function in Gradient Descent}{44}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces \textbf  {Graphical Illustration of Gradient Descent.} Gradient descent attempts to find the gradient at which the cost function is minimised (since the cost function depends on the gradient).\relax }}{44}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Feature Engineering}{46}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Base Information}{46}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Sequencing Biases and Errors}{47}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Calling and Mapping Qualities}{48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Mathematical and Statistical Tools}{50}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Derivation of F1 Score}{50}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces \textbf  {Confusion Matrix for a Binary Class Predictor.}\relax }}{50}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Principal Components Analysis (PCA)}{51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces \textbf  {Variance Captured by First 12 Principal Components}\relax }}{51}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Synthetic Minority Overrepresentation Technique (SMOTE)}{52}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces \textbf  {Illustration of SMOTE Oversampling Algorithm.} Note the use of 2 nearest neighbours to create a new synthetic example. Figure from Chawla et al., 2002\relax }}{52}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Bibilography}{53}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Relevant Code}{64}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}generate\_matrixes.py}{64}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}train\_network.py}{73}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}compute\_bayesian.py}{83}}
 \gdef\minted@oldcachelist{,
   default-pyg-prefix.pygstyle,
   default.pygstyle,
   708C9BCB12B5216BBF86DAFDD16ECE411783A10277C0CC29BFFEC5BB6F4B264B.pygtex,
-  B85D79633CB32D38A6E77E93497D5E651783A10277C0CC29BFFEC5BB6F4B264B.pygtex,
+  B6FB0790809409EA522DB3CF740201401783A10277C0CC29BFFEC5BB6F4B264B.pygtex,
   3D596E6C6A31D9F769636E4181287DE91783A10277C0CC29BFFEC5BB6F4B264B.pygtex}
