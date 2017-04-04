@@ -25,10 +25,10 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Number of Layers}{23}
 \contentsline {subsubsection}{\numberline {3.5.2}Optimiser and Learning Rates}{24}
 \contentsline {subsubsection}{\numberline {3.5.3}Sample Balancing}{26}
-\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with Mason Dataset}{27}
-\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA Dataset}{29}
-\contentsline {subsection}{\numberline {3.8}Analysis of Gene Importance using Bayesian Ranking systems}{31}
-\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking on PDX dataset}{32}
+\contentsline {subsection}{\numberline {3.6}Benchmarking of Optimised Network with the Synthetic Dataset}{27}
+\contentsline {subsection}{\numberline {3.7}Benchmarking of Optimised Network with NA12878 Reference Dataset}{29}
+\contentsline {subsection}{\numberline {3.8}Ranking of Functionally Important Mutations using a Bayesian Network}{31}
+\contentsline {subsection}{\numberline {3.9}Validation of Bayesian Network Ranking of Mutations in a Patient-Derived Xenograft Cancer Model}{32}
 \contentsline {section}{\numberline {4}Discussion}{36}
 \contentsline {subsection}{\numberline {4.1}Adapting Deep Learning for Improving Variant Calling Accuracy}{36}
 \contentsline {subsection}{\numberline {4.2}Improving Performance of Deep Learning Approach}{37}
