@@ -86,7 +86,7 @@ Chan Khai Ern Edwin\\
 \end{center}
 \newpage
 \section*{Acknowledgements}
-This thesis would not have been possible without the guidance and support of Dr Kenneth Ban. I have really enjoyed working on this project, and I am very grateful that he gave me the opportunity to try something even though I was not familiar with the field. 
+This thesis would not have been possible without the guidance and support of Dr Kenneth Ban. I have really enjoyed working on this project, and I am very grateful to have had this opportunity. I would also like to thank the professors who have taken time to guide, teach and mentor me throughout my undergraduate career.
 
 \newpage
 \section*{Table of Contents}
@@ -120,7 +120,7 @@ Despite the variety of approaches used for identifying variants and mutations,  
 \begin{figure}[H]
 \includegraphics[width=0.8\textwidth]{f1scorerealdatasets_v2.pdf}
 \centering
-\caption{\textbf{Performance of Variant Calling Tools on Patient Data using the HiSeq and NextSeq Illumina Sequencing Platforms }. The F1 score indicates how well a caller can predict true positives (See Appendix 5.3 for more details). Notably, the F1 score for the same variant calling tool can differ greatly. Figure adapted from Sandmann et al. (2017)}
+\caption{\textbf{Performance of Variant Calling Tools on Patient Data using the HiSeq and NextSeq Illumina Sequencing Platforms }. The F1 score indicates how well a caller can predict true positives (See Appendix 5.3.1 for more details). Notably, the F1 score for the same variant calling tool can differ greatly. Figure adapted from Sandmann et al. (2017)}
 \end{figure}
 \subsection{Ensemble Methods for Improving the Accuracy of Variant Calling} 
 While it is clear that single variant callers may not perform well across a variety of variant classes, the combination or ensemble of several callers can be used to augment the accuracy of variant callers beyond what can be achieved with a single caller. By aggregating the calls from each different variant caller, the relatively weak prediction calls from each caller can be combined to provide a better aggregate prediction for a variant call. \\\\ One simple approach to aggregating variant calls is by concordance, where the likelihood of an accurate call depends on multiple variant callers identifying the same variant or mutation (Lam et al., 2012; Wei et al., 2011). While straightforward and intuitive, the recall rates of such a tool is poor with a high number of false negative calls. This is because a high concordance of variant calls will reciprocally decrease the number of true variants calls that are identified by specific variant callers (O'Rawe et al., 2013). \\\\ Beyond concordance, supervised machine learning approaches have been used to combine the calls from different variant callers to improve calling accuracy. In these methods, machine learning algorithms have been used to predict the accuracy of a variant call by integrating different features of each variant call (e.g. variant frequencies, mapping quality). For example, the support vector machine (SVM) algorithm was used successfully to improve the accuracy of variant calls (Gézsi et al., 2015) over concordance-based methods. \\\\ Recent advances in machine learning, in particular, deep learning neural networks, have increased the accuracy of predictions from complex multi-modal data (Schmidhuber, 2015) beyond traditional algorithms such as SVM and Random Forests. The ability of deep learning networks to learn from complex high-dimensional data suggests that they may be useful in improving the accuracy of high-confidence variant calls derived from the complex features from each variant caller. 
@@ -176,7 +176,7 @@ In the training pipeline, training datasets from synthetic and real sequencing d
 \subsubsection{Workflow Management of Pipelines}
 The workflows in the training and analysis pipelines were managed using NextFlow (v0.21.3.3990), a Groovy based Domain Specific Language (DSL) that provides easy management of parallel pipelines consisting of dependent tasks organised as a directed acyclic graph (Tommaso et al., 2014). Nextflow was used to manage and coordinate the different steps in the pipelines to ensure reproducibility and scalability.
 \subsubsection{Preprocessing and Analysis}
-The preprocessing and analytical components were implemented using Python (v2.7) (Van Rossum, 2007) and the following Python libraries: NumPy, scikit-Learn, Pomegranate and PyVCF. Briefly, NumPy (v1.11.3) was used to prepare feature vectors for deep learning training, scikit-learn (v0.18.1) was used to perform Principal Component Analysis (PCA) and Synthetic Minority Oversampling Technique (SMOTE) methods (See Appendix 5.3 for details). PyVCF (v0.6.8) was used to parse the VCF files to facilitate the comparison of variants efficiently in O(1) time using hash-based dictionary lookups. 
+The preprocessing and analytical components were implemented using Python (v2.7) (Van Rossum, 2007) and the following Python libraries: NumPy, scikit-Learn, Pomegranate and PyVCF. Briefly, NumPy (v1.11.3) was used to prepare feature vectors for deep learning training, scikit-learn (v0.18.1) was used to perform Principal Component Analysis (PCA) and Synthetic Minority Oversampling Technique (SMOTE) methods (See Appendix 5.3.3 for details). PyVCF (v0.6.8) was used to parse the VCF files to facilitate the comparison of variants efficiently in O(1) time using hash-based dictionary lookups. 
 \subsubsection{Implementation of Deep Learning Networks}
 Deep learning networks were implemented using the Keras library (v1.1.1) with a TensorFlow backend (v0.11.0). TensorFlow, from Google (Abadi et al., 2015), was used for better network training performance due to its distributed computation and queue management system. For each of the network architectures, we used the LeakyReLU activation function. The LeakyReLU is a refinement of the ReLU activation function which minimises the "dying ReLU" problem, and both are well-documented activation functions that have been shown to work well in deep neural networks (Anthimopoulos et al., 2016; LeCun, Bengio \& Hinton, 2015; Maas, Hannun \& Ng, 2013). Additionally, dropout filters were used to prevent overfitting of data (Srivastava et al., 2014).\\\\
 The code used to generate the feature vectors and train the neural network can be found in Relevant Code -- Section 7.1 and 7.2 respectively. Details on the algorithms used in deep learning can be found in Appendix 5.1.
@@ -230,7 +230,7 @@ Quality by depth is computed by dividing the quality score against allele depth,
 Mapping quality is a score provided by the alignment method and gives the probability that a read is placed accurately. It is provided by all variant callers except Pindel.\\
 
 \subsection{Patient Derived Xenograft Mouse Model Development and Sequencing}
-A patient-derived xenograft model of diffuse large B-cell lymphoma DLBCL was performed by the Mouse Models of Human Cancer Unit (MMHCU) at the Institute of Molecular and Cell Biology (IMCB), in accordance with the approved protocols by the Institutional Review Board (IRB). In brief, a sample of the DLBCL tumour was implanted into NOD-SCID-gamma mice and serially propagated as a xenograft. The DNA from the xenograft was extracted for high-throughput sequencing using the Illumina HiSeq platform (Genotypic Technology, India). The sequence reads from the xenograft were used to validate the Bayesian network ranking of functionally important mutations. 
+A patient-derived xenograft model of diffuse large B-Cell lymphoma (DLBCL) was performed by the Mouse Models of Human Cancer Unit (MMHCU) at the Institute of Molecular and Cell Biology (IMCB), in accordance with the approved protocols by the Institutional Review Board (IRB). In brief, a sample of the DLBCL tumour was implanted into NOD-SCID-gamma mice and serially propagated as a xenograft. The DNA from the xenograft was extracted for high-throughput sequencing using the Illumina HiSeq platform (Genotypic Technology, India). The sequence reads from the xenograft were used to validate the Bayesian network ranking of functionally important mutations. 
 \newpage
 \section{Results}
 \subsection{Generation of Synthetic Datasets}
@@ -390,7 +390,7 @@ In this Bayesian network, we sought to integrate three different sets of probabi
 \includegraphics[width=\textwidth]{annovarfeatures.png}
 \centering
 \end{table}
-
+\noindent
 Using this network, the likelihood of a functionally important mutation can be computed based on the conditional probabilities of the different events in the network as shown in the equation below.
 \begin{equation}
 \begin{split}
@@ -406,7 +406,7 @@ P(Impt) refers to the probability of the gene being important,\\
 \noindent
 Intuitively, the probabilities of the different events are used to update the final likelihood of a functionally important mutation. For example, if the mutation was a common polymorphism, the likelihood of it being a disease-causing mutation would be less likely (Schork et al., 2009). Similarly, if a mutation was predicted to be a functional impact of a gene, the likelihood of it being a functionally important mutation would increase.
 \subsection{Validation of Bayesian Network Ranking of Mutations in a Patient-Derived Xenograft Cancer Model}
-To evaluate the effectiveness of our deep learning and Bayesian network ranking system, we analysed sequence reads from patient-derived xenograft (PDX) of a diffuse large B-cell lymphoma (DLBCL), a cancer model with a well-defined disease progression (Knudson et al., 2001; Alizadeh et al., 2000). The PDX model would allow us to study the tumour in an \textit{in vivo} environment that permits longer term functional testing of candidate targeted therapies identified from mutation profiling (Tentler et al., 2012). \\\\
+To evaluate the effectiveness of our deep learning and Bayesian network ranking system, we analysed sequence reads from patient-derived xenograft (PDX) of a diffuse large B-Cell lymphoma (DLBCL), a cancer model with a well-defined disease progression (Knudson et al., 2001; Alizadeh et al., 2000). The PDX model would allow us to study the tumour in an \textit{in vivo} environment that permits longer term functional testing of candidate targeted therapies identified from mutation profiling (Tentler et al., 2012). \\\\
 The sequence reads from the PDX DLBCL sample were analysed using the analysis pipeline that  (i) identified high confidence variant calls by the deep learning network and (ii) ranked the functionally important mutations using the Bayesian network. The mutations were ranked by a Bayesian score indicating the probability of a high confidence mutation all that is functionally important (Figure 22).
 
 \begin{figure}[H]
@@ -1665,5 +1665,4 @@ if __name__ == "__main__":
     paths = parser.parse_args()
     main(paths)
 \end{minted}
-
 \end{document}
